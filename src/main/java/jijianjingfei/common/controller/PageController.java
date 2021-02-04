@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
-	@Autowired
-	InfoCategoryService ddInfoCategoryService;
-	@Autowired
-	InfoService ddInfoService;
 
 	// 手机端注册
 	@RequestMapping("/homepage/register.html")
@@ -439,67 +435,6 @@ public class PageController {
 		map.put("UserType", mmUserType);
 
 		return "phone/homepage/jingyingtuandui";
-	}
-
-	// 手机端infolist
-	@RequestMapping("/homepage/infolist.html")
-	public String HomepageInfolist(HttpServletRequest request, ModelMap map) {
-		if(!isLoginPhone(request)) {
-			return "redirect:/homepage/login.html";
-		}
-
-		String mmUserType = request.getSession().getAttribute("UserType").toString();
-		String mmUserId = request.getSession().getAttribute("UserId").toString();	
-		String mmCategoryId = request.getParameter("categoryid") == null ? "" : request.getParameter("categoryid").toString();
-		String mmCategoryName = ddInfoCategoryService.findOne(mmCategoryId).getCategoryname();
-
-
-		map.put("UserId", mmUserId);
-		map.put("UserType", mmUserType);
-		map.put("CategoryId", mmCategoryId);
-		map.put("CategoryName", mmCategoryName);
-
-		return "phone/homepage/infolist";
-	}
-
-	// 手机端showinfo
-	@RequestMapping("/homepage/showinfo.html")
-	public String HomepageShowinfo(HttpServletRequest request, ModelMap map) {
-		if(!isLoginPhone(request)) {
-			return "redirect:/homepage/login.html";
-		}
-
-		String mmUserType = request.getSession().getAttribute("UserType").toString();
-		String mmUserId = request.getSession().getAttribute("UserId").toString();	
-		String mmInfoId = request.getParameter("infoid") == null ? "" : request.getParameter("infoid").toString();
-		String mmInfoTitle = ddInfoService.findOne(mmInfoId).getInfotitle();
-
-		map.put("UserId", mmUserId);
-		map.put("UserType", mmUserType);
-		map.put("InfoId", mmInfoId);
-		map.put("InfoTitle", mmInfoTitle);
-
-		return "phone/homepage/showinfo";
-	}
-	
-	// 手机端showinfo2
-	@RequestMapping("/homepage/showinfo2.html")
-	public String HomepageShowinfo2(HttpServletRequest request, ModelMap map) {
-		if(!isLoginPhone(request)) {
-			return "redirect:/homepage/login.html";
-		}
-
-		String mmUserType = request.getSession().getAttribute("UserType").toString();
-		String mmUserId = request.getSession().getAttribute("UserId").toString();	
-		String mmInfoId = request.getParameter("infoid") == null ? "" : request.getParameter("infoid").toString();
-		String mmInfoTitle = ddInfoService.findOne(mmInfoId).getInfotitle();
-
-		map.put("UserId", mmUserId);
-		map.put("UserType", mmUserType);
-		map.put("InfoId", mmInfoId);
-		map.put("InfoTitle", mmInfoTitle);
-
-		return "phone/homepage/showinfo2";
 	}
 
 	// PC管理端

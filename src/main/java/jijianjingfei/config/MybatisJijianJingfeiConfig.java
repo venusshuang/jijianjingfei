@@ -1,3 +1,4 @@
+/*
 package jijianjingfei.config;
 
 import javax.sql.DataSource;
@@ -40,3 +41,4 @@ public class MybatisJijianJingfeiConfig {
 		return new DataSourceTransactionManager(sitDataSource);
 	}
 }
+*/
