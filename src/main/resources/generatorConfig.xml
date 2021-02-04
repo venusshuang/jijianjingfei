@@ -10,11 +10,11 @@
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/jijianjingfei?characterEncoding=utf8"
 			userId="root" password="123123" />
-		<javaModelGenerator targetPackage="childckd.model"
+		<javaModelGenerator targetPackage="jijianjingfei.model"
 			targetProject="jijianjingfei" />
-		<sqlMapGenerator targetPackage="childckd.mapper"
+		<sqlMapGenerator targetPackage="jijianjingfei.mapper"
 			targetProject="jijianjingfei" />
-		<javaClientGenerator targetPackage="childckd.dao"
+		<javaClientGenerator targetPackage="jijianjingfei.dao"
 			targetProject="jijianjingfei" type="XMLMAPPER" />
 
 		<table schema="jijianjingfei" tableName="patient_jiuzhenxinxi" />
