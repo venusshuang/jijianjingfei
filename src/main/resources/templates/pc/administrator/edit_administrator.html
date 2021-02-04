@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="EditAdministrator">
+	<div id="editAdministratorModal" style="" class="modal fade bs-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog" style="width: 650px">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel_administrator"></h4>
+				</div>
+				<div class="modal-body" style="overflow: auto;">
+					<div style="width: 600px; margin: 0 auto; margin-top: 15px">
+						<form class="form-horizontal col-sm-12" role="form">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									<span class="required">*</span>账户名
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="administrator.zhanghao">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									<span class="required">*</span>角色
+								</label>
+								<div class="col-sm-8">
+									<select class="input form-control" v-model="roleid" id="roleid"  >
+										<option value="" selected>--请选择--</option>
+											<option v-for="roleitem in rolelist" :value="roleitem.roleid">{{roleitem.rolename}}</option>
+								    </select>
+								</div>
+							</div>
+							
+							
+							
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									<span class="required">*</span>密码
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="administrator.password">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									<span class="required">*</span>备注
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="administrator.beizhu">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input v-if="editFlag == '0'" type="button" class="btn btn-success"
+										value="保 存" @click="addAdministrator()"> 
+									<input v-if="editFlag == '1'" type="button" class="btn btn-success"
+										value="保 存" @click="modifyAdministrator()"> 
+									<input type="button" class="btn btn-default" value="返 回"
+										data-dismiss="modal">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- /.modal -->
+	</div>
+</div>
+</html>

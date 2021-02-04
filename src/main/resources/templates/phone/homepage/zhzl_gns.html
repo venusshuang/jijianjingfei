@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="../../css/phone/homepage.css?ver=1.2" rel="stylesheet" type="text/css"></link>
+<link rel="stylesheet" href="../../css/weui.css"/>
+<title>高尿酸血症</title>
+<style type="text/css">
+	.left-lable{
+		width:700px!important;
+		font-weight: 800;
+	}
+	
+	.form-group{
+		padding:35px 32px!important;
+	}
+	
+	.right-input{
+		border: 1px rgba(25,25,25,0.6) solid;
+		height: 75px;
+	}
+</style>
+</head>
+<body>
+	<div class="bg" style="position: fixed;">
+		<img src="../../image/index_bg.png" width=100% height=100%/>
+	</div>
+	
+	<div class="container" id="Tool">
+		<div class="top">
+			高尿酸血症
+		</div>
+		
+		<div class="page" style="margin-top: 200px;">
+			<div style="background-color: #f3f3f3;height: 80px;line-height: 80px;font-size: 36px;font-weight: 600;">
+		 		&emsp;高尿酸血症
+		 	</div>
+		 	
+			<div style="width:100%;">
+			 	<div class="page form_page js_show" style="padding: 40px 30px;">
+					<div class="weui-form" style="padding-top: 0px;">
+						
+						<!-- from表单 -->
+				  		<div class="weui-form__control-area" style="margin-top: 0px;">
+	      					<div class="weui-cells__group weui-cells__group_form">
+	      						<div class="weui-cells weui-cells_form" style="font-size:40px;">
+
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd" style="width: 35%;">
+					            			<label class="weui-label left-lable">尿酸：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input" v-model="niaosuan" placeholder="请输入尿酸（umol/L）"/>
+					            		</div>
+					          		</div>	   
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd" style="width: 35%;">
+					            			<label class="weui-label left-lable" style="display: inline;">24小时尿量：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input" v-model="niaoliang" placeholder="请输入24h尿量（L/d）"/>
+					            		</div>
+					          		</div>	   
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd" style="width: 35%;">
+					            			<label class="weui-label left-lable" style="display: inline;">体表面积：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input"  v-model="tbmj" placeholder="请输入体表面积"/>
+					            		</div>
+					          		</div>	   
+					          		
+
+							  		
+							  		<!-- button -->
+									<div class="weui-form__opr-area">
+										<a class="weui-btn weui-btn_primary" style="width: 90%;background-color: #2a82e4;color: #fff;height:100px;border-radius:10px;font-size: 50px;border: none;"
+											@click="jisuanpaixielv()">计  算</a>
+									</div>
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" style="font-weight: 800;">
+					            		<div class="weui-cell__hd" style="width: 35%;">
+					            			<label class="weui-label" style="display: inline;">尿酸排泄率：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input class="weui-input right-input" placeholder=" 计算结果" v-model="niaosuanpaixielv" disabled="disabled" />
+					            		</div>
+					          		</div>
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable">尿尿酸：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input"  v-model="niaoniaosuan" placeholder="请输入尿尿酸"/>
+					            		</div>
+					          		</div>	
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable">血肌酐：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input"  v-model="xuejigan" placeholder="请输入血肌酐"/>
+					            		</div>
+					          		</div>	
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable">血尿酸：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input"  v-model="xueniaosuan" placeholder="请输入血尿酸"/>
+					            		</div>
+					          		</div>	
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable">尿肌酐：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input"  v-model="niaojigan2" placeholder="请输入尿肌酐"/>
+					            		</div>
+					          		</div>	
+					          		
+					          		<div class="weui-form__opr-area">
+										<a class="weui-btn weui-btn_primary" style="width: 90%;background-color: #2a82e4;color: #fff;height:100px;border-radius:10px;font-size: 50px;border: none;"
+											@click="jisuanfenshu()">计  算</a>
+									</div>
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" style="font-weight: 800;">
+					            		<div class="weui-cell__hd" style="width: 35%;">
+					            			<label class="weui-label" style="display: inline;">尿酸排泄分数：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input class="weui-input right-input" placeholder=" 计算结果" v-model="fenshu" disabled="disabled" />
+					            		</div>
+					          		</div>
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" style="font-weight: 800;">
+					            		<div class="weui-cell__hd" style="width: 35%;">
+					            			<label class="weui-label" style="display: inline;">分型：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input class="weui-input right-input" placeholder=" 计算结果" v-model="fenxing" disabled="disabled" />
+					            		</div>
+					          		</div>
+					          		
+					          		
+					          			
+	      						</div>
+	      					</div>	
+				  		</div>
+				  		
+				  		
+						
+					</div>
+				</div>
+				
+				
+				
+			</div>
+				
+		</div>
+		
+		
+		
+		
+	</div>
+</body>
+
+<script type="text/javascript" charset="utf-8" src="../../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue-resource.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/layer/layer.js"></script>
+
+<script src="../js/pc/tool/tool.js?ver=1.4"></script>
+
+</html>

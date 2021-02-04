@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>我的预约</title>
+</head>
+<body style="background-color:#fff;">
+	<div class="container" id="wodeyuyue">
+		
+		<input type="hidden" th:value="${UserType}" id="usertype">
+		<input type="hidden" th:value="${UserId}" id="userid">
+	
+		<div class="top">
+			我的预约
+		</div>
+		
+		<div style="width:100%;margin-top:200px;overflow-y:auto;" class="listPart">
+		
+			<div style="width:95%;margin:0 auto;">
+				
+				<div style="margin-top:20px;border: 1px solid #bbb;border-radius: 15px;background-color:#f5fffc;" class="weui-form-preview" v-for="yuyueitem in wodeyuyuelist">
+		            
+		            <div v-if="yuyueitem.type=='guahao'">
+		            	<div class="weui-form-preview__bd">
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label" style="font-size:50px;color:#00baad;font-weight:bolder;">预约挂号</label>
+		                    	<span v-if="yuyueitem.shenhejieguo=='0'||yuyueitem.shenhejieguo=='1'" @click="toCancelGuahao(yuyueitem.id)" class="weui-form-preview__value" style="width:200px;height:80px;float:right;margin-left:30px;font-size:40px;line-height:80px;text-align:center;color:#fff;background-color:#00baad;border-radius:50px;margin-top:20px;">取消预约</span>
+		                    	<span v-else-if="yuyueitem.shenhejieguo=='2'" class="weui-form-preview__value" style="width:200px;height:80px;float:right;margin-left:30px;font-size:40px;line-height:80px;text-align:center;color:#fff;background-color:red;border-radius:50px;margin-top:20px;">系统取消</span>
+		                    	<span v-else-if="yuyueitem.shenhejieguo=='3'" class="weui-form-preview__value" style="width:200px;height:80px;float:right;margin-left:30px;font-size:40px;line-height:80px;text-align:center;color:#fff;background-color:red;border-radius:50px;margin-top:20px;">用户取消</span>
+		                    </div>
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label" style="font-size:40px;color:#000;">预约专家：</label>
+			                    <span class="weui-form-preview__value" style="font-size:40px;text-align:left;color:#555;" v-html="yuyueitem.zhuanjianame"></span>
+			                </div>
+			                <div class="weui-form-preview__item"> 
+		                    	<span class="weui-form-preview__value" style="float:left;width:43%;text-align:left;font-size:40px;" v-html='"患者："+yuyueitem.xingming'></span>
+		                    	<span v-if="yuyueitem.xingbie=='1'" class="weui-form-preview__value" style="float:left;width:33%;text-align:left;font-size:40px;">性别：男</span>
+		                    	<span v-else-if="yuyueitem.xingbie=='2'" class="weui-form-preview__value" style="float:left;width:33%;text-align:left;font-size:40px;">性别：女</span>
+		                    </div>
+			                <div class="weui-form-preview__item" v-if="yuyueitem.shenhejieguo=='2'">
+			                    <label class="weui-form-preview__label" style="font-size:40px;color:#000;">原因：</label>
+			                    <span class="weui-form-preview__value" style="font-size:40px;text-align:left;color:#555;" v-html="yuyueitem.shenheyijian"></span>
+			                </div>
+		            	</div>
+		            </div>
+		            
+		            <div v-else-if="yuyueitem.type=='zhuyuan'">
+		            	<div class="weui-form-preview__bd">
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label" style="font-size:50px;color:#00baad;font-weight:bolder;">预约住院</label>
+			                    <span v-if="yuyueitem.shenhejieguo=='0'||yuyueitem.shenhejieguo=='1'" @click="toCancelZhuyuan(yuyueitem.id)" class="weui-form-preview__value" style="width:200px;height:80px;float:right;margin-left:30px;font-size:40px;line-height:80px;text-align:center;color:#fff;background-color:#00baad;border-radius:50px;margin-top:20px;">取消预约</span>
+		                    	<span v-else-if="yuyueitem.shenhejieguo=='2'" class="weui-form-preview__value" style="width:200px;height:80px;float:right;margin-left:30px;font-size:40px;line-height:80px;text-align:center;color:#fff;background-color:red;border-radius:50px;margin-top:20px;">系统取消</span>
+		                    	<span v-else-if="yuyueitem.shenhejieguo=='3'" class="weui-form-preview__value" style="width:200px;height:80px;float:right;margin-left:30px;font-size:40px;line-height:80px;text-align:center;color:#fff;background-color:red;border-radius:50px;margin-top:20px;">用户取消</span>
+			                </div>
+			                <div class="weui-form-preview__item">
+			                    <label class="weui-form-preview__label" style="font-size:40px;color:#000;">住院病种：</label>
+			                    <span class="weui-form-preview__value" style="font-size:40px;text-align:left;color:#555;" v-html="yuyueitem.bingzhong"></span>
+			                </div>
+			                <div class="weui-form-preview__item"> 
+		                    	<span class="weui-form-preview__value" style="float:left;width:43%;text-align:left;font-size:40px;" v-html='"患者："+yuyueitem.xingming'></span>
+		                    	<span v-if="yuyueitem.xingbie=='1'" class="weui-form-preview__value" style="float:left;width:33%;text-align:left;font-size:40px;">性别：男</span>
+		                    	<span v-else-if="yuyueitem.xingbie=='2'" class="weui-form-preview__value" style="float:left;width:33%;text-align:left;font-size:40px;">性别：女</span>
+		                    </div>
+			                <div class="weui-form-preview__item" v-if="yuyueitem.shenhejieguo=='2'">
+			                    <label class="weui-form-preview__label" style="font-size:40px;color:#000;">原因：</label>
+			                    <span class="weui-form-preview__value" style="font-size:40px;text-align:left;color:#555;" v-html="yuyueitem.shenheyijian"></span>
+			                </div>
+		            	</div>
+		            </div>
+		        </div>
+				
+			</div>
+		</div>
+	
+				
+		<div id="js_toast" style="display: none;width:500px;height:500px;">
+			<div class="weui-mask_transparent"></div>
+			<div class="weui-toast" style="width:500px;height:500px;">
+				<i class="weui-icon-success-no-circle weui-icon_toast" style="width:200px;height:200px;"></i>
+				<p class="weui-toast__content" style="font-size:50px;">取消成功</p>
+			</div>
+		</div>
+
+		
+	</div>
+</body>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue-resource.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/layer/layer.js"></script>
+<link rel="stylesheet" href="../../css/weui.css"/>
+<link href="../../css/phone/homepage.css?ver=1.7" rel="stylesheet" type="text/css"></link>
+<script src="../../js/phone/homepage/wodeyuyue_list.js?ver=1.9"></script>
+
+</html>

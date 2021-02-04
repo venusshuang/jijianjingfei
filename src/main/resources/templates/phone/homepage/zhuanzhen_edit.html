@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="../../css/phone/homepage.css?ver=1.3" rel="stylesheet" type="text/css"></link>
+<title>转诊病例详情</title>
+<style type="text/css">
+	.left-lable{
+		width:300px!important;
+		font-weight: 800;
+	}
+	
+	.form-group{
+		padding:50px 32px!important;
+	}
+</style>
+</head>
+<body style="background-color:#f3f3f3;">
+	<div class="container">
+		
+		<input type="hidden" th:value="${UserType}" id="usertype">
+		<input type="hidden" th:value="${UserId}" id="userid">
+		<input type="hidden" th:value="${ReferraId}" id="referraid">
+	
+		<div class="top">
+			转诊病例详情
+		</div>
+		
+		
+		<div style="width:100%;margin-top: 200px;" id="zhuanzhen_edit">
+			<div class="page form_page js_show">
+				<div class="weui-form" style="padding-top: 0px;">
+					
+					<!-- from表单 -->
+			  		<div class="weui-form__control-area" style="margin-top: 0px;">
+      					<div class="weui-cells__group weui-cells__group_form">
+      						<div class="weui-cells weui-cells_form" style="font-size:40px;">
+				          		
+				          		<div class="weui-cell weui-cell_active form-group" >
+				            		<div class="weui-cell__hd">
+				            			<label class="weui-label left-lable">医师</label>
+				            		</div>
+				           	 		<div class="weui-cell__bd">
+				               	 		<input class="weui-input" placeholder="医师姓名" v-model="zhuanzhen.doctorname"/>
+				            		</div>
+				          		</div>
+				          		
+				          		<div class="weui-cell weui-cell_active form-group">
+				            		<div class="weui-cell__hd">
+				            			<label class="weui-label left-lable">医院</label>
+				            		</div>
+				           	 		<div class="weui-cell__bd">
+				               	 		<input class="weui-input" placeholder="医院名称"  v-model="zhuanzhen.danwei"/>
+				            		</div>
+				          		</div>
+				          		
+				          		<div class="weui-cell weui-cell_active form-group">
+				            		<div class="weui-cell__hd">
+				            			<label class="weui-label left-lable">患者</label>
+				            		</div>
+				           	 		<div class="weui-cell__bd">
+				               	 		<input class="weui-input" placeholder="患者姓名"  v-model="zhuanzhen.patientname"/>
+				            		</div>
+				          		</div>
+				          		
+				          		<div class="weui-cell weui-cell_active form-group">
+				            		<div class="weui-cell__hd">
+				            			<label class="weui-label left-lable">年龄</label>
+				            		</div>
+				           	 		<div class="weui-cell__bd">
+				               	 		<input class="weui-input" placeholder="患者年龄" type="number" pattern="[0-9]*" v-model="zhuanzhen.patientage" />
+				            		</div>
+				          		</div>
+				          		
+				          		<div class="weui-cell weui-cell_active form-group">
+				            		<div class="weui-cell__hd">
+				            			<label class="weui-label left-lable">主诉</label>
+				            		</div>
+				           	 		<div class="weui-cell__bd">
+				               	 		<input class="weui-input" placeholder="病情描述"  v-model="zhuanzhen.zhusu"/>
+				            		</div>
+				          		</div>				          		
+				          		
+				          		<div class="weui-cell weui-cell_active form-group">
+				            		<div class="weui-uploader">
+				            			<div class="weui-uploader__hd">
+				                            <p class="weui-uploader__title weui-label left-lable">上传图片</p>
+				                            <div class="weui-uploader__info">病例文件资料</div>
+				                        </div>
+				                        
+				                        <div class="weui-uploader__bd">
+				                           	<!-- 放置上传上来的文件，里面拼接li -->
+				                           	<ul class="weui-uploader__files" id="uploaderFiles">
+				                                
+				                            </ul>
+				                            <input type="text" class="form-control" id="imageurl" style="display:none;">
+				                            <div id="filelist" style="display:none;"></div>
+				                            <div class="weui-uploader__input-box" id="container" style="width:200px;height:200px;margin-left:10px;">
+				                                <input id="pickfiles" class="weui-uploader__input" type="file" />
+				                            </div>
+				                            <div id="UploadedFiles" style="display:none;"></div>
+				                        </div>
+				            		
+				            		</div>
+				           	 		
+				          		</div>
+      						</div>
+      					</div>	
+			  		</div>
+			  		
+			  		<!-- Message -->
+					<div class="weui-form__tips-area">
+						<p class="weui-form__tips" id="message" style="font-size: 45px;color: red;"></p>
+					</div>
+			  		
+			  		<!-- button -->
+					<div class="weui-form__opr-area">
+						<a v-if="referraid != ''" class="weui-btn weui-btn_primary" style="width: 90%;background-color: #00baad;color: #fff;height:100px;border-radius:20px;font-size: 50px;border: none;"
+							@click="modify()">保 存</a>
+							
+						<a v-else class="weui-btn weui-btn_primary" style="width: 90%;background-color: #00baad;color: #fff;height:100px;border-radius:20px;font-size: 50px;border: none;"
+							@click="save()">保 存</a>
+					</div>
+					
+					<!-- 保存成功提示 -->
+					<div id="js_toast" style="display: none;width:500px;height:500px;">
+						<div class="weui-mask_transparent"></div>
+						<div class="weui-toast" style="width:500px;height:500px;">
+							<i class="weui-icon-success-no-circle weui-icon_toast" style="width:200px;height:200px;"></i>
+							<p class="weui-toast__content" style="font-size:50px;">保存成功</p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+		</div>	
+	</div>
+</body>
+
+
+
+<script type="text/javascript" charset="utf-8" src="../../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue-resource.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/layer/layer.js"></script>
+<link rel="stylesheet" href="../../css/weui.css"/>
+<script src="../../js/phone/homepage/zhuanzhen_edit.js?ver=0.7"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/plupload/plupload.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/plupload/plupload.full.js"></script>
+<script src="../../js/upload_image.js?ver=0.7"></script>
+<script type="text/javascript">
+	var mmImageUrls = "";
+	$(function(){
+		InitUpLoader();
+	});
+</script>
+</html>

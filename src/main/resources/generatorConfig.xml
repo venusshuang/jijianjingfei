@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry location="D:/mysql-connector-java-5.1.7-bin.jar" />
+	<context id="context1">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3390/childckd?characterEncoding=utf8"
+			userId="root" password="kjgbfile345677" />
+		<javaModelGenerator targetPackage="childckd.model"
+			targetProject="childckd-web" />
+		<sqlMapGenerator targetPackage="childckd.mapper"
+			targetProject="childckd-web" />
+		<javaClientGenerator targetPackage="childckd.dao"
+			targetProject="childckd-web" type="XMLMAPPER" />
+
+		<table schema="childckd" tableName="patient_jiuzhenxinxi" />	
+		
+	</context>
+</generatorConfiguration>

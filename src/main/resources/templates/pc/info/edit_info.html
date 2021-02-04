@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script>
+	var date = new Date();
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	 m = m<10?'0'+m:m;
+	var d = date.getDate();
+	$(function(){
+		$("#releasetime").val(y+'-'+m+'-'+d);
+	})
+</script>
+
+<div id="EditPart_Info" style="width:100%;height:1450px;padding-top:60px;display: none;">	<div style="width:700px;margin:0 auto;">
+	<form class="form-horizontal col-sm-12" role="form">
+		<div class="form-group">
+			<div class="col-sm-8" style="text-align:right;">
+					<input class="SaveButton_Info btn btn-info" type="button"
+						value="保 存" /> <input class="Button_Info btn btn-danger"
+						type="button" value="取 消"
+						onclick="SelectCurrentOfActionType('4');"
+				style="margin-left: 10px;" /> <input id="infoid" type="hidden">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">肩题</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="jianti">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">标题</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="infotitle">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">副标题</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="infotitle2">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">摘要</label>
+			<div class="col-sm-10">
+					<textarea id="summary" class="form-control"
+						style="height: 100px; vertical-align: top;"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">作者</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="author">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">信息来源</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="source">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">发布时间</label>
+			<div class="col-sm-10">
+					<input id="releasetime" class="form-control" type="text"
+						readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
+			</div>
+		</div>
+		<div class="form-group" id="ispass">
+			<label class="col-sm-2 control-label">是否通过</label>
+			<div class="col-sm-10">
+				<input type="checkbox" id="checkpass" checked="checked" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">访问地址</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="returnurl">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">显示图片</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="imageurl">
+				<div id="filelist"></div>
+				<div id="container">
+					<input type="button" id="pickfiles" value="上传" /> <span
+						onclick="ViewImage();"
+						style="font-size: 14px; font-family: 微软雅黑; cursor: pointer;">点击查看</span>
+				</div>
+				<div id="UploadedFiles"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">视频文件</label>
+			<div class="col-sm-10">
+					<input type="text" class="form-control" id="videourl"> <input
+						type="button" value="生成文件名" onclick="ToGenerateVideoName()" /> <input
+				type="button" value="删除文件名" onclick="ClearVideoName()" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">内容</label>
+			<div class="col-sm-10">
+				<script type="text/plain" id="editor" style="height:400px;"></script>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-8" style="text-align:right;">
+				 <input class="SaveButton_Info btn btn-info"
+						type="button" value="保 存" /> <input
+						class="Button_Info btn btn-danger" type="button" value="取 消"
+						onclick="SelectCurrentOfActionType('4');"
+				style="margin-left: 10px;" />
+			</div>
+		</div>
+	</form>
+</div>
+</div>

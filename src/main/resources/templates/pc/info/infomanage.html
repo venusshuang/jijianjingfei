@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('信息发布')">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+</head>
+
+<style>
+	.InfoManage_Left {
+		width: 300px;
+		min-height: 500px;
+		float: left;
+		overflow: auto;
+		border: 1px solid #EEE;
+	}
+	
+	.InfoManage_Right {
+		margin-left: 305px;
+		min-height: 500px;
+		border: 1px solid #EEE;
+	}
+</style>
+
+
+<body style="padding-top:10px;">
+<div id="InfoManageDiv">
+	<div class="InfoManage_Left">
+		<div th:replace="pc/info/tree_infocategory" ></div>
+	</div>
+
+	<div class="InfoManage_Right">
+		<div th:replace="pc/info/nav_infomanage" ></div>
+		<div style="width:700px;">
+			<div id="CategoryName" class="CategoryName"
+				style="width: 100px; height: 50px; line-height: 50px; float: left; margin-left: 50px;font-weight:bold;"></div>
+			<div id="CategoryDept" class="CategoryName"
+				style="width: 500px; height: 50px; line-height: 50px; float: left; margin-left: 50px;"></div>
+		</div>
+		
+		<div th:replace="pc/info/edit_infocategory" ></div>
+		<div th:replace="pc/info/list_info" ></div>
+		<div th:replace="pc/info/edit_info" ></div>
+
+	</div>
+</div>
+	
+<script th:src="@{/js/ueditor/ueditor.config.js}"></script>
+<script th:src="@{/js/ueditor/ueditor.all.js}"></script>
+<script th:src="@{/js/pc/info/infomanage.js}"></script>
+<script th:src="@{/js/pc/info/infocategory.js}"></script>
+<script th:src="@{/js/pc/info/infocategory_ui.js}"></script>
+<script th:src="@{/js/pc/info/info.js}"></script>
+<script th:src="@{/js/pc/info/info_ui.js}"></script>
+<script th:src="@{/js/pc/info/infocategoryinfo.js}"></script>
+<script type="text/javascript" charset="utf-8" src="/js/plupload/plupload.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/plupload/plupload.full.js"></script>
+<script th:src="@{/js/upload_image_info.js}"></script>
+<script type="text/javascript">
+ 	var UserType = "SuperAdmin";
+	var TrueName = "${TrueName}";
+	var DeptId = "0";
+	var ActionType = "4";
+	var CurrentCategoryId = "";
+	var CurrentCategoryName = "";
+	var CurrentNewsInfoId = "";
+	$(function() {
+		ShowOrHideMenu(false);
+		BindTree_InfoCategory(UserType,DeptId);
+		PrepareEditor();
+		InitUpLoader_Info();
+		$("#nav_main").show();
+		$("#nav_info").show();
+		$("#nav_pinglun").show();
+		$("#nav_info").addClass("active");
+		$("#manage_info").siblings().css("border-bottom", "");
+		$("#manage_info").css("border-bottom", "3px solid red");
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('预约住院审核')">
+</head>
+<body>
+
+
+
+<div class="container-fluid">
+	<div class="row">
+
+	<!-- 内容 -->
+	<div id="Zhuyuan" class="main" >
+	<input type="hidden" th:value="${AdministratorId}" id="administratorid">
+	
+	
+	<div style="width:100%;height:150px;">
+		
+		<div class="form-horizontal col-sm-12">
+			<div class="form-group">
+				<label class="col-sm-1 control-label">
+					肾病种类
+				</label>
+				<div class="col-sm-5">
+					<select class="input form-control" v-model="bingzhongid" id="bingzhongid"  >
+					<option value="" selected>--请选择--</option>
+						<option v-for="bingzhongitem in bingzhonglist" :value="bingzhongitem.id">{{bingzhongitem.text}}</option>
+			    	</select>
+				</div>
+				<label class="col-sm-1 control-label">
+					姓&nbsp&nbsp&nbsp名
+				</label>
+				<div class="col-sm-5">
+					<input id="name" v-model="name" class="form-control"  type="text"  style="float:left;background-color:#fff;"  />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-1 control-label">
+					预约日期
+				</label>
+				<div class="col-sm-5">
+					<input id="chuangjianshijian" v-model="chuangjianshijian" class="form-control"  type="text"  style="float:left;background-color:#fff;" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" v-on:blur="getDate()"  />	
+				</div>
+				<label class="col-sm-1 control-label">
+					手机号
+				</label>
+				<div class="col-sm-5">
+					<input id="shoujihao" v-model="shoujihao" class="form-control"  type="text"  style="float:left;background-color:#fff;"  />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-7 control-label">
+				</label>
+				<div class="col-sm-5">
+					<button style="float:right;margin-right:10px;" class="btn btn-info" @click="bindZhuyuanList()">搜 索</button>
+					<button style="float:right;margin-right:10px;" class="btn btn-danger" @click="toRemove()">清 除</button>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+	
+	<div style="margin:0 auto;margin-top:20px;float:left;">
+		<button style="float:left;margin-left:10px;" class="btn btn-info" @click="perpareToShenheAll()">批量审核</button>
+    </div>
+    
+    <div style="width:200px;margin:0 auto;margin-top:20px;float:left;margin-left:10px">
+		<select class="input form-control" v-model="shenhejieguo" id="shenhejieguo" @change="bindZhuyuanList()" >
+			<option value=0 selected="selected">待审核</option>
+			<option value=1 >通过</option>
+			<option value=2 >驳回</option>
+			<option value=3 >用户取消</option>
+	    </select>	
+	</div>
+		
+	<div class="table-responsive" style="overflow:inherit;margin-top:40px;">
+		
+			<!-- 列表 -->
+		<table class="table table-hover table-striped" style="margin:0 auto;margin-top:40px;font-size:18px;">
+			<thead>
+				<th style="text-align:center;vertical-align:middle;width: 80px;"><input style="zoom:150%; " type="checkbox" name="shenheAllCheckbox"  @click="allCheckShenhe()" value="" id="allCheckShenhe"></th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">姓名</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">性别</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">年龄</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">手机号</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">病种</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">处理结果</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">操作</th>
+			</thead>
+			<tbody>
+				<tr v-for="(zhuyuanitem,index) in zhuyuanlist" v-if="zhuyuanlist!=null">
+					<td style="text-align:center;vertical-align:middle;"><input style="zoom:150%; " type="checkbox" name="shenheCheckbox" :value="zhuyuanitem.zhuyuanid" ></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="zhuyuanitem.xingming"></td>
+					<td style="text-align:center;vertical-align:middle;" >
+						<span v-if="zhuyuanitem.xingbie == '1'">男</span>
+						<span v-if="zhuyuanitem.xingbie == '2'">女</span>
+					</td>
+					<td style="text-align:center;vertical-align:middle;" v-text="zhuyuanitem.age"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="zhuyuanitem.shoujihao"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="zhuyuanitem.text"></td>
+					<td style="text-align:center;vertical-align:middle;" >
+						<span v-if="zhuyuanitem.shenhejieguo == '0'" style="color:blue">待审核</span>
+						<span v-if="zhuyuanitem.shenhejieguo == '1'" style="color:green">通过</span>
+						<span v-if="zhuyuanitem.shenhejieguo == '2'" style="color:red">驳回</span>
+						<span v-if="zhuyuanitem.shenhejieguo == '3'" style="color:red">用户取消</span>
+					</td>
+					<td style="text-align:center;vertical-align:middle;">
+						<button class="btn btn-info" @click="perpareToShenhe(zhuyuanitem.zhuyuanid,zhuyuanitem.shenhejieguo,zhuyuanitem.shenheyijian)">审 核</button>
+						<button class="btn btn-success" @click="ShowNews(zhuyuanitem.zhuyuanid,zhuyuanitem.userid,zhuyuanitem.xingming)">消 息</button>
+					</td>
+					
+				</tr>
+				<tr v-if="zhuyuanlist.length==0">
+						<td colspan="8" style="text-align:center;">暂无预约住院信息</td>
+				</tr>
+				
+				
+			</tbody>
+		</table>
+		
+		<div v-if="zhuyuanlist.length!=0" class="my-page-navigation">
+				<button class="btn btn-default" v-on:click="firstPage">首页</button>
+				<button class="btn btn-default" v-on:click="prePage">上一页</button>
+				<select class="form-control" v-model="pagesize">
+					<option value="10">10 条/页</option>
+					<option value="20">20 条/页</option>
+					<option value="30">30 条/页</option>
+					<option value="50">50 条/页</option>
+				</select>
+				<span v-text="pageindex + '  /  ' + pageCount"></span>
+				<span v-text="'共' + recordCount + '条'"></span>
+				<button class="btn btn-default" v-on:click="nextPage">下一页</button>
+				<button class="btn btn-default" v-on:click="lastPage">尾页</button>
+				<span>跳到第</span>
+				<input type="text" class="form-control" v-model="targetpage" v-on:keyup.enter="targetPage">
+				<span>页</span>
+				<button class="btn btn-default" v-on:click="targetPage">跳</button>
+		</div>
+		
+	    <div th:replace="pc/zhuyuan/edit_shenhe::ShenheZhuyuan"></div>
+	    
+		<div th:replace="pc/zhuyuan/xiaoxi_list::XiaoxiList"></div> 
+
+		</div>
+	</div>
+	
+	</div>
+</div>
+
+</body>
+
+<script src="../js/pc/zhuyuan/main_zhuyuan.js?ver=1.3"></script>
+<link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+<link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+<link rel="stylesheet" href="/css/xadmin.css?ver=0.6">
+
+
+</html>

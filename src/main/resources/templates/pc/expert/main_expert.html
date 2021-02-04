@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('专家管理')">
+</head>
+<body style="background:#fff !important;">
+
+<!-- <div th:replace="manage/top_dept"></div> -->
+
+<div class="container-fluid">
+	<div class="row">
+
+	<!-- 内容 -->
+	<div id="Expert" class="main" >
+	<div style="height:75px;border: 1px solid #ccc;border-radius: 4px;display:none;">
+			<div style="margin:0 auto;margin-top:10px;float:left;font-size: 20px; line-height: 50px;">
+				专家姓名：
+			</div>
+
+			<div style="width:440px;margin:0 auto;margin-top:20px;float:left;">
+				<input id="name" v-model="name" class="form-control"  type="text"  style="margin-left:10px;float:left;background-color:#fff;width:200px;"  />	
+			</div>
+			<div style="width:140px;margin:0 auto;margin-top:20px;float:right;">
+				<button style="float:left;margin-right:10px;" class="btn btn-danger" @click="toRemove()">清 除</button>
+				<button style="float:right;margin-right:10px;" class="btn btn-info" @click="bindExpertList()">搜 索</button>
+			</div>
+	</div>
+	
+	<div style="margin:0 auto;margin-top:20px;float:left;">
+		<button style="float:left;margin-left:10px;" class="btn btn-danger" @click="toDeleteChecked()">批量删除</button>
+		<button style="float:right;margin-left:40px;" class="btn btn-info" @click="perparetoAddExpert()">新增专家</button>
+    </div>
+		
+	<div class="table-responsive" style="overflow:inherit;margin-top:40px;">
+		
+			<!-- 列表 -->
+		<table class="table table-hover table-striped" style="margin:0 auto;margin-top:40px;font-size:18px;">
+			<thead>
+				<th style="text-align:center;vertical-align:middle;width: 80px;"><input style="zoom:150%; ;" type="checkbox" name="expertAllCheckbox"  @click="allCheckExpert()" value="" id="allCheckExpert"></th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">专家照片</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">专家姓名</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">专家职位</th>
+				<th style="text-align:center;vertical-align:middle;">简介</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">操作</th>
+			</thead>
+			<tbody>
+				<tr v-for="(expertitem,index) in expertlist" v-if="expertlist!=null">
+					<td style="text-align:center;vertical-align:middle;"><input style="zoom:150%; ;" type="checkbox" name="expertCheckbox" :value="expertitem.expertid" ></td>
+					<td style="text-align:center;vertical-align:middle;">
+						<img width=100 :src="expertitem.imageurl"/>
+					</td>
+					<td style="text-align:center;vertical-align:middle;" v-text="expertitem.name"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="expertitem.zhiwu"></td>
+					<td style="text-align:left;vertical-align:middle;" v-text="expertitem.jianjie"></td>
+					<td style="text-align:center;vertical-align:middle;">
+						<button class="btn btn-info" @click="toDelete(expertitem.expertid)">删 除</button>
+						<button class="btn btn-info" @click="perparetoModifyExpert(expertitem.expertid)">编 辑</button>
+					</td>
+					
+				</tr>
+				<tr v-if="expertlist.length==0">
+						<td colspan="5" style="text-align:center;">暂无专家信息</td>
+				</tr>
+				
+				
+			</tbody>
+		</table>
+		<div th:replace="pc/expert/edit_expert::EditExpert"></div>
+			
+
+		</div>
+	</div>
+	
+	</div>
+</div>
+
+</body>
+
+
+<link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+<link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+<link rel="stylesheet" href="/css/xadmin.css?ver=0.6">
+<script src="../js/pc/expert/main_expert.js?ver=1.6"></script>
+<script type="text/javascript" charset="utf-8" src="/js/plupload/plupload.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/plupload/plupload.full.js"></script>
+<script th:src="@{/js/upload_image_info.js}"></script>
+<script type="text/javascript">
+	$(function() {
+		InitUpLoader_Info();
+	});
+	function ViewImage() {
+		var mmIMG_PATH = $("#imageurl").val();
+		if (mmIMG_PATH !== "") {
+			window.open(mmIMG_PATH);
+		}
+	}
+</script>
+</html>

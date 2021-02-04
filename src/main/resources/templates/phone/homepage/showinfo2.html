@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>特色技术</title>
+</head>
+<body style="background-color:#fff;">
+	<div class="container" id="showinfo">
+		
+		<input type="hidden" th:value="${UserType}" id="usertype">
+		<input type="hidden" th:value="${UserId}" id="userid">
+		<input type="hidden" th:value="${InfoId}" id="infoid">
+		<input type="hidden" th:value="${InfoTitle}" id="infotitle">
+	
+		<div class="top">
+			
+		</div>
+		
+		<div style="width:100%;margin-top:200px;height:1200px;overflow:auto;" class="detailPart">
+			<div style="width:98%;">
+				<div class="weui-form-preview__item">
+                	<span class="weui-form-preview__value" style="text-indent:2em;margin-left:30px;font-size:40px;text-align:left;color:#000;line-height:100px;" v-html="info.infocontent"></span>
+               	</div>
+			</div>
+			
+		</div>
+		
+	</div>
+</body>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue-resource.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/layer/layer.js"></script>
+<link rel="stylesheet" href="../../css/weui.css"/>
+<link href="../../css/phone/homepage.css?ver=1.7" rel="stylesheet" type="text/css"></link>
+<script src="../../js/phone/homepage/showinfo.js?ver=1.2"></script>
+</html>

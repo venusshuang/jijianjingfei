@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('实用工具')">
+	
+</head>
+<body>
+
+<div class="container-fluid">
+	<div class="row">
+
+	<!-- 内容 -->
+	<div id="Tool" style="margin-left:0px;padding-top:1px;width:100%;">
+
+		<div  style="width:50%;overflow:inherit;margin-top:40px;float:left;margin-left:10px;">
+			<table style="margin:0 auto;font-size:18px;">
+				<tbody>
+					<tr>
+						<td><div id="div_tbmj" @click="toShow('1')"  style="cursor:pointer;height:200px;line-height:200px;">1、体表面积</div></td>
+						<td><div id="div_niaogai" @click="toShow('2')"  style="cursor:pointer;height:200px;line-height:200px;">2、尿钙/尿肌酐</div></td>
+						
+					</tr>
+					<tr>
+						<td><div id="div_eGFR" @click="toShow('3')"  style="cursor:pointer;height:200px;line-height:200px;">3、eGFR</div></td>
+						<td><div id="div_gaoniao" @click="toShow('4')"  style="cursor:pointer;height:200px;line-height:200px;">4、高尿酸血症</div></td>
+					</tr>
+					<tr>
+						<td><div id="div_EER" @click="toShow('5')"  style="cursor:pointer;height:200px;line-height:200px;">5、EER</div></td>
+						<td><div id="div_SLE" @click="toShow('6')"  style="cursor:pointer;height:200px;line-height:200px;">6、SLE-DAS</div></td>
+						
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+		
+		<div id="tbmj" style="display:none; height:400px; width:40%;border: 1px solid #ccc;border-radius: 4px;float:left;margin-top:40px;margin-left:30px">
+						<form class="form-horizontal col-sm-12" role="form" style="margin-top:20px;">
+							<div align="center" style="padding:15px;">
+								<strong>体表面积</strong>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									体重：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="tizhong" placeholder="请输入体重（kg）">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									体表面积：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="tibiaomianji" disabled="disabled">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input type="button" class="btn btn-info"
+										value="计 算" @click="jisuanTbmj()"> 
+								</div>
+							</div>
+					 </form>
+		</div>
+		
+		<div id="niaojigan" style="display:none; height:400px; width:45%;border: 1px solid #ccc;border-radius: 4px;float:left;margin-top:40px;margin-left:30px">
+						<form class="form-horizontal col-sm-12" role="form" style="margin-top:20px;">
+							<div align="center" style="padding:15px;">
+								<strong>尿钙/尿肌酐</strong>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									尿钙（mmol/L）：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="niaogai" placeholder="请输入尿钙（mmol/L）">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									尿肌酐（mmol/L）：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="niaojigan" placeholder="请输入尿肌酐（mmol/L）">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									尿钙/尿肌酐：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="niaogaijigan" disabled="disabled">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input type="button" class="btn btn-info"
+										value="计 算" @click="jisuanniaojigan()"> 
+								</div>
+							</div>
+					 </form>
+		</div>
+
+		<div id="egfr" style="display:none; height:400px; width:40%;border: 1px solid #ccc;border-radius: 4px;float:left;margin-top:40px;margin-left:30px">
+						<form class="form-horizontal col-sm-12" role="form" style="margin-top:20px;">
+							<div align="center" style="padding:15px;">
+								<strong>eGFR（ml/min/1.73m2）</strong>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									年龄及性别范围：
+								</label>
+								<div class="col-sm-8">
+									<select class="input form-control right-input"  v-model="nianling">
+												<option value="">请选择</option>
+												<option value="1">低体重儿<2500g</option>
+												<option value="2">0~18个月</option>
+												<option value="3">2~16岁女孩</option>
+												<option value="4">2~13岁男孩</option>
+												<option value="5">13~16岁男孩</option>
+									</select>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									身长：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="shenchang" placeholder="请输入身长（cm）">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									Src：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="src" placeholder="请输入Src（umol/L）">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									eGFR：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="eGFR" disabled="disabled">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input type="button" class="btn btn-info"
+										value="计 算" @click="jisuaneGFR()"> 
+								</div>
+							</div>
+					 </form>
+		</div>
+		
+		<div id="gaoniaosuanxuezheng" style="display:none; height:700px; width:45%;border: 1px solid #ccc;border-radius: 4px;float:left;margin-top:40px;margin-left:30px">
+						<form class="form-horizontal col-sm-12" role="form" style="margin-top:20px;">
+							<div align="center" style="padding:15px;">
+								<strong>高尿酸血症</strong>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									尿酸（umol/L）：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="niaosuan" placeholder="请输入尿酸（umol/L）">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									24小时尿量（L/d）：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="niaoliang" placeholder="请输入24h尿量（L/d）">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-4 control-label">
+									体表面积：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="tbmj" placeholder="请输入体表面积">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									尿酸排泄率：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="niaosuanpaixielv" disabled="disabled">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input type="button" class="btn btn-info"
+										value="计 算" @click="jisuanpaixielv()"> 
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									尿尿酸：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="niaoniaosuan" placeholder="请输入尿尿酸">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									血肌酐：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="xuejigan" placeholder="请输入血肌酐">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									血尿酸：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="xueniaosuan" placeholder="请输入血尿酸">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									尿肌酐：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="niaojigan2" placeholder="请输入尿肌酐">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									尿酸排泄分数：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="fenshu" disabled="disabled">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input type="button" class="btn btn-info"
+										value="计 算" @click="jisuanfenshu()"> 
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									分型：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="fenxing" disabled="disabled">
+								</div>
+							</div>
+							
+							
+							
+					 </form>
+		</div>
+				<div id="cdkhuanernengliang" style="display:none; height:700px; width:45%;border: 1px solid #ccc;border-radius: 4px;float:left;margin-top:40px;margin-left:30px">
+						<form class="form-horizontal col-sm-12" role="form" style="margin-top:20px;">
+							<div align="center" style="padding:15px;">
+								<strong>CKD患儿能量需求（EER）</strong>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									年龄范围：
+								</label>
+								<div class="col-sm-8">
+									<select class="input form-control right-input" style="width: 100%;" v-model="age_fanwei">
+										<option value="">请选择</option>
+										<option value="1">0~3个月</option>
+										<option value="2">4~6个月</option>
+										<option value="3">7~12个月</option>
+										<option value="4">13~35个月</option>
+										<option value="5">3~8岁</option>
+										<option value="6">9~18岁</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group" style="display: none;" id="div_age">
+								<label class="col-sm-4 control-label">
+									年龄：
+								</label>
+								<div class="col-sm-8">
+									<input class="input form-control right-input"  placeholder=" 输入内容" type="number" pattern="[0-9]*" v-model="age"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									性别：
+								</label>
+								<div class="col-sm-8">
+			               	 		<select class="input form-control right-input" style="width: 100%;" v-model="xingbie">
+										<option value="">请选择</option>
+										<option value="1">男</option>
+										<option value="2">女</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-4 control-label">
+									体重（kg）：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="tizhong" >
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									身高（m）：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="shengao">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input type="button" class="btn btn-info"
+										value="计 算" @click="jisuanEER()"> 
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-4 control-label">
+									EER计算值为：
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="EER" disabled="disabled">
+								</div>
+							</div>
+							
+							
+							
+					 </form>
+		</div>
+		
+		<div id="SLE" style="display:none; height:1000px; width:40%;border: 1px solid #ccc;border-radius: 4px;float:left;margin-top:40px;margin-left:30px">
+						<form class="form-horizontal col-sm-12" role="form" style="margin-top:20px;">
+							<div align="center" style="padding:15px;">
+								<strong>SLE-DAS</strong>
+							</div>
+							<div class="form-group" title="28个关节中肿胀的关节数">
+								<label class="col-sm-6 control-label" >
+									是否存在关节炎：
+								</label>
+								<div class="col-sm-4" >
+									<input style="zoom:150%;float: left;" type="radio" name="gjy" value="1" id="gjy1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="gjy" value="0" id="gjy0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="任何粘膜皮肤血管炎和冻疮样狼疮">
+								<label class="col-sm-6 control-label">
+									是否存在皮肤黏膜血管炎：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="xgy" value="1" id="xgy1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="xgy" value="0" id="xgy0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="SLICC分类标准中包括的急性、亚急性和慢性皮肤性狼疮皮疹，仅在颈部上方">
+								<label class="col-sm-6 control-label">
+									是否存在局部皮疹：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="pz" value="1" id="pz1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="pz" value="0" id="pz0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="SLICC分类标准中包括的急性、亚急性和慢性皮肤性狼疮皮疹，颈部上方及下方">
+								<label class="col-sm-6 control-label">
+									是否存在全身皮疹：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="qpz" value="1" id="qpz1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="qpz" value="0" id="qpz0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="异常斑片状或弥散性脱发">
+								<label class="col-sm-6 control-label">
+									是否存在脱发：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="tf" value="1" id="tf1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="tf" value="0" id="tf0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="口腔或鼻黏膜溃疡"	>
+								<label class="col-sm-6 control-label">
+									是否存在黏膜溃疡：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="ky" value="1" id="ky1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="ky" value="0" id="ky0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="C3或C4低于正常值底限"	>
+								<label class="col-sm-6 control-label">
+									是否存在低补体血症：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="bxz" value="1" id="bxz1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="bxz" value="0" id="bxz0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="抗ds-DNA抗体水平高于检测范围"	>
+								<label class="col-sm-6 control-label">
+									是否存在抗ds-DNA升高：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="dna" value="1" id="dna1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="dna" value="0" id="dna0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="尿蛋白/肌酐＞500mg/g 或 24小时尿蛋白定量＞500mg/24h">
+								<label class="col-sm-6 control-label">
+									是否存在蛋白尿：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="ldb" value="1" id="ldb1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="ldb" value="0" id="ldb0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="血小板计数＜100×10^9/L">
+								<label class="col-sm-6 control-label">
+									是否存在血小板减少症：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="xxb" value="1" id="xxb1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="xxb" value="0" id="xxb0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="白细胞计数＜3×10^9/L">
+								<label class="col-sm-6 control-label">
+									是否存在白细胞减少：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="bxb" value="1" id="bxb1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="bxb" value="0" id="bxb0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="SLICC分类标准中的神经精神病学特征，包括癫痫近期发作、精神病、器质性脑病、急性精神错乱、SLE相关视网膜病变、周围神经病、脊髓病变、狼疮性头痛、脑血管意外和无菌性脑膜炎">
+								<label class="col-sm-6 control-label">
+									是否存在神经精神受累：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="sjsl" value="1" id="sjsl1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="sjsl" value="0" id="sjsl0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="累及大中型血管的全身性血管炎和狼疮性肠炎">
+								<label class="col-sm-6 control-label">
+									是否存在全身性血管炎：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="qsxxgx" value="1" id="qsxxgx1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="qsxxgx" value="0" id="qsxxgx0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="包括肺萎缩，间质性肺炎，弥漫性肺泡出血，肺动脉高压，心肌炎，瓣膜功能不全，利伯曼-萨克斯心内膜炎">
+								<label class="col-sm-6 control-label">
+									是否存在心脏/肺部受累：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="sl" value="1" id="sl1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="sl" value="0" id="sl0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="近端肌痛/无力伴CK/醛缩酶升高，或肌电图改变，或经活检证实">
+								<label class="col-sm-6 control-label">
+									是否存在肌炎：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="jy" value="1" id="jy1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="jy" value="0" id="jy0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="胸膜炎、心包炎、无菌性腹膜炎">
+								<label class="col-sm-6 control-label">
+									是否存在浆膜炎：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="jmy" value="1" id="jmy1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="jmy" value="0" id="jmy0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="直接Coombs试验阳性的贫血，血清LDH升高和血清结合珠蛋白低">
+								<label class="col-sm-6 control-label">
+									是否存在溶血性贫血：
+								</label>
+								<div class="col-sm-4">
+									<input style="zoom:150%;float: left;" type="radio" name="rxxpx" value="1" id="rxxpx1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="rxxpx" value="0" id="rxxpx0">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+								</div>
+							</div>
+							
+							<div class="form-group" title="28个关节中肿胀的关节数">
+								<label class="col-sm-6 control-label">
+									肿胀关节数：
+								</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" v-model="gjs" placeholder="请输入肿胀的关节数">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-6 control-label">
+									尿蛋白水平：
+								</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" v-model="ndbsp" placeholder="尿蛋白水平(mg/24 hours)">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-6 control-label">
+									血小板计数：
+								</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" v-model="xxbjs" placeholder="血小板计数(10^9/L）">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-6 control-label">
+									白细胞计数：
+								</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" v-model="bxbjs" placeholder="白细胞计数(10^9/L)">
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-sm-6 control-label">
+									SLE-DAS：
+								</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" v-model="SLE" disabled="disabled">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input type="button" class="btn btn-info"
+										value="计 算" @click="jisuanSLE()"> 
+								</div>
+							</div>
+					 </form>
+		</div>
+		
+		
+	</div>
+</div>
+</div>
+</body>
+
+<script src="../js/pc/tool/tool.js?ver=1.1"></script>
+<link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+<link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+
+<link rel="stylesheet" href="/css/xadmin.css?ver=0.6">
+<style type="text/css">
+table tr td{
+    text-align: center;
+    width:300px;
+    border:1px solid #000;
+}
+.blue{
+	background-color: blue;
+	color:white; 
+}
+</style>
+
+
+
+
+</html>

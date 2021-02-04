@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('黑名单列表')">
+</head>
+<body>
+
+<div class="container-fluid">
+	<div class="row">
+
+	<!-- 内容 -->
+	<div id="Black" class="main" >
+	
+	<div style="width:100%;height:100px;">
+	
+		<div class="form-horizontal col-sm-12">
+			<div class="form-group">
+				<label class="col-sm-1 control-label">
+					姓名
+				</label>
+				<div class="col-sm-3">
+					<input id="name" v-model="name" class="form-control"  type="text"  style="float:left;background-color:#fff;"  />	
+				</div>
+				<label class="col-sm-1 control-label">
+					所属医院
+				</label>
+				<div class="col-sm-3">
+					<input id="dept" v-model="dept" class="form-control"  type="text"  style="float:left;background-color:#fff;"  />	
+				</div>
+				<label class="col-sm-1 control-label">
+					手机号码
+				</label>
+				<div class="col-sm-3">
+					<input id="shoujihao" v-model="shoujihao" class="form-control"  type="text"  style="float:left;background-color:#fff;"  />	
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-7 control-label">
+				</label>
+				<div class="col-sm-5">
+					<button style="float:right;margin-right:10px;" class="btn btn-info" @click="bindBlackList()">搜 索</button>
+					<button style="float:right;margin-right:10px;" class="btn btn-danger" @click="toRemove()">清 除</button>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+	
+	<div style="margin:0 auto;margin-top:20px;float:left;">
+		<button style="float:left;margin-left:10px;" class="btn btn-danger" @click="toDeleteChecked()">批量删除</button>
+
+    </div>
+		
+	<div class="table-responsive" style="overflow:inherit;margin-top:40px;">
+		
+			<!-- 列表 -->
+		<table class="table table-hover table-striped" style="margin:0 auto;margin-top:40px;font-size:18px;">
+			<thead>
+				<th style="text-align:center;vertical-align:middle;width: 80px;"><input style="zoom:150%; ;" type="checkbox" name="blackAllCheckbox"  @click="allCheckBlack()" value="" id="allCheckBlack"></th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">姓名</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">手机号</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">所属医院</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">角色</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">操作</th>
+			</thead>
+			<tbody>
+				<tr v-for="(blackitem,index) in blacklist" v-if="blacklist!=null">
+					<td style="text-align:center;vertical-align:middle;"><input style="zoom:150%; ;" type="checkbox" name="blackCheckbox" :value="blackitem.blacklistid" ></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="blackitem.name"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="blackitem.shoujihao"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="blackitem.dept"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="blackitem.roles"></td>
+					<td style="text-align:center;vertical-align:middle;">
+						<button class="btn btn-success" @click="toDelete(blackitem.blacklistid)">移除黑名单</button>
+						<button class="btn btn-info" @click="perparetoLookBlack(blackitem.blacklistid)">查 看</button>
+					</td>
+					
+				</tr>
+				<tr v-if="blacklist.length==0">
+						<td colspan="6" style="text-align:center;">暂无黑名单信息</td>
+				</tr>
+				
+				
+			</tbody>
+		</table>
+		<div th:replace="pc/black/detail_black::DetailBlack"></div>
+			
+
+		</div>
+	</div>
+	
+	</div>
+</div>
+
+</body>
+
+
+<link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+<link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+<script src="../js/pc/black/main_black.js?ver=1.8"></script>
+
+<link rel="stylesheet" href="/css/xadmin.css?ver=0.6">
+</html>

@@ -1,0 +1,206 @@
+@charset "UTF-8";
+
+html,body{
+	margin:0;
+	padding:0;
+}
+
+.bg{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.container{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow-y:auto;
+}
+
+.top{
+	width:100%;
+	height:200px;
+	line-height:200px;
+	color:#fff;
+	font-size:60px;
+	font-weight:bold;
+	text-align:center;
+	background-color:#00baad;
+	position: fixed;
+	z-index: 99
+}
+
+.index_menu1{
+	border-radius:20px;
+	width:48%;
+	height:450px;
+}
+
+.index_menu1:hover{
+	-moz-box-shadow: 2px 2px 10px #909090;
+   	-webkit-box-shadow: 2px 2px 10px #909090;
+   	box-shadow:2px 2px 10px #909090;
+}
+
+.index_menu1_pic{
+	padding-top:50px;
+	width:50%;
+	height:200px;
+	margin:0 auto;
+}
+
+.index_menu1_title{
+	font-family:'微软雅黑';
+	width:100%;
+	height:80px;
+	text-align:center;
+	font-size:50px;
+	font-weight:bold;
+	line-height:70px;
+	color:#fff;
+	padding-top:30px;
+}
+
+.index_menu1_summary{
+	font-family:'微软雅黑';
+	width:100%;
+	height:80px;
+	text-align:center;
+	font-size:35px;
+	line-height:60px;
+	color:#fff;
+}
+
+.index_menu2{
+	width:24%;
+	height:230px;
+	border:1px solid #000;
+}
+
+.index_menu2:hover{
+	-moz-box-shadow: 2px 2px 10px #909090;
+   	-webkit-box-shadow: 2px 2px 10px #909090;
+   	box-shadow:2px 2px 10px #909090;
+}
+
+.index_menu2_pic{
+	padding-top:30px;
+	width:50%;
+	height:100px;
+	margin:0 auto;
+}
+
+.index_menu2_title{
+	font-family:'微软雅黑';
+	width:100%;
+	height:60px;
+	text-align:center;
+	font-size:40px;
+	line-height:60px;
+	color:#000;
+	padding-top:30px;
+}
+
+.manage_title{
+	margin-top:300px;
+	text-align:center;
+	font-size:65px;
+	font-weight:bold;
+	color:#fff;
+}
+
+.input_div{
+	width:80%;
+	height:200px;
+	margin:100px auto;
+}
+
+.input_div input{
+	border-radius:20px;
+	width:100%;
+	height:100px;
+	border:2px solid #fff;
+	font-size:40px;
+	margin-top:80px;
+}
+
+.input_div button{
+	border-radius:60px;
+	width:100%;
+	height:100px;
+	background-color:#00baad;
+	font-size:40px;
+	color:#fff;
+	margin-top:40px;
+	text-align:center;
+}
+
+.input_div #message{
+	width:100%;
+	height:100px;
+	font-size:40px;
+	color:#00baad;
+	margin-top:80px;
+	text-align:center;
+}
+
+.input_div select{
+	border-radius:20px;
+	width:100%;
+	height:100px;
+	font-size:40px;
+	margin-top:80px;
+	text-align:center;
+	border:2px solid #fff;
+}
+
+.input_div select option{
+	width:100%;
+	height:100px;
+	font-size:30px;
+	color:#000;
+	margin-top:80px;
+	text-align:center;
+	background-color:#aaa0;
+}
+
+.required {
+	color: #ff0000;
+	font-size: 40px;
+	margin-right: 5px
+}
+
+/*就诊信息*/
+.jiuzhenitem{
+	width:100%;
+	height:620px;
+	border-bottom:1px solid #333;
+}
+
+.jiuzhenitem .button{
+	border-radius:20px;
+	height:80px;
+	color:#fff;
+	font-size:40px;
+	line-height:80px;
+	text-align:center;
+}
+
+/*yuyuezhuyuan */
+.tishi {
+	background-color: #fad1d1;
+	color: #ee2828;
+	height: 72px;
+	line-height: 72px;
+	font-size: 32px;
+}
+
+

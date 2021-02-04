@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="../../css/phone/homepage.css?ver=1.2" rel="stylesheet" type="text/css"></link>
+<title>首页</title>
+</head>
+<body>
+	<div class="bg">
+		<img src="../../image/index_bg.png" width=100% height=100%/>
+	</div>
+	<div class="container" style="overflow:auto;" id="indexpage">
+		<input type="hidden" th:value="${UserType}" id="usertype">
+		<input type="hidden" th:value="${UserId}" id="userid">
+	
+		<div class="top">
+			首页
+		</div>
+		
+		<div style="width:100%;margin-top:220px;">
+			<div style="width:90%;height:1000px;margin:50px auto;">
+				<div style="width:100%;height:500px;">
+					
+					<a id="a_guahao" href="../../homepage/jiuzhenxinxi_list.html" style="pointer-events: none;">
+						<div class="index_menu1" style="background-color:#4d98ea;float:left;">
+							<div class="index_menu1_pic">
+								<img src="../../image/menu-guahao.png" width=100% height=100%/>
+							</div>
+							<div class="index_menu1_title">挂号</div>
+							<div class="index_menu1_summary">预约出诊号</div>
+						</div>
+					</a>
+					
+					<a id="a_zhuyuan" href="../../homepage/yuyuezhuyuan.html" style="pointer-events: none;">
+						<div class="index_menu1" style="background-color:#f5a14c;float:right;">
+							<div class="index_menu1_pic">
+								<img src="../../image/menu-zhuyuan.png" width=100% height=100%/>
+							</div>
+							<div class="index_menu1_title">预约住院</div>
+							<div class="index_menu1_summary">预约住院号</div>
+						</div>
+					</a>
+				</div>
+				<div style="width:100%;height:500px;">
+				
+					<a id="a_zhuanzhen" href="../../homepage/zhuanzhen_list.html" style="pointer-events: none;">
+						<div class="index_menu1" style="background-color:#65c4e0;float:left;">
+							<div class="index_menu1_pic">
+								<img src="../../image/menu-zhuanzhen.png" width=100% height=100%/>
+							</div>
+							<div class="index_menu1_title">儿童肾病转诊</div>
+							<div class="index_menu1_summary">转诊申请信息</div>
+						</div>
+					</a>
+					
+					<a id="a_zhihuizhenliao" href="../../homepage/zhihuizhenliao.html" style="pointer-events: none;">
+						<div class="index_menu1" style="background-color:#00baad;float:right;">
+							<div class="index_menu1_pic">
+								<img src="../../image/menu-zhihui.png" width=100% height=100%/>
+							</div>
+							<div class="index_menu1_title">智慧诊疗</div>
+							<div class="index_menu1_summary">实用小工具</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			
+			
+			<div style="background-color:#9e9e9e;width:100%;height:100px;padding-left:50px;font-size:50px;line-height:100px;">
+				快捷工具
+			</div>
+			<div style="width:98%;height:300px;margin:50px auto;">
+				<div style="width:100%;height:500px;">
+					<a href="../../homepage/wodeyuyue_list.html">
+						<div class="index_menu2" style="background-color:#fff;float:left;">
+							<div class="index_menu2_pic">
+								<img src="../../image/menu-wodeyuyue.png" width=100% height=100%/>
+							</div>
+							<div class="index_menu2_title">我的预约</div>
+						</div>
+					</a>
+					<a href="../../homepage/wodexiaoxi_list.html">
+						<div class="index_menu2" style="background-color:#fff;float:left;margin-left:1%;">
+							<div class="index_menu2_pic">
+								<img src="../../image/menu-xiaoxitongzhi.png" width=100% height=100%/>
+							</div>
+							<div class="index_menu2_title">消息通知</div>
+						</div>
+					</a>
+					<a href="/homepage/modifyPassword.html">
+						<div class="index_menu2" style="background-color:#fff;float:left;margin-left:1%;">
+							<div class="index_menu2_pic">
+								<img src="../../image/xiugaimima.png" width=100% height=100%/>
+							</div>
+							<div class="index_menu2_title">修改密码</div>
+						</div>
+					</a>
+					<a href="/homepage/zhongxinjianjie.html">
+						<div class="index_menu2" style="background-color:#fff;float:left;margin-left:1%;">
+							<div class="index_menu2_pic">
+								<img src="../../image/zxjj.png" width=100% height=100%/>
+							</div>
+							<div class="index_menu2_title">中心简介</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" charset="utf-8" src="../../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue.js"></script>
+<script src="../../js/phone/homepage/index.js?ver=0.1"></script>
+
+</html>

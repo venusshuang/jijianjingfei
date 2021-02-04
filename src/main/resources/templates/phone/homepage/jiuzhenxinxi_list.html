@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>就诊患者</title>
+</head>
+<body style="background-color:#fff;">
+	<div class="container" id="jiuzhenxinxi">
+		
+		<input type="hidden" th:value="${UserType}" id="usertype">
+		<input type="hidden" th:value="${UserId}" id="userid">
+	
+		<div class="top">
+			就诊患者
+		</div>
+		
+		
+		<div style="width:100%;margin-top:200px;height:1200px;overflow:auto;" class="listPart">
+		
+			<div style="width:100%;">
+				
+				<div style="margin-top:10px;border-bottom: 1px solid #555;" class="weui-form-preview" v-for="jiuzhenxinxiitem in jiuzhenxinxilist">
+		            <div class="weui-form-preview__hd">
+		                <div class="weui-form-preview__item">
+		                    <em class="weui-form-preview__value" style="float:left;width:43%;text-align:left;font-size:50px;" v-html="jiuzhenxinxiitem.name"></em>
+		                    <em v-if="jiuzhenxinxiitem.xingbie=='1'" class="weui-form-preview__value" style="float:right;width:33%;text-align:left;font-size:40px;">性别：男</em>
+		                    <em v-else-if="jiuzhenxinxiitem.xingbie=='2'" class="weui-form-preview__value" style="float:right;width:33%;text-align:left;font-size:40px;">性别：女</em>
+		                </div>
+		            </div>
+		            <div class="weui-form-preview__bd">
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label" style="font-size:40px;color:#000;">手机号码：</label>
+		                    <span class="weui-form-preview__value" style="font-size:40px;text-align:left;color:#555;" v-html="jiuzhenxinxiitem.shoujihao"></span>
+		                </div>
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label" style="font-size:40px;color:#000;">联系地址：</label>
+		                    <span class="weui-form-preview__value" style="font-size:40px;text-align:left;color:#555;" v-html="jiuzhenxinxiitem.lianxidizhi"></span>
+		                </div>
+		                <div class="weui-form-preview__item">
+		                    <label class="weui-form-preview__label" style="font-size:40px;color:#000;">主要症状：</label>
+		                    <span class="weui-form-preview__value" style="font-size:40px;text-align:left;color:#555;" v-html="jiuzhenxinxiitem.zhuyaozhengzhuang"></span>
+		                </div>
+		            </div>
+		            <div class="weui-form-preview__ft" style="line-height:80px;">
+	                	<a style="font-size:40px;" class="weui-form-preview__btn weui-form-preview__btn_default" @click="prepareToModify(jiuzhenxinxiitem.jiuzhenxinxiid)">修改</a>
+	                	<a style="font-size:40px;" class="weui-form-preview__btn weui-form-preview__btn_primary" @click="prepareToGuahao(jiuzhenxinxiitem.jiuzhenxinxiid)">选择挂号</a>
+	            	</div>
+		        </div>
+				
+			</div>
+		</div>
+		
+		<div style="height:300px;padding:30px;" class="listPart">
+			<div @click="prepareToAdd()" style="border-radius: 20px;background-color:#aaa0;border:1px #000 solid;margin:0 auto;width:90%;height:250px;line-height:250px;text-align:center;color:#00baad;font-size:40px;">+新增挂号信息</div>
+		</div>
+		
+		
+		<div style="width:100%;margin-top:200px;display:none;" id="editPart">
+
+			<div class="page form_page js_show">
+				<div class="weui-form">
+					<div class="weui-form__control-area">
+						<div class="weui-cells__group weui-cells__group_form">
+							<div class="weui-cells__title"></div>
+							<div class="weui-cells weui-cells_form" style="font-size:40px;">
+								<div class="weui-cell weui-cell_active" style="padding:50px 32px;">
+									<div class="weui-cell__hd">
+										<label class="weui-label" style="width:300px;"><span class="required">*</span>姓名</label>
+									</div>
+									<div class="weui-cell__bd">
+										<input class="weui-input" placeholder="请输入患者姓名" v-model="jiuzhenxinxi.name">
+									</div>
+								</div>
+								<div class="weui-cell weui-cell_active" style="padding:50px 32px;">
+									<div class="weui-cell__hd">
+										<label class="weui-label" style="width:300px;"><span class="required">*</span>身份证</label>
+									</div>
+									<div class="weui-cell__bd">
+										<input class="weui-input"
+											placeholder="请输入患者身份证号码" v-model="jiuzhenxinxi.shenfenzhenghaoma">
+									</div>
+								</div>
+								<div class="weui-cell weui-cell_active" style="padding:50px 32px;">
+									<div class="weui-cell__hd">
+										<label class="weui-label" style="width:300px;"><span class="required">*</span>性别</label>
+									</div>
+									<div class="weui-cell__bd">
+				               	 		<input type="radio" name="xingbie" style="zoom: 260%;" value="1" id="xingbie1" />男&emsp;
+										<input type="radio" name="xingbie" style="zoom: 260%;" value="2" id="xingbie2" />女
+				            		</div>
+								</div>
+								<!-- <div class="weui-cell weui-cell_active" style="padding:50px 32px;">
+									<div class="weui-cell__hd">
+										<label class="weui-label" style="width:300px;">年龄</label>
+									</div>
+									<div class="weui-cell__bd">
+										<input class="weui-input"
+											placeholder="请输入患者年龄" type="number" pattern="[0-9]*"v-model="jiuzhenxinxi.age">
+									</div>
+								</div> -->
+								<div class="weui-cell weui-cell_active" style="padding:50px 32px;">
+									<div class="weui-cell__hd">
+										<label class="weui-label" style="width:300px;"><span class="required">*</span>年龄</label>
+									</div>
+									<div class="weui-cell__bd">
+										<select v-model="jiuzhenxinxi.age" style="width:400px;height: 60px;font-size: 40px;">
+											<option value="">--请选择--</option>
+											<option v-for="nianlingduanitem in nianlingduanlist" v-html="nianlingduanitem.text" :value="nianlingduanitem.id"></option>
+										</select>
+									</div>
+								</div>
+								<div class="weui-cell weui-cell_active" style="padding:50px 32px;">
+									<div class="weui-cell__hd">
+										<label class="weui-label" style="width:300px;"><span class="required">*</span>临床诊断</label>
+									</div>
+									<div class="weui-cell__bd">
+										<select v-model="jiuzhenxinxi.bingzhong" style="width:400px;height: 60px;font-size: 40px;">
+											<option value="">--请选择--</option>
+											<option v-for="bingzhongitem in bingzhonglist" v-html="bingzhongitem.text" :value="bingzhongitem.id"></option>
+										</select>
+									</div>
+								</div>
+								<div class="weui-cell weui-cell_active" style="padding:50px 32px;">
+									<div class="weui-cell__hd">
+										<label class="weui-label" style="width:300px;"><span class="required">*</span>手机号码</label>
+									</div>
+									<div class="weui-cell__bd">
+										<input class="weui-input"
+											placeholder="请输入手机号码" type="number" pattern="[0-9]*"v-model="jiuzhenxinxi.shoujihao">
+									</div>
+								</div>
+								<div class="weui-cell weui-cell_active" style="padding:50px 32px;">
+									<div class="weui-cell__hd">
+										<label class="weui-label" style="width:300px;">联系地址</label>
+									</div>
+									<div class="weui-cell__bd">
+										<input class="weui-input"
+											placeholder="请输入联系地址" v-model="jiuzhenxinxi.lianxidizhi">
+									</div>
+								</div>
+								<div class="weui-cell weui-cell_active" style="padding:50px 32px;">
+									<div class="weui-cell__hd">
+										<label class="weui-label" style="width:300px;">主要症状</label>
+									</div>
+								</div>
+								<div class="weui-cell weui-cell_active" style="padding:50px 32px;">
+									<div class="weui-cell__bd">
+										<textarea class="weui-textarea" placeholder="主要表现、诊断" rows="3"v-model="jiuzhenxinxi.zhuyaozhengzhuang"></textarea>
+									</div>
+								</div>
+								<div class="weui-cell weui-cell_active form-group">
+									<div class="weui-uploader">
+										<div class="weui-uploader__hd">
+											<p class="weui-uploader__title weui-label left-lable">上传图片</p>
+											<div class="weui-uploader__info">病例文件资料</div>
+										</div>
+
+										<div class="weui-uploader__bd">
+											<!-- 放置上传上来的文件，里面拼接li -->
+											<ul class="weui-uploader__files" id="uploaderFiles">
+
+											</ul>
+											<input type="text" class="form-control" id="imageurl"
+												style="display: none;">
+											<div id="filelist" style="display: none;"></div>
+											<div class="weui-uploader__input-box" id="container"
+												style="width: 200px; height: 200px; margin-left: 10px;">
+												<input id="pickfiles" class="weui-uploader__input"
+													type="file" />
+											</div>
+											<div id="UploadedFiles" style="display: none;"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Message -->
+					<div class="weui-form__tips-area">
+						<p class="weui-form__tips" id="message" style="font-size: 45px;color: red;"></p>
+					</div>
+					
+					<!-- button -->
+					<div class="weui-form__opr-area" v-if="editFlag=='0'">
+						<a class="weui-btn weui-btn_primary weui-btn_disabled" style="font-size: 50px;width: 500px;height: 100px;background-color: #00baad;line-height: 70px;color: #fff;"
+							@click="toAdd()">保存</a>
+					</div>
+					
+					<div class="weui-form__opr-area" v-else-if="editFlag=='1'">
+						<a class="weui-btn weui-btn_primary weui-btn_disabled" style="font-size: 50px;width: 500px;height: 100px;background-color: #00baad;line-height: 70px;color: #fff;"
+							@click="toModify()">保存</a>
+					</div>
+					
+				</div>
+				
+				<div id="js_toast" style="display: none;width:500px;height:500px;">
+					<div class="weui-mask_transparent"></div>
+					<div class="weui-toast" style="width:500px;height:500px;">
+						<i class="weui-icon-success-no-circle weui-icon_toast" style="width:200px;height:200px;"></i>
+						<p class="weui-toast__content" style="font-size:50px;">保存成功</p>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		
+	</div>
+</body>
+<script src="https://res.wx.qq.com/open/libs/weuijs/1.2.1/weui.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue-resource.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/layer/layer.js"></script>
+<link rel="stylesheet" href="../../css/weui.css"/>
+<link href="../../css/phone/homepage.css?ver=1.8" rel="stylesheet" type="text/css"></link>
+<script src="../../js/phone/homepage/jiuzhenxinxi.js?ver=3.4"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/plupload/plupload.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/plupload/plupload.full.js"></script>
+<script src="../../js/upload_image.js?ver=1.0"></script>
+<script type="text/javascript">
+ var mmImageUrls = "";
+ $(function(){
+  InitUpLoader();
+ });
+</script>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="zhuanzhenDetail">
+	<div id="detailZhuanzhenModal" style="" class="modal fade bs-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog" style="width: 650px">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h3 class="modal-title" id="myModalLabel">查看转诊病例详情</h3>
+				</div>
+				<div class="modal-body" style="overflow: auto;">
+					<div style="width: 600px; margin: 0 auto; margin-top: 15px">
+						<div >
+							<p style="font-size: 20px;font-weight: 400;margin: 20px 0px;">患者信息：</p>
+							<span class="col-sm-6" v-text="'姓名：'+zhuanzhen.patientname"></span>
+							<span v-text="'年龄：'+zhuanzhen.patientage"></span>
+						</div>
+						<div >
+							<p style="font-size: 20px;font-weight: 400;margin: 20px 0px;">医生信息：</p>
+							<span class="col-sm-6" v-text="'姓名：'+zhuanzhen.doctorname"></span>
+							<span v-text="'医院：'+zhuanzhen.danwei"></span>
+						</div>
+						<div >
+							<p style="font-size: 20px;font-weight: 400;margin: 20px 0px;">主要症状：</p>
+							<textarea style="width: 100%;min-height: 60px;border: 1px #d0cece solid;" v-text="zhuanzhen.zhusu"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- /.modal -->
+	</div>
+</div>
+</html>

@@ -1,0 +1,91 @@
+nav{
+	height:100px;
+}
+
+.required{
+	color:red;
+}
+
+.current{
+	color: #dfdfdf;
+    background-color: #19a97b;
+}
+
+.current  a{
+	color: #dfdfdf;
+}
+
+.Left{
+	font-weight:bold;
+	text-align: right;
+}
+
+.my-page-navigation{
+	width:100%;
+	border-top : 1px solid #ddd;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	position: relative;
+	display: flex;
+	justify-content: center !important;
+}
+
+.my-page-navigation > .btn{
+    position: relative;
+    float: left;
+}
+
+.my-page-navigation > .btn:first-child {
+    margin-left: 0;
+}
+
+.my-page-navigation > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.my-page-navigation > .btn:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+
+.my-page-navigation > .btn:last-child:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.my-page-navigation > .btn:hover {
+    z-index: 2;
+}
+
+.my-page-navigation > select{
+	width: auto;
+	width: initial;
+	border-radius: 0;
+	display: inline-block;
+	float:left;
+}
+
+.my-page-navigation > input{
+	width: 76px;
+	border-radius: 0;
+	float:left;
+	margin-left:-1px;
+}
+
+.my-page-navigation > span {
+    padding: 8px 12px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1;
+	color: #555;
+	text-align: center;
+	vertical-align:top;
+	heigth:34px;
+	display: inline-block;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	background-color: #e0e0e0;
+	background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+	float: left;
+	margin-left:-1px;
+}

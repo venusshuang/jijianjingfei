@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('医生列表')">
+</head>
+<body>
+
+<!-- <div th:replace="manage/top_dept"></div> -->
+
+<div class="container-fluid">
+	<div class="row">
+
+	<!-- 内容 -->
+	<div id="Doctor" class="main" >
+	
+		<div style="width:100%;height:100px;">
+		
+		<div class="form-horizontal col-sm-12">
+			<div class="form-group">
+				<label class="col-sm-1 control-label">
+					医生姓名
+				</label>
+				<div class="col-sm-5">
+					<input id="xingming" v-model="xingming" class="form-control"  type="text"  style="float:left;background-color:#fff;"  />	
+				</div>
+				<label class="col-sm-1 control-label">
+					所属医院
+				</label>
+				<div class="col-sm-5">
+					<input id="danwei" v-model="danwei" class="form-control"  type="text"  style="float:left;background-color:#fff;"  />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-7 control-label">
+				</label>
+				<div class="col-sm-5">
+					<button style="float:right;margin-right:10px;" class="btn btn-info" @click="bindDoctorList()">搜 索</button>
+					<button style="float:right;margin-right:10px;" class="btn btn-danger" @click="toRemove()">清 除</button>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+
+	
+	<div style="margin:0 auto;margin-top:20px;float:left;">
+		<button style="float:left;margin-left:10px;" class="btn btn-danger" @click="toDeleteChecked()">批量删除</button>
+    </div>
+		
+	<div class="table-responsive" style="overflow:inherit;margin-top:40px;">
+		
+			<!-- 列表 -->
+		<table class="table table-hover table-striped" style="margin:0 auto;margin-top:40px;font-size:18px;">
+			<thead>
+				<th style="text-align:center;vertical-align:middle;width: 80px;"><input style="zoom:150%; " type="checkbox" name="doctorAllCheckbox"  @click="allCheckDoctor()" value="" id="allCheckDoctor"></th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">医生姓名</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">所属医院</th>
+				<th style="text-align:center;vertical-align:middle;width: 150px;">操作</th>
+			</thead>
+			<tbody>
+				<tr v-for="(doctoritem,index) in doctorlist" v-if="doctorlist!=null">
+					<td style="text-align:center;vertical-align:middle;"><input style="zoom:150%; " type="checkbox" name="doctorCheckbox" :value="doctoritem.doctorid" ></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="doctoritem.xingming"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="doctoritem.danwei"></td>
+					<td style="text-align:center;vertical-align:middle;">
+						<button class="btn btn-danger" @click="toAddBlack(doctoritem.doctorid,doctoritem.xingming)">加入黑名单</button>
+						<button class="btn btn-info" @click="perpareToLookDoctor(doctoritem.doctorid)">查 看</button>
+					</td>
+					
+				</tr>
+				<tr v-if="doctorlist.length==0">
+						<td colspan="4" style="text-align:center;">暂无医生信息</td>
+				</tr>
+				
+				
+			</tbody>
+		</table>
+	    <div th:replace="pc/doctor/detail_doctor::DetailDoctor"></div> 
+			
+
+		</div>
+	</div>
+	
+	</div>
+</div>
+
+</body>
+
+<script src="../js/pc/doctor/main_doctor.js?ver=1.1"></script>
+<link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+<link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+
+<link rel="stylesheet" href="/css/xadmin.css?ver=0.6">
+
+</html>

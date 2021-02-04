@@ -1,0 +1,167 @@
+<!-- 左侧菜单开始 -->
+<div class="left-nav">
+    <div id="side-nav">
+        <ul id="nav">
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="预约挂号">&#xe723;</i>
+                    <cite>预约挂号</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                	<li>
+                        <a onclick="xadmin.add_tab('仪表盘','/guahao/yibiaopan.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>仪表盘</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('预约挂号','/guahao/main_guahao.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>预约挂号</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('周排班管理','/paibanguanli/main_schedule.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>周排班管理</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('专家排班管理','/paibanguanli/main_paibanguanli.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>专家排班管理</cite></a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="预约住院">&#xe723;</i>
+                    <cite>预约住院</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('预约住院','/zhuyuan/main_zhuyuan.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>预约住院</cite></a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="转诊病例">&#xe723;</i>
+                    <cite>转诊病例</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('转诊列表','/zhuanzhen/zhuanzhen.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>转诊列表</cite></a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="患者管理">&#xe6b8;</i>
+                    <cite>患者管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('患者列表','/patient/main_patient.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>患者列表</cite></a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="医生管理">&#xe726;</i>
+                    <cite>医生管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('医生列表','/doctor/main_doctor.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>医生列表</cite></a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="专家管理">&#xe726;</i>
+                    <cite>专家管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('专家列表','/expert/main_expert.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>专家列表</cite></a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="黑名单管理">&#xe6ce;</i>
+                    <cite>黑名单管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('黑名单列表','/black/main_black.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>黑名单列表</cite></a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li v-if="roletype==1">
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="权限管理">&#xe6b4;</i>
+                    <cite>权限管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('账号设置','/administrator/main_administrator.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>账号设置</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('角色管理','/administrator/main_role.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>角色管理</cite></a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li v-if="roletype==1">
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="信息发布">&#xe6b4;</i>
+                    <cite>信息发布</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('中心简介','/info/main_info.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>中心简介</cite></a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="实用小工具">&#xe6ce;</i>
+                    <cite>实用小工具</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('实用小工具','/tool/tool.html')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>实用小工具</cite></a>
+                    </li>
+                </ul>
+            </li>
+            
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="../../css/phone/homepage.css?ver=1.2" rel="stylesheet" type="text/css"></link>
+<link rel="stylesheet" href="../../css/weui.css"/>
+<title>SLE-DAS</title>
+<style type="text/css">
+	.left-lable{
+		width:700px!important;
+		font-weight: 800;
+	}
+	
+	.form-group{
+		padding:35px 32px!important;
+	}
+	
+	.right-input{
+		border: 1px rgba(25,25,25,0.6) solid;
+		height: 75px;
+	}
+</style>
+</head>
+<body>
+	<div class="bg" style="position: fixed;">
+		<img src="../../image/index_bg.png" width=100% height=100%/>
+	</div>
+	
+	<div class="container" id="Tool">
+		<div class="top">
+			SLE-DAS
+		</div>
+		
+		<div class="page" style="margin-top: 200px;">
+			<div style="background-color: #f3f3f3;height: 80px;line-height: 80px;font-size: 36px;font-weight: 600;">
+		 		&emsp;SLE-DAS
+		 	</div>
+		 	
+			<div style="width:100%;">
+			 	<div class="page form_page js_show" style="padding: 40px 30px;">
+					<div class="weui-form" style="padding-top: 0px;">
+						
+						<!-- from表单 -->
+				  		<div class="weui-form__control-area" style="margin-top: 0px;">
+	      					<div class="weui-cells__group weui-cells__group_form">
+	      						<div class="weui-cells weui-cells_form" style="font-size:40px;">
+
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在关节炎：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="gjy" value="1" id="gjy1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="gjy" value="0" id="gjy0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	   
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在皮肤黏膜血管炎：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="xgy" value="1" id="xgy1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="xgy" value="0" id="xgy0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	  
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在局部皮疹：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="pz" value="1" id="pz1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="pz" value="0" id="pz0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	 
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在全身皮疹：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="qpz" value="1" id="qpz1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="qpz" value="0" id="qpz0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	 
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在脱发：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="tf" value="1" id="tf1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="tf" value="0" id="tf0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	  
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在黏膜溃疡：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="ky" value="1" id="ky1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="ky" value="0" id="ky0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	 
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在低补体血症：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="bxz" value="1" id="bxz1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="bxz" value="0" id="bxz0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	  
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在抗ds-DNA升高：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="dna" value="1" id="dna1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="dna" value="0" id="dna0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	  
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在蛋白尿：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="ldb" value="1" id="ldb1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="ldb" value="0" id="ldb0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在血小板减少症：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="xxb" value="1" id="xxb1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="xxb" value="0" id="xxb0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在白细胞减少：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="bxb" value="1" id="bxb1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="bxb" value="0" id="bxb0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	 
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在神经精神受累：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="sjsl" value="1" id="sjsl1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="sjsl" value="0" id="sjsl0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+					            		</div>
+					          		</div>	  
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在全身性血管炎：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="qsxxgx" value="1" id="qsxxgx1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="qsxxgx" value="0" id="qsxxgx0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+							            </div>
+					          		</div>
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在心脏/肺部受累：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="sl" value="1" id="sl1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="sl" value="0" id="sl0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+							            </div>
+					          		</div>	 
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在肌炎：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="jy" value="1" id="jy1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="jy" value="0" id="jy0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+							            </div>
+					          		</div>	  
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在浆膜炎：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="jmy" value="1" id="jmy1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="jmy" value="0" id="jmy0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+							            </div>
+					          		</div>	  
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">是否存在溶血性贫血：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input style="zoom:350%;float: left;" type="radio" name="rxxpx" value="1" id="rxxpx1">
+								            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">是</div>
+							         		<input style="zoom:350%;float: left;" type="radio" name="rxxpx" value="0" id="rxxpx0">
+							            	<div style="margin-top: 5px;margin-left: 10px;float: left;">否</div>
+							            </div>
+					          		</div>	  
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd" >
+					            			<label class="weui-label left-lable" style="display: inline;">肿胀关节数：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input" v-model="gjs" placeholder="请输入肿胀的关节数"/>
+					            		</div>
+					          		</div>	    
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">尿蛋白水平：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input" v-model="ndbsp" placeholder="尿蛋白水平(mg/24 hours)"/>
+					            		</div>
+					          		</div>	  
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd">
+					            			<label class="weui-label left-lable" style="display: inline;">血小板计数：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input" v-model="xxbjs" placeholder="血小板计数(10^9/L）"/>
+					            		</div>
+					          		</div>	   
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" >
+					            		<div class="weui-cell__hd" >
+					            			<label class="weui-label left-lable" style="display: inline;">白细胞计数：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input type="text" class="weui-input right-input" v-model="bxbjs" placeholder="白细胞计数(10^9/L)"/>
+					            		</div>
+					          		</div>	    
+					          		
+
+							  		
+							  		<!-- button -->
+									<div class="weui-form__opr-area">
+										<a class="weui-btn weui-btn_primary" style="width: 90%;background-color: #2a82e4;color: #fff;height:100px;border-radius:10px;font-size: 50px;border: none;"
+											@click="jisuanSLE()">计  算</a>
+									</div>
+					          		
+					          		<div class="weui-cell weui-cell_active form-group" style="font-weight: 800;">
+					            		<div class="weui-cell__hd" style="width: 35%;">
+					            			<label class="weui-label" style="display: inline;">SLE-DAS：</label>
+					            		</div>
+					           	 		<div class="weui-cell__bd">
+					               	 		<input class="weui-input right-input" placeholder=" 计算结果" v-model="SLE" disabled="disabled" />
+					            		</div>
+					          		</div>
+					          			
+	      						</div>
+	      					</div>	
+				  		</div>
+				  		
+				  		
+						
+					</div>
+				</div>
+				
+				
+				
+			</div>
+				
+		</div>
+		
+		
+		
+		
+	</div>
+</body>
+
+<script type="text/javascript" charset="utf-8" src="../../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/vue-resource.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/layer/layer.js"></script>
+
+<script src="../js/pc/tool/tool.js?ver=1.4"></script>
+
+</html>
