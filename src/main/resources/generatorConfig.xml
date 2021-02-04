@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+		PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<classPathEntry location="D:/mysql-connector-java-5.1.7-bin.jar" />
 	<context id="context1">
@@ -17,7 +19,7 @@
 		<javaClientGenerator targetPackage="jijianjingfei.dao"
 			targetProject="jijianjingfei" type="XMLMAPPER" />
 
-		<table schema="jijianjingfei" tableName="patient_jiuzhenxinxi" />
+		<table schema="jijianjingfei" tableName="user" />
 		
 	</context>
 </generatorConfiguration>
