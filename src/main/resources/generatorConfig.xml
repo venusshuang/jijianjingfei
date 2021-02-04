@@ -8,16 +8,16 @@
 		</commentGenerator>
 		
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3390/childckd?characterEncoding=utf8"
-			userId="root" password="kjgbfile345677" />
+			connectionURL="jdbc:mysql://localhost:3306/jijianjingfei?characterEncoding=utf8"
+			userId="root" password="123123" />
 		<javaModelGenerator targetPackage="childckd.model"
-			targetProject="childckd-web" />
+			targetProject="jijianjingfei" />
 		<sqlMapGenerator targetPackage="childckd.mapper"
-			targetProject="childckd-web" />
+			targetProject="jijianjingfei" />
 		<javaClientGenerator targetPackage="childckd.dao"
-			targetProject="childckd-web" type="XMLMAPPER" />
+			targetProject="jijianjingfei" type="XMLMAPPER" />
 
-		<table schema="childckd" tableName="patient_jiuzhenxinxi" />	
+		<table schema="jijianjingfei" tableName="patient_jiuzhenxinxi" />
 		
 	</context>
 </generatorConfiguration>
