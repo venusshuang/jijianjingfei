@@ -1,4 +1,4 @@
-package jijianjingfei.common.controller;
+package jjjf.common.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,7 +49,7 @@ public class UploadController {
 			MultipartFile mmFile = mmRequest.getFile(mmKeyString);
 
 			SimpleDateFormat mmDateFormat = new SimpleDateFormat("yyyyMMdd");
-			String SaveFolder = "/jijianjingfei/image/" +mmDateFormat.format(new Date()) + "/";
+			String SaveFolder = "/jjjf/image/" +mmDateFormat.format(new Date()) + "/";
 			String FullUrl = UPLOADIMAGE_URL + "/image/"+ mmDateFormat.format(new Date()) + "/";
 			//String FullUrl = SaveFolder;
 			ServletContext mmContext = request.getServletContext();

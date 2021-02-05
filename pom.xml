@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>jijianjingfei</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jijianjingfei</name>
+	<name>jjjf</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -127,10 +127,6 @@
 				<groupId>org.mybatis.generator</groupId>
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
 				<version>1.3.2</version>
-				<configuration>
-				           <verbose>true</verbose>
-				          <overwrite>true</overwrite>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,4 +1,4 @@
-package jijianjingfei.util;
+package jjjf.util;
 
 
 import java.awt.Color;

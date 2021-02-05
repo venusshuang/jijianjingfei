@@ -1,5 +1,5 @@
 /*
-package jijianjingfei.config;
+package jjjf.config;
 
 import javax.sql.DataSource;
 
@@ -18,11 +18,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 
 @Configuration
-@MapperScan(basePackages = "jijianjingfei.dao",sqlSessionFactoryRef = "childckdSqlSessionFactory")
+@MapperScan(basePackages = "jjjf.dao",sqlSessionFactoryRef = "childckdSqlSessionFactory")
 public class MybatisJijianJingfeiConfig {
 	@Primary
 	@Bean(name = "JijianJingfeiDataSource")
-	@ConfigurationProperties("spring.datasource.jijianjingfei")
+	@ConfigurationProperties("spring.datasource.jjjf")
 	public DataSource masterDataSource(){
 		return DruidDataSourceBuilder.create().build();
 	}
@@ -32,7 +32,7 @@ public class MybatisJijianJingfeiConfig {
 		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
 		sessionFactoryBean.setDataSource(dataSource);
 		sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
-				.getResources("classpath:jijianjingfei/mapper/*.xml"));
+				.getResources("classpath:jjjf/mapper/*.xml"));
 		return sessionFactoryBean.getObject();
 	}
 
