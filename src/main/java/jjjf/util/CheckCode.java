@@ -50,6 +50,7 @@ public class CheckCode {
 		 * */
 	}
 
+//
 	private void drawNum(Graphics g,HttpServletRequest request) {
 		g.setColor(Color.RED);
 		g.setFont(new Font("SimSun",Font.BOLD,15));
