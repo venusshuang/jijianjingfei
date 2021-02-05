@@ -26,7 +26,6 @@ public class BooleanMessage {
 		return booleanMessage;
 	}
 
-
 	public static BooleanMessage getErrorMessage(String message){
 		BooleanMessage booleanMessage = new BooleanMessage();
 		booleanMessage.setOk(false);
