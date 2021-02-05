@@ -1,7 +1,7 @@
 /**
  * 
  */
-package jijianjingfei.util;
+package jjjf.util;
 
 public class BooleanMessage {
 	private boolean ok = false;
@@ -25,7 +25,8 @@ public class BooleanMessage {
 		booleanMessage.setMessage(message);
 		return booleanMessage;
 	}
-	
+
+
 	public static BooleanMessage getErrorMessage(String message){
 		BooleanMessage booleanMessage = new BooleanMessage();
 		booleanMessage.setOk(false);
