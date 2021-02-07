@@ -56,7 +56,7 @@ public class PageController {
 		return "pc/welcome";
 	}
 
-	//军建计划下达情况
+	//类别标签
 	@RequestMapping("/gongchengguanli/biaoqianguanli.html")
 	public String LeibieBiaoqian(HttpServletRequest request, ModelMap map) {
 		if(!isLoginPC(request)) {
@@ -70,7 +70,20 @@ public class PageController {
 		return "gongchengguanli/biaoqianguanli_list";
 
 	}
-	
+	//上传demo
+	@RequestMapping("/gongchengguanli/shangchuandemo.html")
+	public String shangchuandemo(HttpServletRequest request, ModelMap map) {
+		if(!isLoginPC(request)) {
+			return "redirect:/manage/login.html";
+		}
+		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
+		map.put("AdminID", mmAdminId);
+		map.put("DeptID", mmDeptId);
+
+		return "gongchengguanli/shangchuandemo";
+
+	}
 	// 仪表盘
 	@RequestMapping("/guahao/yibiaopan.html")
 	public String Yibiaopan(HttpServletRequest request, ModelMap map) {

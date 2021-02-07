@@ -138,71 +138,14 @@ var Leibiebiaoqian = new Vue({
             }
             return true;
         },
-
-        allCheckAdministrator : function(){
+        toDelete : function(ppId){
             var _this = this;
-            if($("#allCheckAdministrator").is(":checked"))
-            {
-                $("input[name='administratorCheckbox']").prop('checked',true);
-            }
-            else
-            {
-                $("input[name='administratorCheckbox']").prop('checked',false);
-            }
-
-        },
-
-        toDeleteChecked:function(){
-            let _this = this;
-
-            let mmAdministratorIdList="";
-            $("[name=administratorCheckbox]:checked").each(function(){
-                mmAdministratorIdList+="|"+this.value;
-            })
-            mmAdministratorIdList=mmAdministratorIdList!=""?mmAdministratorIdList.substring(1):"";
-
-            if(mmAdministratorIdList == ""){
-                layer.alert("请选择要删除的管理员！");
-                return false;
-            }
-
-            layer.confirm('是否确定删除？',{
-                btn : ['是','否']
-            },function(){
-
-                layer.open({type:3});
-
-                $.post('/administrator/deleteAdministratorIdList',{
-                    administratorIdList :mmAdministratorIdList,
-                    rdm:Math.random()
-                },function(ppData){
-
-                    layer.closeAll("loading");
-
-                    if(ppData!=null){
-                        if(ppData.result == '1'){
-
-                            layer.alert("批量删除成功");
-                            _this.bindAdministratorList();
-
-                        }else{
-
-                            layer.alert(ppData.message);
-                        }
-                    }
-                },"json");
-
-            })
-        },
-
-        toDelete : function(ppAdministratorId){
-            var _this = this;
-            layer.confirm("确定删除该管理员信息吗？",{
+            layer.confirm("确定删除该类别标签吗？",{
                 btn : ['是','否']
             },function(){
                 layer.open({type:3});
-                $.post("/administrator/deleteAdministrator", {
-                    administratorid : ppAdministratorId,
+                $.post("/leibiebiaoqian/delete", {
+                    id : ppId,
                     random : Math.random()
                 }, function(ppData) {
                     if (ppData != null) {
@@ -215,7 +158,7 @@ var Leibiebiaoqian = new Vue({
                                 btn:[],
                                 content:"删除成功!",
                             });
-                            _this.bindAdministratorList();
+                            _this.bindBiaoqianList();
                         }
                     }
                 },"json");

@@ -70,6 +70,7 @@ public class LeibiebiaoqianController {
             return JsonResult.getErrorResult("类别标签修改失败！"+e);
         }
     }
+
     @RequestMapping("find_one")
     public JsonResult<?> findOne(
             @RequestParam("id") String ppID
@@ -86,6 +87,7 @@ public class LeibiebiaoqianController {
             return JsonResult.getErrorResult("单个类别标签查询失败！"+e);
         }
     }
+
     @RequestMapping("find_all")
     public JsonResult<?> findAll(
             @RequestParam("biaoqian") String ppBiaoqian
@@ -95,6 +97,25 @@ public class LeibiebiaoqianController {
         }catch(Exception e) {
             e.printStackTrace();
             return JsonResult.getErrorResult("全部类别标签查询失败！"+e);
+        }
+    }
+
+    @RequestMapping("delete")
+    public JsonResult<?> delete(
+            @RequestParam("id") String ppID
+    ){
+        try {
+            DictLeibiebiaoqian mmLeibieBiaoqian=ddService.findOne(ppID);
+            if (mmLeibieBiaoqian==null){
+                return JsonResult.getErrorResult("类别标签不存在!");
+            }
+            if (!ddService.delete(ppID)){
+                return JsonResult.getErrorResult("类别标签删除失败!");
+            }
+            return JsonResult.getSuccessResult("类别标签删除成功!");
+        }catch(Exception e) {
+            e.printStackTrace();
+            return JsonResult.getErrorResult("类别标签删除失败！"+e);
         }
     }
 }

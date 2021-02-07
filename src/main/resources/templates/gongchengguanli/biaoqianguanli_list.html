@@ -9,7 +9,7 @@
     <div class="main">
         <div id="leibiebiaoqian" >
             <div class="primary-title">
-               类别标签<span class="btn btn-success" style="float: right; margin-right: 15px; margin-top: 10px;" @click="toAdd()">新增</span>
+               类别标签<span class="btn btn-success" style="float: right; margin-right: 15px; margin-top: 10px;" @click="perparetoAddBiaoqian()">新 增</span>
             </div>
 
             <div class="primary-content" >
@@ -35,7 +35,7 @@
                                 <span v-if="biaoqian.isvalid==0" style="color: red">否</span>
                             </td>
                             <td style="text-align:center;vertical-align:middle;">
-                                <button class="btn btn-primary" @click="perpareToModifyBiaoqian(biaoqian.id)">编 辑</button>
+                                <button class="btn btn-primary" @click="perpareToModifyBiaoqian(biaoqian.id)">修 改</button>
                                 <button class="btn btn-danger" @click="toDelete(biaoqian.id)">删 除</button>
                             </td>
 

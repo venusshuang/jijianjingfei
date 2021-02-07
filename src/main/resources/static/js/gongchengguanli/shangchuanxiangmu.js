@@ -67,9 +67,9 @@ var vm_paichugaoxiao = new Vue({
 		
 		//弹出上传高校名单xls模态框
 		showUploadXls: function () {
-			var _this= this;
-				$("#uploadModal").modal("show");
-				this.getFileUrl("gaoxiaomingdan",'51200','xls,xlsx',_this.piciid);
+			let _this= this;
+			$("#uploadModal").modal("show");
+			this.getFileUrl("gaoxiaomingdan",'51200','xls,xlsx',_this.piciid);
 		},
 		
 		// 将文件上传到指定地址,并接受返回过来的路径，																
