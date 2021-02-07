@@ -15,7 +15,7 @@ public class PageController {
 	// 登录
 	@RequestMapping("/manage/login.html")
 	public String ManageLogin() {
-		return "pc/manage/login";
+		return "manage/login";
 	}
 
 	// 判断PC端是否登录

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+
+<div  th:fragment="edits" >
+
+ <div id="PaichuGaoxiaolistModal" style="" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+       <div class="modal-dialog modal-md" style="width: 800px;height:400px;">
+            <div class="modal-content">
+            
+            	<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true" @click="close()">&times;</button>
+					<h4 class="modal-title">查看项目名单</h4>
+				</div>
+				
+                <div class="modal-body" style="height: 400px;overflow: scroll;">
+                	<table class="table table-hover table-striped" style="margin: 0 auto;" id="list_gaoxiao">
+                	
+						<thead>
+							<th style="text-align: center; vertical-align: middle;width:50px;">序号</th>
+							<th style="text-align: center; vertical-align: middle;width:80px;">国家</th>
+							<th style="text-align: center; vertical-align: middle;">学校中文名称</th>
+							<th style="text-align: center; vertical-align: middle;">学校英文名称</th>					
+							<th style="text-align: center; vertical-align: middle;width:100px;">导入状态</th>
+							<th style="text-align: center; vertical-align: middle;width:100px;">操作</th>
+						</thead>
+						
+						<tbody>
+							<tr v-for="gaoxiao in gaoxiaolist">
+								<td style="text-align: center; vertical-align: middle;"
+									v-text="gaoxiao.序号"></td>
+								<td name="guojiamingcheng" style="text-align: center; vertical-align: middle;"
+									v-text="gaoxiao.国家"></td>
+								<td name="zhongwenmingcheng" style="text-align: center; vertical-align: middle;"
+									v-text="gaoxiao.中文名称"></td>
+								<td name="yingwenmingcheng" style="text-align: center; vertical-align: middle;"
+									v-text="gaoxiao.英文名称"></td>
+								<td style="text-align: center; vertical-align: middle;"
+										class="daoruzhuangtai" :id="gaoxiao.序号"></td>
+								<td style="text-align: center; vertical-align: middle;">
+									<button class="btn btn-sm btn-primary"  @click="dangedaoru(gaoxiao)">导入</button>
+								</td>
+							</tr>
+						</tbody>
+						
+					</table>
+					
+                </div>
+                <div style="width:100%;height:100px;text-align:center;">
+                	<button id="daoru" class="btn btn-lg btn-info" style="margin-top:30px;" v-on:click="importGaoxiao()">批量导入</button>
+                </div>
+                
+            </div> 
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    </div>
+  
+</body>
+</html>
