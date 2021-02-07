@@ -257,7 +257,7 @@ public class PageController {
 
 
 	//军建计划下达情况
-	@RequestMapping("/gongchenguanli/junjianxiada.html")
+	@RequestMapping("/gongchengguanli/junjianxiada.html")
 	public String Junjianxiada(HttpServletRequest request, ModelMap map) {
 
 		if(!isLoginPC(request)) {
