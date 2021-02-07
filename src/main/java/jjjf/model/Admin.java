@@ -17,6 +17,8 @@ public class Admin {
 
     private String password;
 
+    private String creator;
+
     private Date createtime;
 
     private String modifier;
@@ -79,6 +81,14 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
     public Date getCreatetime() {

@@ -9,6 +9,7 @@
     <result column="buzhibie" property="buzhibie" jdbcType="VARCHAR" />
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="modifier" property="modifier" jdbcType="VARCHAR" />
     <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    adminid, deptid, adminname, contactinformation, buzhibie, account, password, createtime, 
-    modifier, lastupdatetime, zhuangtai
+    adminid, deptid, adminname, contactinformation, buzhibie, account, password, creator, 
+    createtime, modifier, lastupdatetime, zhuangtai
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="jjjf.model.AdminExample" >
     select
@@ -109,12 +110,14 @@
   <insert id="insert" parameterType="jjjf.model.Admin" >
     insert into admin (adminid, deptid, adminname, 
       contactinformation, buzhibie, account, 
-      password, createtime, modifier, 
-      lastupdatetime, zhuangtai)
+      password, creator, createtime, 
+      modifier, lastupdatetime, zhuangtai
+      )
     values (#{adminid,jdbcType=VARCHAR}, #{deptid,jdbcType=VARCHAR}, #{adminname,jdbcType=VARCHAR}, 
       #{contactinformation,jdbcType=VARCHAR}, #{buzhibie,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
-      #{lastupdatetime,jdbcType=TIMESTAMP}, #{zhuangtai,jdbcType=INTEGER})
+      #{password,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{zhuangtai,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="jjjf.model.Admin" >
     insert into admin
@@ -139,6 +142,9 @@
       </if>
       <if test="password != null" >
         password,
+      </if>
+      <if test="creator != null" >
+        creator,
       </if>
       <if test="createtime != null" >
         createtime,
@@ -174,6 +180,9 @@
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
@@ -219,6 +228,9 @@
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
       <if test="record.createtime != null" >
         createtime = #{record.createtime,jdbcType=TIMESTAMP},
       </if>
@@ -245,6 +257,7 @@
       buzhibie = #{record.buzhibie,jdbcType=VARCHAR},
       account = #{record.account,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       modifier = #{record.modifier,jdbcType=VARCHAR},
       lastupdatetime = #{record.lastupdatetime,jdbcType=TIMESTAMP},
@@ -274,6 +287,9 @@
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
       <if test="createtime != null" >
         createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -297,6 +313,7 @@
       buzhibie = #{buzhibie,jdbcType=VARCHAR},
       account = #{account,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       modifier = #{modifier,jdbcType=VARCHAR},
       lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
