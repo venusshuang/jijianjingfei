@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('周排班管理')">
+	
+</head>
+<body>
+
+<div class="container-fluid">
+	<div class="row">
+
+	<!-- 内容 -->
+	<div id="Schedule" class="main" style="padding-top:1px;">
+		
+		<input type="hidden" id="xingqi" value=""/>
+		<input type="hidden" id="shangxiawu" value=""/>
+		<input type="hidden" id="scheduleid" value=""/>
+		
+		<div class="table-responsive" style="overflow:inherit;margin-top:40px;">
+			<table id="scheduletable" class="table table-hover table-striped" style="width:98%;margin:0 auto;font-size:18px;border:1px solid #000;border-collapse:collapse;">
+				<thead style="font-weight:bold;">
+					<tr>
+						<td></td>
+						<td>周一</td>
+						<td>周二</td>
+						<td>周三</td>
+						<td>周四</td>
+						<td>周五</td>
+						<td>周六</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="font-weight:bold;line-height:200px;">上午</td>
+						<td id="1上午"></td>
+						<td id="2上午"></td>
+						<td id="3上午"></td>
+						<td id="4上午"></td>
+						<td id="5上午"></td>
+						<td id="6上午"></td>
+					</tr>
+					<tr>
+						<td style="font-weight:bold;line-height:200px;">下午</td>
+						<td id="1下午"></td>
+						<td id="2下午"></td>
+						<td id="3下午"></td>
+						<td id="4下午"></td>
+						<td id="5下午"></td>
+						<td id="6下午"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+	    <div th:replace="pc/paibanguanli/edit_schedule::EditSchedule"></div>
+		    
+	</div>
+	
+	</div>
+</div>
+
+</body>
+
+<script src="../js/pc/paiban/main_schedule.js?ver=2.9"></script>
+<link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+<link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+
+<link rel="stylesheet" href="/css/xadmin.css?ver=0.7">
+    
+<script type="text/javascript">
+var mmXingqi = "";
+var mmShangxiawu = "";
+var mmScheduleId = "";
+
+function toShowSchedule(ppScheduleId,ppXingqi,ppShangxiawu){
+
+	clearInput();
+	
+	mmXingqi = ppXingqi;
+	mmShangxiawu = ppShangxiawu;
+	
+	$("#xingqi").val(mmXingqi);
+	$("#shangxiawu").val(mmShangxiawu);
+	
+	if(ppScheduleId!=""){
+		mmScheduleId = ppScheduleId;
+		$("#scheduleid").val(mmScheduleId);
+		bindOneSchedule();
+		
+		$("#myModalLabel").html("修改周排班");
+	}else{
+		$("#myModalLabel").html("新增周排班");
+	}
+	
+	$('#editScheduleModal').modal();
+};
+
+function bindOneSchedule(){
+
+	$.post('/schedule/find_one', {
+		scheduleid : mmScheduleId,
+		rdm : Math.random()
+	},function(ppData) {
+		
+		layer.closeAll("loading");
+		if(ppData != null){
+			if(ppData.result == "1"){
+				var data = ppData.resultContent;
+				
+				$("#input_expertid").val(data.expertid);
+				$("#input_jiage").val(data.jiage);
+				$("#input_xianhaoshu").val(data.xianhaoshu);
+				
+			}else{
+				layer.alert(ppData.message);
+			}
+		}
+	},"json");
+};
+
+function toDelete(ppScheduleId){
+	
+	layer.confirm('是否确定删除？',{
+		btn : ['是','否'],
+	},function(){
+		$.post('/schedule/delete', {
+			scheduleid : ppScheduleId,
+			rdm : Math.random()
+		},function(ppData) {
+			
+			if(ppData != null){
+				if(ppData.result == "1"){
+					layer.open({
+						time:2000,
+						btn:[],
+						content:"删除成功!",
+					});
+					setTimeout(function(){
+						location.reload();
+					},2000);
+				}else{
+					layer.alert(ppData.message);
+				}
+			}
+		},"json");
+	})
+	
+};
+
+function toSetZhuangtai(ppScheduleId,ppZhuangtai){
+	
+	layer.confirm('是否确定执行此操作？',{
+		btn : ['是','否'],
+	},function(){
+		$.post('/schedule/set_zhuangtai', {
+			scheduleid : ppScheduleId,
+			zhuangtai : ppZhuangtai,
+			rdm : Math.random()
+		},function(ppData) {
+			
+			if(ppData != null){
+				if(ppData.result == "1"){
+					layer.open({
+						time:2000,
+						btn:[],
+						content:"设置停诊成功!",
+					});
+					setTimeout(function(){
+						location.reload();
+					},2000);
+				}else{
+					layer.alert(ppData.message);
+				}
+			}
+		},"json");
+	})
+
+};
+
+function clearInput(){
+	$("#input_expertid").val("");
+	$("#input_jiage").val("");
+	$("#input_xianhaoshu").val("");
+}
+
+
+</script>
+
+<style>
+	#scheduletable thead tr td{
+		height:80px;
+		line-height:80px;
+		text-align:center;
+		vertical-align:middle;
+	}
+	td{
+		text-align:center;
+		vertical-align:middle;
+		border:1px solid #000;
+		height:200px;
+		padding:0 !important;
+		cursor:pointer;
+		max-width:300px;
+	}
+	#scheduletable tbody tr td div{
+		text-align:center;
+		line-height:50px;
+	}
+</style>
+</html>

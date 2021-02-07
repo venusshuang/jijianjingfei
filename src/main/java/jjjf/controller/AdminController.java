@@ -19,6 +19,7 @@ public class AdminController {
     @Resource
     AdminService ddService;
 
+    //登录
     @RequestMapping("login")
     public JsonResult<?> login(
             @RequestParam("account") String ppLoginName,
@@ -36,11 +37,28 @@ public class AdminController {
             // 登录成功,记录session
             HttpSession session = request.getSession();
             session.setAttribute("ADMINID", mmAdmin.getAdminid());
+            session.setAttribute("DEPTID", mmAdmin.getDeptid());
             return JsonResult.getSuccessResult("登录成功");
 
         }catch(Exception e) {
             e.printStackTrace();
             return JsonResult.getErrorResult("登录失败！"+e);
+        }
+    }
+
+    //登出
+    @RequestMapping("logout")
+    public boolean logout(
+            HttpServletRequest request){
+        try {
+            HttpSession session = request.getSession();
+            session.removeAttribute("ADMINID");
+            session.removeAttribute("RoleType");
+            return true;
+
+        }catch(Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

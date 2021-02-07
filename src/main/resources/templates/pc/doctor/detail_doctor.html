@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="DetailDoctor">
+	<div id="editDoctorModal" style="" class="modal fade bs-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog" style="width: 650px">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel_doctor"></h4>
+				</div>
+				<div class="modal-body" style="overflow: auto;">
+					<div style="width: 600px; margin: 0 auto; margin-top: 15px">
+						<form class="form-horizontal col-sm-12" role="form">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									医生姓名
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="doctor.xingming" readonly="readonly">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									所属医院
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="doctor.danwei" readonly="readonly">
+								</div>
+							</div>
+							
+							
+
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input type="button" class="btn btn-default" value="返 回" data-dismiss="modal">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- /.modal -->
+	</div>
+</div>
+</html>

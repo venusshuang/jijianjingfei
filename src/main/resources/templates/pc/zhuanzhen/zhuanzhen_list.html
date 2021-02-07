@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('转诊列表')">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+
+			
+			
+			<div id="zhuanzhenlist" class="main" >
+			
+				<div style="width:100%;height:100px;">
+	
+					<div class="form-horizontal col-sm-12">
+						<div class="form-group">
+							<label class="col-sm-1 control-label">
+								患者姓名
+							</label>
+							<div class="col-sm-3">
+								<input id="patientname" v-model="patientname" class="form-control"  type="text"  style="float:left;background-color:#fff;"  />	
+							</div>
+							<label class="col-sm-1 control-label">
+								医师姓名
+							</label>
+							<div class="col-sm-3">
+								<input id="doctorname" v-model="doctorname" class="form-control"  type="text"  style="float:left;background-color:#fff;"  />	
+							</div>
+							<label class="col-sm-1 control-label">
+								医院名称
+							</label>
+							<div class="col-sm-3">
+								<input id="danwei" v-model="danwei" class="form-control"  type="text"  style="float:left;background-color:#fff;"  />	
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-7 control-label">
+							</label>
+							<div class="col-sm-5">
+								<button style="float:right;margin-right:10px;" class="btn btn-info" @click="findZhuanzhenList()">搜 索</button>
+								<button style="float:right;margin-right:10px;" class="btn btn-danger" @click="toRemove()">清 除</button>
+							</div>
+						</div>
+					</div>
+				
+				</div>
+				
+				<!-- 批量删除 -->
+				<div style="margin:0 auto;margin-top:20px;float:left;">
+					<button style="float:left;margin-left:10px;" class="btn btn-danger" @click="toDeleteChecked()">批量删除</button>
+			    </div>
+				
+				<!-- 列表 -->
+				<div>
+					<table class="table table-hover table-striped" style="margin:0 auto;margin-top:40px;font-size:18px;">
+						<thead>
+							<th style="text-align:center;vertical-align:middle;width: 80px;">
+								<input style="zoom:150%; ;" type="checkbox" name="zhuanzhenAllCheckbox"  @click="CheckAll()" value="" id="checkAll">
+							</th>
+							<th style="text-align:center;vertical-align:middle;width: 150px;">患者姓名</th>
+							<th style="text-align:center;vertical-align:middle;width: 150px;">年龄</th>
+							<th style="text-align:center;vertical-align:middle;width: 150px;">医师</th>
+							<th style="text-align:center;vertical-align:middle;">医院</th>
+							<th style="text-align:center;vertical-align:middle;width: 250px;">操作</th>
+						</thead>
+						<tbody>
+							<tr v-for="(zhuanzhenitem,index) in zhuanzhenlist" v-if="zhuanzhenlist != null">
+								<td style="text-align:center;vertical-align:middle;"><input style="zoom:150%; ;" type="checkbox" name="checkbox" :value="zhuanzhenitem.referralid" ></td>
+								<td style="text-align:center;vertical-align:middle;" v-text="zhuanzhenitem.patientname"></td>
+								<td style="text-align:center;vertical-align:middle;" v-text="zhuanzhenitem.patientage"></td>
+								<td style="text-align:center;vertical-align:middle;" v-text="zhuanzhenitem.doctorname"></td>
+								<td style="text-align:center;vertical-align:middle;" v-text="zhuanzhenitem.danwei"></td>
+								<td style="text-align:center;vertical-align:middle;">
+									<button class="btn btn-success" @click="toShowNews(zhuanzhenitem.referralid,zhuanzhenitem.doctorid,zhuanzhenitem.doctorname)">在线联系</button>
+									<button class="btn btn-info" @click="toShowDetail(zhuanzhenitem.referralid)">查 看</button>
+								</td>
+								
+							</tr>
+							<tr v-if="zhuanzhenlist.length == 0">
+								<td colspan="6" style="text-align:center;">暂无转诊信息</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<!-- 转诊详情页 -->
+				<div th:replace="pc/zhuanzhen/zhuanzhen_detail::zhuanzhenDetail"></div> 
+				<!-- 聊天页 -->
+				<div th:replace="pc/zhuanzhen/xiaoxi_list::XiaoxiList"></div> 
+			</div>
+		</div>
+		
+	</div>
+</body>
+
+<link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+<link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+<link rel="stylesheet" href="/css/xadmin.css?ver=0.6"></link>
+
+<script src="../js/pc/zhuanzhen/zhuanzhen_list.js?ver=0.1"></script>
+
+</html>

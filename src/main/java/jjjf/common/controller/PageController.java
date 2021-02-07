@@ -35,7 +35,9 @@ public class PageController {
 		}
 
 		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
 		map.put("AdminID", mmAdminId);
+		map.put("DeptID", mmDeptId);
 		return "index";
 	}
 

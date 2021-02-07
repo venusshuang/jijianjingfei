@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="DetailBlack">
+	<div id="editBlackModal" style="" class="modal fade bs-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog" style="width: 650px">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel_black"></h4>
+				</div>
+				<div class="modal-body" style="overflow: auto;">
+					<div style="width: 600px; margin: 0 auto; margin-top: 15px">
+						<form class="form-horizontal col-sm-12" role="form">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									姓名
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="black.name" readonly="readonly">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									手机号
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="black.shoujihao" readonly="readonly">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									所属医院
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="black.dept" readonly="readonly">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									角色
+								</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" v-model="black.roles" readonly="readonly">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input type="button" class="btn btn-default" value="返 回" data-dismiss="modal">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- /.modal -->
+	</div>
+</div>
+</html>

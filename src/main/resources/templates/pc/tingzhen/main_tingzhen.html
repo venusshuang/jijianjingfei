@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('专家停诊管理')">
+</head>
+<body style="background:#fff !important;">
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- 内容 -->
+			<div id="tingzhen" class="main">
+				<div style="margin: 0 auto; margin-top: 20px; float: left;">
+					<button style="float: left; margin-left: 10px;"
+						class="btn btn-danger" @click="toDeleteChecked()">批量删除</button>
+					<button style="float: right; margin-left: 40px;"
+						class="btn btn-primary" @click="toAddTingzhen()">新增停诊</button>
+				</div>
+
+				<div class="table-responsive" style="overflow: inherit; margin-top: 40px;">
+
+					<!-- 列表 -->
+					<table class="table table-hover table-striped"
+						style="margin: 0 auto; margin-top: 40px; font-size: 18px;">
+						<thead>
+							<th style="text-align: center; vertical-align: middle; width: 80px;">
+								<input style="zoom: 150%;" type="checkbox" name="tingzhenAllCheckbox" @click="allCheckTingzhen()" value="" id="allCheckTingzhen">
+							</th>
+							<th style="text-align: center; vertical-align: middle; width: 60px;">序号</th>
+							<th style="text-align: center; vertical-align: middle; width: 150px;">专家姓名</th>
+							<th style="text-align: center; vertical-align: middle;">停诊开始时间</th>
+							<th style="text-align: center; vertical-align: middle;">停诊结束时间</th>
+							<th style="text-align: center; vertical-align: middle; width: 150px;">是否上午停诊</th>
+							<th style="text-align: center; vertical-align: middle; width: 150px;">是否下午停诊</th>
+							<th style="text-align: center; vertical-align: middle; width: 150px;">操作</th>
+						</thead>
+						<tbody>
+							<tr v-for="(tingzhenitem,index) in tingzhenlist" v-if="tingzhenlist.length > 0">
+								<td style="text-align: center; vertical-align: middle;">
+									<input style="zoom: 150%;" type="checkbox" name="tingzhenCheckbox" :value="tingzhenitem.tingzhenid">
+								</td>
+								<td style="text-align: center; vertical-align: middle;" v-text="index+1"></td>
+								<td style="text-align: center; vertical-align: middle;" v-text="tingzhenitem.name"></td>
+								<td style="text-align: center; vertical-align: middle;" v-text="tingzhenitem.starttime"></td>
+								<td style="text-align: center; vertical-align: middle;" v-text="tingzhenitem.endtime"></td>
+								<td style="text-align: center; vertical-align: middle;">
+									<span v-if="tingzhenitem.isam == '1'" style="color:green;">是</span>
+									<span v-else style="color:red;">否</span>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<span v-if="tingzhenitem.ispm == '1'" style="color:green;">是</span>
+									<span v-else style="color:red;">否</span>
+								</td>
+								<td style="text-align: center; vertical-align: middle;">
+									<button class="btn btn-danger" @click="toDelete(tingzhenitem.tingzhenid)">删 除</button>
+									<button class="btn btn-info" @click="toModifyTingzhen(tingzhenitem.tingzhenid)">修改</button>
+								</td>
+
+							</tr>
+							<tr v-if="tingzhenlist.length==0">
+								<td colspan="8" style="text-align: center;">暂无停诊信息</td>
+							</tr>
+
+
+						</tbody>
+					</table>
+					
+					<div th:replace="pc/tingzhen/edit_tingzhen::EditTingzhen"></div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+
+<script src="../js/pc/tingzhen/main_tingzhen.js?ver=0.6"></script>
+
+<link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+<link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+<link rel="stylesheet" href="/css/xadmin.css?ver=0.6">
+
+</html>

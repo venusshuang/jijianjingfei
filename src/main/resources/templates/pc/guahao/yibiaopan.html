@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('仪表盘')">
+</head>
+<body>
+
+
+
+<div class="container-fluid">
+	<div class="row">
+	
+	<!-- 内容 -->
+	<div id="Yibiaopan" class="main" >
+	<input type="hidden" th:value="${AdministratorId}" id="administratorid">
+	
+	<div style="width:100%;height:150px;">
+		
+		<div class="form-horizontal col-sm-12">
+			<div class="form-group">
+				<label class="col-sm-1 control-label">
+					专家姓名
+				</label>
+				<div class="col-sm-5">
+					<select class="input form-control" v-model="expertid" id="expertid" style="text-align:center;" >
+						<option value="" selected>--请选择--</option>
+						<option v-for="expertitem in expertlist" :value="expertitem.expertid">{{expertitem.name}}</option>
+			    	</select>
+				</div>
+				<label class="col-sm-1 control-label">
+					排班日期
+				</label>
+				<div class="col-sm-5">
+					<input id="paibanriqi" v-model="paibanriqi" class="form-control"  type="text"  style="float:left;background-color:#fff;" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" v-on:blur="getDate()"  />	
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-7 control-label">
+				</label>
+				<div class="col-sm-5">
+					<button style="float:right;margin-right:10px;" class="btn btn-info" @click="bindYibiaopanList()">搜 索</button>
+					<button style="float:right;margin-right:10px;" class="btn btn-danger" @click="toRemove()">清 除</button>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+	
+	
+	<div class="table-responsive" style="overflow:inherit;margin-top:40px;">
+		
+			<!-- 列表 -->
+		<table class="table table-hover table-striped" style="margin:0 auto;margin-top:40px;font-size:18px;">
+			<thead>
+				<th style="text-align:center;vertical-align:middle;width: 50px;">预约日期</th>
+				<th style="text-align:center;vertical-align:middle;width: 100px;">专家姓名</th>
+				<th style="text-align:center;vertical-align:middle;width: 50px;">每日可预约数量</th>
+				<th style="text-align:center;vertical-align:middle;width: 50px;">已确认预约数量数</th>
+				<th style="text-align:center;vertical-align:middle;width: 50px;">待确认预约数量</th>
+				
+			</thead>
+			<tbody>
+				<tr v-for="(yibiaopan,index) in yibiaopanlist" v-if="yibiaopanlist!=null">
+					<td style="text-align:center;vertical-align:middle;" v-text="yibiaopan.Paibanriqi"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="yibiaopan.ExpertName"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="yibiaopan.AllowYuyueCount"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="yibiaopan.ConfirmYuyueCount"></td>
+					<td style="text-align:center;vertical-align:middle;" v-text="yibiaopan.UnConfirmYuyueCount"></td>
+
+					
+				</tr>
+				<tr v-if="yibiaopanlist.length==0">
+						<td colspan="5" style="text-align:center;">暂无专家排班信息</td>
+				</tr>
+				
+				
+			</tbody>
+		</table>
+		
+		<div v-if="yibiaopanlist.length!=0" class="my-page-navigation">
+				<button class="btn btn-default" v-on:click="firstPage">首页</button>
+				<button class="btn btn-default" v-on:click="prePage">上一页</button>
+				<select class="form-control" v-model="pagesize">
+					<option value="10">10 条/页</option>
+					<option value="20">20 条/页</option>
+					<option value="30">30 条/页</option>
+					<option value="50">50 条/页</option>
+				</select>
+				<span v-text="pageindex + '  /  ' + pageCount"></span>
+				<span v-text="'共' + recordCount + '条'"></span>
+				<button class="btn btn-default" v-on:click="nextPage">下一页</button>
+				<button class="btn btn-default" v-on:click="lastPage">尾页</button>
+				<span>跳到第</span>
+				<input type="text" class="form-control" v-model="targetpage" v-on:keyup.enter="targetPage">
+				<span>页</span>
+				<button class="btn btn-default" v-on:click="targetPage">跳</button>
+		</div>
+		
+	   
+		
+		</div>
+		
+		
+		
+	</div>
+	
+	</div>
+</div>
+
+</body>
+
+<script src="../js/pc/guahao/yibiaopan.js?ver=1.5"></script>
+<link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+<link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+<link rel="stylesheet" href="/css/xadmin.css?ver=0.6">
+
+
+</html>

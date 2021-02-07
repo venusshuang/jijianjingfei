@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="ShenheGuahao">
+	<div id="editShenheModal" style="" class="modal fade bs-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog" style="width: 650px">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel_Shenhe"></h4>
+				</div>
+				<div class="modal-body" style="overflow: auto;">
+					<div style="width: 600px; margin: 0 auto; margin-top: 15px">
+						<form class="form-horizontal col-sm-12" role="form">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									<span class="required">*</span>预约结果
+								</label>
+								<div class="col-sm-8">
+									<input style="zoom:150%;float: left;" type="radio" name="YuyueResult" value="1">
+						            <div style="margin-top: 5px;margin-left: 10px;margin-right:15px;float: left;">预约成功</div>
+					         		<input style="zoom:150%;float: left;" type="radio" name="YuyueResult" value="2">
+					            	<div style="margin-top: 5px;margin-left: 10px;float: left;">预约失败</div>
+								</div>
+							</div>
+							
+							
+							<div class="form-group">
+								<label class="col-sm-3 control-label">
+									<span class="required">*</span>备注信息
+								</label>
+								<div class="col-sm-8">
+									<textarea type="text" class="form-control" id="shenheyijian" v-model="shenheyijian" style="height:100px;"></textarea>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12" style="text-align: center;">
+									<input v-if="editFlag == '0'" type="button" class="btn btn-success"
+										value="保 存" @click="toShenhe()"> 
+									<input v-if="editFlag == '1'" type="button" class="btn btn-success"
+										value="保 存" @click="toShenheAll()"> 
+									<input type="button" class="btn btn-default" value="返 回"
+										data-dismiss="modal">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- /.modal -->
+	</div>
+</div>
+</html>
