@@ -1,11 +1,21 @@
 package jjjf.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import jjjf.model.Junjianxiangmu;
 import jjjf.model.JunjianxiangmuExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface JunjianxiangmuMapper {
+
+
+    List<Map<String, Object>> findXiangmuBydeptId(@Param("deptid") String mmDeptId, @Param("startindex") int mmStartIndex,
+                                                  @Param("pagesize") int mmPageSize);
+
+    Object getCountBydeptId(@Param("deptid") String mmDeptId);
+
+
     int countByExample(JunjianxiangmuExample example);
 
     int deleteByExample(JunjianxiangmuExample example);

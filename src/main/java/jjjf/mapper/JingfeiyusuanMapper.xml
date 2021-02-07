@@ -10,7 +10,7 @@
     <result column="zhongxinjingfeizhibiao" property="zhongxinjingfeizhibiao" jdbcType="DOUBLE" />
     <result column="zhongxinyuliujine" property="zhongxinyuliujine" jdbcType="DOUBLE" />
     <result column="zhongxinkuaijihao" property="zhongxinkuaijihao" jdbcType="DOUBLE" />
-    <result column="deptid" property="deptid" jdbcType="VARCHAR" />
+    <result column="chengshoujingfeidanwei" property="chengshoujingfeidanwei" jdbcType="VARCHAR" />
     <result column="jingfeikemu" property="jingfeikemu" jdbcType="VARCHAR" />
     <result column="creater" property="creater" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
@@ -78,8 +78,8 @@
   </sql>
   <sql id="Base_Column_List" >
     jingfeiyuansuanid, xiangmuid, jingfeixiadaqingkuang, yusuanniandu, lianbaojingfeizhibiao, 
-    zhongxinjingfeizhibiao, zhongxinyuliujine, zhongxinkuaijihao, deptid, jingfeikemu, 
-    creater, createtime, modifier, lastupdatetime, 状态
+    zhongxinjingfeizhibiao, zhongxinyuliujine, zhongxinkuaijihao, chengshoujingfeidanwei, 
+    jingfeikemu, creater, createtime, modifier, lastupdatetime, 状态
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="jjjf.model.JingfeiyusuanExample" >
     select
@@ -114,13 +114,13 @@
   <insert id="insert" parameterType="jjjf.model.Jingfeiyusuan" >
     insert into jingfeiyusuan (jingfeiyuansuanid, xiangmuid, jingfeixiadaqingkuang, 
       yusuanniandu, lianbaojingfeizhibiao, zhongxinjingfeizhibiao, 
-      zhongxinyuliujine, zhongxinkuaijihao, deptid, 
+      zhongxinyuliujine, zhongxinkuaijihao, chengshoujingfeidanwei, 
       jingfeikemu, creater, createtime, 
       modifier, lastupdatetime, 状态
       )
     values (#{jingfeiyuansuanid,jdbcType=VARCHAR}, #{xiangmuid,jdbcType=VARCHAR}, #{jingfeixiadaqingkuang,jdbcType=VARCHAR}, 
       #{yusuanniandu,jdbcType=VARCHAR}, #{lianbaojingfeizhibiao,jdbcType=DOUBLE}, #{zhongxinjingfeizhibiao,jdbcType=DOUBLE}, 
-      #{zhongxinyuliujine,jdbcType=DOUBLE}, #{zhongxinkuaijihao,jdbcType=DOUBLE}, #{deptid,jdbcType=VARCHAR}, 
+      #{zhongxinyuliujine,jdbcType=DOUBLE}, #{zhongxinkuaijihao,jdbcType=DOUBLE}, #{chengshoujingfeidanwei,jdbcType=VARCHAR}, 
       #{jingfeikemu,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
       #{modifier,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{状态,jdbcType=INTEGER}
       )
@@ -152,8 +152,8 @@
       <if test="zhongxinkuaijihao != null" >
         zhongxinkuaijihao,
       </if>
-      <if test="deptid != null" >
-        deptid,
+      <if test="chengshoujingfeidanwei != null" >
+        chengshoujingfeidanwei,
       </if>
       <if test="jingfeikemu != null" >
         jingfeikemu,
@@ -199,8 +199,8 @@
       <if test="zhongxinkuaijihao != null" >
         #{zhongxinkuaijihao,jdbcType=DOUBLE},
       </if>
-      <if test="deptid != null" >
-        #{deptid,jdbcType=VARCHAR},
+      <if test="chengshoujingfeidanwei != null" >
+        #{chengshoujingfeidanwei,jdbcType=VARCHAR},
       </if>
       <if test="jingfeikemu != null" >
         #{jingfeikemu,jdbcType=VARCHAR},
@@ -255,8 +255,8 @@
       <if test="record.zhongxinkuaijihao != null" >
         zhongxinkuaijihao = #{record.zhongxinkuaijihao,jdbcType=DOUBLE},
       </if>
-      <if test="record.deptid != null" >
-        deptid = #{record.deptid,jdbcType=VARCHAR},
+      <if test="record.chengshoujingfeidanwei != null" >
+        chengshoujingfeidanwei = #{record.chengshoujingfeidanwei,jdbcType=VARCHAR},
       </if>
       <if test="record.jingfeikemu != null" >
         jingfeikemu = #{record.jingfeikemu,jdbcType=VARCHAR},
@@ -291,7 +291,7 @@
       zhongxinjingfeizhibiao = #{record.zhongxinjingfeizhibiao,jdbcType=DOUBLE},
       zhongxinyuliujine = #{record.zhongxinyuliujine,jdbcType=DOUBLE},
       zhongxinkuaijihao = #{record.zhongxinkuaijihao,jdbcType=DOUBLE},
-      deptid = #{record.deptid,jdbcType=VARCHAR},
+      chengshoujingfeidanwei = #{record.chengshoujingfeidanwei,jdbcType=VARCHAR},
       jingfeikemu = #{record.jingfeikemu,jdbcType=VARCHAR},
       creater = #{record.creater,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -326,8 +326,8 @@
       <if test="zhongxinkuaijihao != null" >
         zhongxinkuaijihao = #{zhongxinkuaijihao,jdbcType=DOUBLE},
       </if>
-      <if test="deptid != null" >
-        deptid = #{deptid,jdbcType=VARCHAR},
+      <if test="chengshoujingfeidanwei != null" >
+        chengshoujingfeidanwei = #{chengshoujingfeidanwei,jdbcType=VARCHAR},
       </if>
       <if test="jingfeikemu != null" >
         jingfeikemu = #{jingfeikemu,jdbcType=VARCHAR},
@@ -359,7 +359,7 @@
       zhongxinjingfeizhibiao = #{zhongxinjingfeizhibiao,jdbcType=DOUBLE},
       zhongxinyuliujine = #{zhongxinyuliujine,jdbcType=DOUBLE},
       zhongxinkuaijihao = #{zhongxinkuaijihao,jdbcType=DOUBLE},
-      deptid = #{deptid,jdbcType=VARCHAR},
+      chengshoujingfeidanwei = #{chengshoujingfeidanwei,jdbcType=VARCHAR},
       jingfeikemu = #{jingfeikemu,jdbcType=VARCHAR},
       creater = #{creater,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
