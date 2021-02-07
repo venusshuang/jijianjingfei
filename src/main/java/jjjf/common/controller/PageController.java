@@ -258,6 +258,21 @@ public class PageController {
 
 	//军建计划下达情况
 	@RequestMapping("/gongchenguanli/junjianxiada.html")
-	
+	public String Junjianxiada(HttpServletRequest request, ModelMap map) {
+
+		if(!isLoginPC(request)) {
+			return "redirect:/manage/login.html";
+		}
+
+		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
+		map.put("AdminID", mmAdminId);
+		map.put("DeptID", mmDeptId);
+
+
+
+		return "gongchenguanli/junjianxiada_list";
+
+	}
 
 }
