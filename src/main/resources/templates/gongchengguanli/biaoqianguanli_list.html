@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('类别标签')">
+</head>
+<body>
+<div class="container-fluid">
+    <input type="hidden" th:value="${AdminID}" id="userid" />
+
+    <div class="main">
+        <div id="leibiebiaoqian" >
+            <div class="primary-title">
+               类别标签<span class="btn btn-success" style="float: right; margin-right: 15px; margin-top: 10px;" @click="toAdd()">新增</span>
+            </div>
+
+            <div class="primary-content" >
+                <div style="margin-top:15px;text-align: center;">
+                    <label  style="margin-left: 20px;">类别标签名称：</label><input type="text" class="form-control" style="width: 150px;display:inline-block;" id="biaoqian"  v-model="biaoqiantext">
+                    <button class="btn btn-info" v-on:click="bindBiaoqianList(1)" style="margin-left:15px;">查询</button>
+                </div>
+                <div style="width: 100%;padding-top:10px;clear: both;" id="all_fenzu">
+                    <!-- 列表 -->
+                    <table class="table table-hover table-striped" style="margin:0 auto;margin-top:40px;font-size:18px;">
+                        <thead>
+                        <th style="text-align:center;vertical-align:middle;width: 150px;">序号</th>
+                        <th style="text-align:center;vertical-align:middle;width: 150px;">类别标签名称</th>
+                        <th style="text-align:center;vertical-align:middle;width: 150px;">是否有效</th>
+                        <th style="text-align:center;vertical-align:middle;width: 150px;">操作</th>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(biaoqian,index) in biaoqianlist" v-if="biaoqianlist.length>0">
+                            <td style="text-align:center;vertical-align:middle;" v-text="index+1"></td>
+                            <td style="text-align:center;vertical-align:middle;" v-text="biaoqian.text"></td>
+                            <td style="text-align:center;vertical-align:middle;" >
+                                <span v-if="biaoqian.isvalid==1" style="color: green">是</span>
+                                <span v-if="biaoqian.isvalid==0" style="color: red">否</span>
+                            </td>
+                            <td style="text-align:center;vertical-align:middle;">
+                                <button class="btn btn-primary" @click="perpareToModifyBiaoqian(biaoqian.id)">编 辑</button>
+                                <button class="btn btn-danger" @click="toDelete(biaoqian.id)">删 除</button>
+                            </td>
+
+                        </tr>
+                        <tr v-if="biaoqianlist.length==0">
+                            <td colspan="5" style="text-align:center;">暂无标签信息</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div th:replace="gongchengguanli/biaoqianguanli_edit::editBiaoqian"></div>
+                </div>
+
+            </div>
+        </div>
+        <script src="../js/gongchengguanli/biaoqianguanli.js?ver=1.2"></script>
+        <link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+        <link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+        <link rel="stylesheet" href="/css/xadmin.css?ver=0.6">
+    </div>
+</div>
+</body>
+</html>

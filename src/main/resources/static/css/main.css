@@ -89,3 +89,20 @@ nav{
 	float: left;
 	margin-left:-1px;
 }
+
+.primary-title {
+	color: rgb(17, 17, 17);
+	background-color: rgb(255, 255, 255);
+	width: 100%;
+	height: 50px;
+	font-size: 20px;
+	line-height: 50px;
+	padding-left: 15px;
+}
+.primary-content {
+	color: rgb(17, 17, 17);
+	background-color: rgb(255, 255, 255);
+	width: 100%;
+	padding: 15px;
+	margin-top: 10px;
+}

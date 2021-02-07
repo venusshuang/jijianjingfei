@@ -7,6 +7,10 @@
     <result column="ordernum" property="ordernum" jdbcType="INTEGER" />
     <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
   </resultMap>
+  <select id="getMaxOrderNum" resultType="Object">
+    select MAX(ordernum)  from dict_leibiebiaoqian
+  </select>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

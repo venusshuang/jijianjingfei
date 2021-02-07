@@ -27,4 +27,6 @@ public interface DictLeibiebiaoqianMapper {
     int updateByPrimaryKeySelective(DictLeibiebiaoqian record);
 
     int updateByPrimaryKey(DictLeibiebiaoqian record);
+
+    Object getMaxOrderNum();
 }
