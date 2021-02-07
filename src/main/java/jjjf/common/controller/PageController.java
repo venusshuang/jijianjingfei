@@ -36,7 +36,7 @@ public class PageController {
 
 		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
 		map.put("AdminID", mmAdminId);
-		return "pc/index";
+		return "index";
 	}
 
 	// 欢迎页
