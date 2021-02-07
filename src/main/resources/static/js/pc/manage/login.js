@@ -41,8 +41,8 @@ var _loginVue = new Vue({
 		
 			layer.open({type:3});
 			
-			$.post('../administrator/login', {
-				zhanghao : _this.loginname,
+			$.post('../admin/login', {
+				account : _this.loginname,
 				password : _this.password,
 				rdm:Math.random()
 			}, function(ppData) {
