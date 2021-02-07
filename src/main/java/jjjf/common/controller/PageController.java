@@ -256,5 +256,8 @@ public class PageController {
 	}
 
 
+	//军建计划下达情况
+	@RequestMapping("/gongchenguanli/junjianxiada.html")
+	
 
 }
