@@ -10,10 +10,10 @@ import org.apache.ibatis.annotations.Param;
 public interface JunjianxiangmuMapper {
 
 
-    List<Map<String, Object>> findXiangmuBydeptId(@Param("deptid") String mmDeptId, @Param("startindex") int mmStartIndex,
+    List<Map<String, Object>> findXiangmuBydeptId(@Param("xiangmuname") String mmXiangmuName,@Param("deptid") String mmDeptId, @Param("startindex") int mmStartIndex,
                                                   @Param("pagesize") int mmPageSize);
 
-    Object getCountBydeptId(@Param("deptid") String mmDeptId);
+    Object getCountBydeptId(@Param("xiangmuname") String mmXiangmuName,@Param("deptid") String mmDeptId);
 
 
     int countByExample(JunjianxiangmuExample example);

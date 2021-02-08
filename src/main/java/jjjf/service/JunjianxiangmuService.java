@@ -15,13 +15,13 @@ public class JunjianxiangmuService {
     @Resource
     JunjianxiangmuMapper ddMapper;
 
-    public List<Map<String, Object>> findXiangmuBydeptId(String ppdeptId, int ppPageIndex, int ppPageSize){
+    public List<Map<String, Object>> findXiangmuBydeptId(String ppxiangmuName,String ppdeptId, int ppPageIndex, int ppPageSize){
         int mmStartIndex = (ppPageIndex - 1) * ppPageSize;
-        return ddMapper.findXiangmuBydeptId(ppdeptId, mmStartIndex, ppPageSize);
+        return ddMapper.findXiangmuBydeptId(ppxiangmuName,ppdeptId, mmStartIndex, ppPageSize);
     }
 
-    public Integer getCountBydeptId(String ppdeptId) {
-        Object mmCount = ddMapper.getCountBydeptId(ppdeptId);
+    public Integer getCountBydeptId(String ppxiangmuName,String ppdeptId) {
+        Object mmCount = ddMapper.getCountBydeptId(ppxiangmuName,ppdeptId);
         return mmCount == null ? 0 : Integer.parseInt(mmCount.toString());
     }
 

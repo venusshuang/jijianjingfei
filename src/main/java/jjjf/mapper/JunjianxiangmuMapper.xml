@@ -24,6 +24,11 @@
     from junjianxiangmu xm
     left join dict_leibiebiaoqian lb on lb.id=xm.xiangmuleibie
     where xm.zhuangtai=100
+
+    <if test="xiangmuname != ''">
+      and xiangmuname like #{xiangmuname}
+    </if>
+
     <if test='deptid != "1"'>
       and xm.jieshoudanweiid=#{deptid}
     </if>
@@ -38,6 +43,11 @@
     select count(*) from junjianxiangmu xm
     left join dict_leibiebiaoqian lb on lb.id=xm.xiangmuleibie
     where xm.zhuangtai=100
+
+    <if test="xiangmuname != ''">
+      and xiangmuname like #{xiangmuname}
+    </if>
+
     <if test='deptid != "1"'>
       and xm.jieshoudanweiid=#{deptid}
     </if>

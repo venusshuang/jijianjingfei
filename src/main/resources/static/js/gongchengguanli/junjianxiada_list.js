@@ -4,6 +4,7 @@ var Junjianxiada = new Vue({
     data :{
         adminId : $("#adminid").val(),
         deptId : $("#deptid").val(),
+        xiangmutext:'',
         xiangmu : {},
         xiangmulist : [],
         leibielist:[],
@@ -34,6 +35,7 @@ var Junjianxiada = new Vue({
             var _this = this;
             layer.open({type:3});
             $.post("/junjianxiangmu/findXiangmuBydeptId",{
+                xiangmuname :_this.xiangmutext,
                 deptid : _this.deptId,
                 pageindex : _this.pageIndex,
                 pagesize : _this.pageSize,

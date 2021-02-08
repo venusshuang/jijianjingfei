@@ -25,13 +25,16 @@ public class JunjianxiangmuContorller {
     public Logger log = LoggerFactory.getLogger(JunjianxiangmuContorller.class);
 
     @RequestMapping("findXiangmuBydeptId")
-    public JsonResult<?> findVaildByAdminId(@RequestParam("deptid") String ppDeptId,
+    public JsonResult<?> findVaildByAdminId(@RequestParam("xiangmuname") String ppXiangmuName,
+                                            @RequestParam("deptid") String ppDeptId,
                                             @RequestParam("pageindex") int ppPageIndex,
                                             @RequestParam("pagesize") int ppPageSize) {
         try {
-
-            List<Map<String, Object>> mmList=ddService.findXiangmuBydeptId(ppDeptId,ppPageIndex,ppPageSize);
-            Integer mmCount = ddService.getCountBydeptId(ppDeptId);
+            if(!ppXiangmuName.equals("")) {
+                ppXiangmuName = "%" + ppXiangmuName + "%";
+            }
+            List<Map<String, Object>> mmList=ddService.findXiangmuBydeptId(ppXiangmuName,ppDeptId,ppPageIndex,ppPageSize);
+            Integer mmCount = ddService.getCountBydeptId(ppXiangmuName,ppDeptId);
             PageInfo mmPageInfo = new PageInfo(ppPageIndex, ppPageSize, mmCount);
 
             Map<String, Object> mmMap = new HashMap<String, Object>();
