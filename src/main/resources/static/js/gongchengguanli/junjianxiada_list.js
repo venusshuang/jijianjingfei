@@ -24,6 +24,8 @@ var Junjianxiada = new Vue({
         var _this = this;
 
         _this.bindXiadaList();
+        _this.bindLeibielist();
+        _this.bindDanweilist();
 
 
     },
@@ -70,8 +72,7 @@ var Junjianxiada = new Vue({
             this.editFlag = 0;
             this.xiangmu = {};
             this.xiangmuId="";
-            this.bindLeibielist();
-            this.bindDanweilist();
+
 
         },
 
@@ -169,10 +170,65 @@ var Junjianxiada = new Vue({
             this.editFlag = 1;
             this.xiangmu = {};
             this.xiangmuId=ppxiangmuid;
+            this.bindXiangmu();
 
         },
+        bindXiangmu:function (){
+            var _this = this;
+            layer.open({type:3});
+            $.post('/junjianxiangmu/find_one', {
+                xiangmuid : _this.xiangmuId,
+                rdm : Math.random()
+            },function(ppData) {
+                layer.closeAll("loading");
+                if(ppData != null){
+                    if(ppData.result == "1"){
+                        var data = ppData.resultContent;
+                        _this.xiangmu = data;
+                    }else{
+                        layer.alert(ppData.message);
+                    }
+                }
+            },"json");
+        },
 
+        modifyXiangmu:function (){
+            var _this = this;
+            if(_this.checkInputData()){
+                layer.open({type:3});
 
+                $.post('/junjianxiangmu/modify',{
+                    xiangmuId: _this.xiangmuId,
+                    adminId : _this.adminId,
+                    xiangmuname:$.trim(_this.xiangmu.xiangmuname),
+                    xiangmupifu:$.trim(_this.xiangmu.xiangmupifu),
+                    lianbaopifujine:$.trim(_this.xiangmu.lianbaopifujine),
+                    zhongxinpifujine:$.trim(_this.xiangmu.zhongxinpifujine),
+                    lianbaoyuliujine:$.trim(_this.xiangmu.lianbaoyuliujine),
+                    xiangmuleibie:$.trim(_this.xiangmu.xiangmuleibie),
+                    jieshoudanweiid:$.trim(_this.xiangmu.jieshoudanweiid),
+                    beizhu:$.trim(_this.xiangmu.beizhu),
+                    random : Math.random()
+                },function(ppData){
+                    if(ppData != null){
+                        layer.closeAll("loading");
+
+                        if(ppData.result == "1"){
+                            layer.open({
+                                time:1000,
+                                btn:[],
+                                content:"修改成功!",
+                            });
+                            $("#editXiadaxiamgmuModal").modal("hide");
+                            _this.bindXiadaList();
+                        }else{
+                            layer.alert(ppData.message);
+                        }
+                    }
+                },"json");
+
+            }
+        },
 
 
         toDelete:function (ppxiangmuid){

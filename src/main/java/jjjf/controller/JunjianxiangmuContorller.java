@@ -77,7 +77,7 @@ public class JunjianxiangmuContorller {
             mmJunjianxiangmu.setZhuangtai(100);
 
             return ddService.add(mmJunjianxiangmu)==true? JsonResult.getSuccessResult("新增军建计划下达情况成功")
-        : JsonResult.getErrorResult("新增军建计划下达情况失败");
+                    : JsonResult.getErrorResult("新增军建计划下达情况失败");
 
 
         }catch (Exception e) {
@@ -86,6 +86,57 @@ public class JunjianxiangmuContorller {
             return JsonResult.getErrorResult("junjianxiangmu/add:error " + e.getMessage());
         }
     }
+
+    @RequestMapping("find_one")
+    public JsonResult<?> find_one(@RequestParam("xiangmuid") String ppXiangmuId) {
+        try {
+            return JsonResult.getSuccessResult(ddService.findOne(ppXiangmuId));
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            log.error("junjianxiangmu/find_one:error",e);
+            return JsonResult.getErrorResult("junjianxiangmu/find_one:error " + e.getMessage());
+        }
+    }
+
+    @RequestMapping("modify")
+    public JsonResult<?> modify(@RequestParam("xiangmuId") String ppxiangmuId,
+                                @RequestParam("adminId") String ppadminId,
+                                @RequestParam("xiangmuname") String ppxiangmuname,
+                                @RequestParam("xiangmupifu") String ppxiangmupifu,
+                                @RequestParam("lianbaopifujine") Double pplianbaopifujine,
+                                @RequestParam("zhongxinpifujine") Double ppzhongxinpifujine,
+                                @RequestParam("lianbaoyuliujine") Double pplianbaoyuliujine,
+                                @RequestParam("xiangmuleibie") String ppxiangmuleibie,
+                                @RequestParam("jieshoudanweiid") String ppjieshoudanweiid,
+                                @RequestParam("beizhu") String ppbeizhu){
+        try {
+            Junjianxiangmu mmJunjianxiangmu=new Junjianxiangmu();
+            mmJunjianxiangmu.setXiangmuid(ppxiangmuId);
+            mmJunjianxiangmu.setXiangmuname(ppxiangmuname);
+            mmJunjianxiangmu.setXiangmupifu(ppxiangmupifu);
+            mmJunjianxiangmu.setLianbaopifujine(pplianbaopifujine);
+            mmJunjianxiangmu.setZhongxinpifujine(ppzhongxinpifujine);
+            mmJunjianxiangmu.setLianbaoyuliujine(pplianbaoyuliujine);
+            mmJunjianxiangmu.setXiangmuleibie(ppxiangmuleibie);
+            mmJunjianxiangmu.setJieshoudanweiid(ppjieshoudanweiid);
+            mmJunjianxiangmu.setBeizhu(ppbeizhu);
+            mmJunjianxiangmu.setCreater(ppadminId);
+            mmJunjianxiangmu.setCreatetime(new Date());
+            mmJunjianxiangmu.setModifier(ppadminId);
+            mmJunjianxiangmu.setLastupdatetime(new Date());
+            mmJunjianxiangmu.setZhuangtai(100);
+            return ddService.modify(mmJunjianxiangmu)==true? JsonResult.getSuccessResult("修改军建计划下达情况成功")
+                    : JsonResult.getErrorResult("修改军建计划下达情况失败");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("junjianxiangmu/modify:error",e);
+            return JsonResult.getErrorResult("junjianxiangmu/modify:error " + e.getMessage());
+        }
+    }
+
+
 
 
     @RequestMapping("delete")
