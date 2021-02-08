@@ -46,7 +46,7 @@
                         <td style="text-align:center;vertical-align:middle;" v-text="xiangmuitem.beizhu"></td>
                         <td style="text-align:center;vertical-align:middle;">
 
-                            <button class="btn btn-primary" @click="perpareToModifyRole(xiangmuitem.xiangmuid)">编 辑</button>
+                            <button class="btn btn-primary" @click="perpareToModifyXiangmu(xiangmuitem.xiangmuid)">编 辑</button>
                             <button class="btn btn-danger" @click="toDelete(xiangmuitem.xiangmuid)">删 除</button>
                         </td>
 
@@ -68,7 +68,7 @@
                     <button class="btn btn-default" v-on:click="JumpPage">跳</button>
                 </div>
 
-           <!--     <div th:replace="pc/administrator/edit_role::EditRole"></div>-->
+                <div th:replace="gongchengguanli/junjianxiada_edit::editXiadaxiamgmu"></div>
 
 
             </div>
@@ -83,5 +83,5 @@
 
 
 </body>
-<script src="../js/gongchengguanli/junjianxiada_list.js?ver=1.2"></script>
+<script src="../js/gongchengguanli/junjianxiada_list.js?ver=1.1"></script>
 </html>

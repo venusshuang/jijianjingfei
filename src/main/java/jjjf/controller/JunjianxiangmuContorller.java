@@ -1,6 +1,8 @@
 package jjjf.controller;
 
 
+
+import jjjf.model.Junjianxiangmu;
 import jjjf.service.JunjianxiangmuService;
 import jjjf.util.JsonResult;
 import jjjf.util.PageInfo;
@@ -11,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("junjianxiangmu")
@@ -43,6 +43,67 @@ public class JunjianxiangmuContorller {
             e.printStackTrace();
             log.error("junjianxiangmu/findXiangmuBydeptId:error",e);
             return JsonResult.getErrorResult("junjianxiangmu/findXiangmuBydeptId:error " + e.getMessage());
+        }
+    }
+
+
+    @RequestMapping("add")
+    public JsonResult<?> add(@RequestParam("adminId") String ppadminId,
+                             @RequestParam("xiangmuname") String ppxiangmuname,
+                             @RequestParam("xiangmupifu") String ppxiangmupifu,
+                             @RequestParam("lianbaopifujine") Double pplianbaopifujine,
+                             @RequestParam("zhongxinpifujine") Double ppzhongxinpifujine,
+                             @RequestParam("lianbaoyuliujine") Double pplianbaoyuliujine,
+                             @RequestParam("xiangmuleibie") String ppxiangmuleibie,
+                             @RequestParam("jieshoudanweiid") String ppjieshoudanweiid,
+                             @RequestParam("beizhu") String ppbeizhu){
+
+        try {
+
+            Junjianxiangmu mmJunjianxiangmu=new Junjianxiangmu();
+            mmJunjianxiangmu.setXiangmuid(UUID.randomUUID().toString());
+            mmJunjianxiangmu.setXiangmuname(ppxiangmuname);
+            mmJunjianxiangmu.setXiangmupifu(ppxiangmupifu);
+            mmJunjianxiangmu.setLianbaopifujine(pplianbaopifujine);
+            mmJunjianxiangmu.setZhongxinpifujine(ppzhongxinpifujine);
+            mmJunjianxiangmu.setLianbaoyuliujine(pplianbaoyuliujine);
+            mmJunjianxiangmu.setXiangmuleibie(ppxiangmuleibie);
+            mmJunjianxiangmu.setJieshoudanweiid(ppjieshoudanweiid);
+            mmJunjianxiangmu.setBeizhu(ppbeizhu);
+            mmJunjianxiangmu.setCreater(ppadminId);
+            mmJunjianxiangmu.setCreatetime(new Date());
+            mmJunjianxiangmu.setModifier(ppadminId);
+            mmJunjianxiangmu.setLastupdatetime(new Date());
+            mmJunjianxiangmu.setZhuangtai(100);
+
+            return ddService.add(mmJunjianxiangmu)==true? JsonResult.getSuccessResult("新增军建计划下达情况成功")
+        : JsonResult.getErrorResult("新增军建计划下达情况失败");
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            log.error("junjianxiangmu/add:error",e);
+            return JsonResult.getErrorResult("junjianxiangmu/add:error " + e.getMessage());
+        }
+    }
+
+
+    @RequestMapping("delete")
+    public JsonResult<?> delete(@RequestParam("xiangmuid") String ppxiangmuId) {
+        try {
+
+            Junjianxiangmu mmJunjianxiangmu=ddService.findOne(ppxiangmuId);
+            if (mmJunjianxiangmu==null){
+                return JsonResult.getErrorResult("军建计划不存在!");
+            }
+            if (!ddService.delete(ppxiangmuId)){
+                return JsonResult.getErrorResult("军建计划删除失败!");
+            }
+            return JsonResult.getSuccessResult("军建计划删除成功!");
+        }catch (Exception e) {
+            e.printStackTrace();
+            log.error("junjianxiangmu/delete:error",e);
+            return JsonResult.getErrorResult("junjianxiangmu/delete:error " + e.getMessage());
         }
     }
 

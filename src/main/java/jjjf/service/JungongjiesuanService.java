@@ -16,4 +16,17 @@ public class JungongjiesuanService {
         return ddMapper.selectByPrimaryKey(ppjungongJiesuanId);
     }
 
+
+    public boolean add(Jungongjiesuan ppjungongJiesuan){
+        return ddMapper.insert(ppjungongJiesuan)==1;
+    }
+
+    public boolean modify(Jungongjiesuan ppjungongJiesuan){
+        return ddMapper.updateByPrimaryKeySelective(ppjungongJiesuan)==1;
+    }
+
+   /* public boolean delete(String ppXiangmuId) {
+        return ddMapper.deleteByPrimaryKey(ppXiangmuId)==1;
+    }*/
+
 }

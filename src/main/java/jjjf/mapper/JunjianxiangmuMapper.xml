@@ -23,7 +23,7 @@
     xm.zhongxinpifujine,xm.lianbaoyuliujine,lb.text,xm.beizhu
     from junjianxiangmu xm
     left join dict_leibiebiaoqian lb on lb.id=xm.xiangmuleibie
-    where 1=1
+    where xm.zhuangtai=100
     <if test='deptid != "1"'>
       and xm.jieshoudanweiid=#{deptid}
     </if>
@@ -37,8 +37,8 @@
 
     select count(*) from junjianxiangmu xm
     left join dict_leibiebiaoqian lb on lb.id=xm.xiangmuleibie
-    where 1=1
-    <if test="deptid != '1'">
+    where xm.zhuangtai=100
+    <if test='deptid != "1"'>
       and xm.jieshoudanweiid=#{deptid}
     </if>
     order by xm.xiangmuname

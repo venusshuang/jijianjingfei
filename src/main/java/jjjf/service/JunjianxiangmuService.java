@@ -2,6 +2,7 @@ package jjjf.service;
 
 
 import jjjf.dao.JunjianxiangmuMapper;
+import jjjf.model.Junjianxiangmu;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,5 +24,22 @@ public class JunjianxiangmuService {
         Object mmCount = ddMapper.getCountBydeptId(ppdeptId);
         return mmCount == null ? 0 : Integer.parseInt(mmCount.toString());
     }
+
+    public Junjianxiangmu findOne(String ppxiangmuId) {
+        return ddMapper.selectByPrimaryKey(ppxiangmuId);
+    }
+
+    public boolean add(Junjianxiangmu ppJunjianxiangmu){
+        return ddMapper.insert(ppJunjianxiangmu)==1;
+    }
+
+    public boolean modify(Junjianxiangmu ppJunjianxiangmu){
+        return ddMapper.updateByPrimaryKeySelective(ppJunjianxiangmu)==1;
+    }
+
+    public boolean delete(String ppxiangmuId){
+        return ddMapper.deleteByPrimaryKey(ppxiangmuId)==1;
+    }
+
 
 }
