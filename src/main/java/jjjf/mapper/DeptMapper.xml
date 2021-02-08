@@ -13,6 +13,21 @@
     <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
     <result column="zhuangtai" property="zhuangtai" jdbcType="INTEGER" />
   </resultMap>
+  <select id="findDanweiByzhuangtai" resultMap="BaseResultMap">
+
+  select * from Dept
+where zhuangtai=100
+
+LIMIT #{startindex},#{pagesize}
+
+  </select>
+
+  <select id="getCountByzhuangtai" resultType="Object">
+  select count(*) from admin
+where zhuangtai=100
+
+
+  </select>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

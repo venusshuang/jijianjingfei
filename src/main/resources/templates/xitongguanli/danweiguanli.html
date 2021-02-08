@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="public::head('单位管理')">
+</head>
+<body>
+<input type="hidden" th:value="${session.AdminID}" id="AdminID"/>
+<input type="hidden" th:value="${session.DeptID}" id="DeptID"/>
+
+<div id="Danweilist" class="main">
+    <div th:replace="xitongguanli/edit_danwei" ></div>
+
+    <div class="primary-title">
+        单位管理
+
+        <span class="btn btn-primary" style="float:right;margin-right:15px;margin-top:10px;"
+              v-on:click="toAdd()">新 增</span>
+    </div>
+
+    <div class="primary-content">
+        <table class="table table-hover table-striped">
+            <thead>
+            <th style="text-align:center;vertical-align:middle;width: 50px;">序号</th>
+            <th style="text-align:center;vertical-align:middle;">单位名称</th>
+            <th style="text-align:center;vertical-align:middle;">单位类型</th>
+            <th style="text-align:center;vertical-align:middle;">创建者</th>
+            <th style="text-align:center;vertical-align:middle;">创建时间</th>
+            <th style="text-align:center;vertical-align:middle;">最后修改者</th>
+            <th style="text-align:center;vertical-align:middle;">最后修改时间</th>
+            <th style="text-align:center;vertical-align:middle;">操作</th>
+            </thead>
+
+            <tbody>
+            <tr v-for="(danweiitem,index) in danweilist" v-if="show">
+                <td style="text-align:center;vertical-align:middle;" v-text="index+1+(pageIndex-1)*pageSize"></td>
+                <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.deptname"></td>
+                <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.depttype"></td>
+                <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.creator"></td>
+                <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.createtime"></td>
+                <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.modifier"></td>
+                <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.lastupdatetime"></td>
+                <td style="text-align:center;vertical-align:middle;">
+                    <button v-on:click="toModify(danweiitem.deptid)" class="btn btn-info">修 改</button>
+                    <button class="btn btn-danger" v-on:click="toDelete(danweiitem.deptid)">删 除</button>
+                </td>
+            </tr>
+
+
+        </table>
+        <div v-if="!show" style="text-align:center;width:100%;">查无数据</div>
+
+        <div v-if="show" class="my-page-navigation">
+            <button class="btn btn-default" v-on:click="SetPageIndex">首页</button>
+            <button class="btn btn-default" v-on:click="SetPageIndexPrePage">上一页</button>
+            <span v-text="pageIndex + '  /  ' + pageCount"></span>
+            <span v-text="'共' + recordCount + '条'"></span>
+            <button class="btn btn-default" v-on:click="SetPageIndexNextPage">下一页</button>
+            <button class="btn btn-default" v-on:click="SetPageEnd">尾页</button>
+            <span>跳到第</span>
+            <input type="text" class="form-control" style="width: 80px;display:inline-block;"  v-model="inputPageIndexValue" v-on:keyup.enter="JumpPage">
+            <span>页</span>
+            <button class="btn btn-default" v-on:click="JumpPage">跳</button>
+        </div>
+
+
+    </div>
+
+</div>
+</body>
+<script src="../js/xitongguanli/danweiguanli.js?ver=1.6"></script>
+</html>

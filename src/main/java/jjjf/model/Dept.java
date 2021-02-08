@@ -1,5 +1,8 @@
 package jjjf.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Dept {
@@ -70,11 +73,13 @@ public class Dept {
     public void setCreator(String creator) {
         this.creator = creator;
     }
-
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")  // HH:mm:ss
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getCreatetime() {
         return createtime;
     }
-
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")  // HH:mm:ss
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
@@ -86,11 +91,13 @@ public class Dept {
     public void setModifier(String modifier) {
         this.modifier = modifier;
     }
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")  // HH:mm:ss
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getLastupdatetime() {
         return lastupdatetime;
     }
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")  // HH:mm:ss
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public void setLastupdatetime(Date lastupdatetime) {
         this.lastupdatetime = lastupdatetime;
     }

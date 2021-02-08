@@ -1,0 +1,52 @@
+<div id="danweiModal" style="" class="modal fade bs-example-modal-lg"
+     tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+
+     data-backdrop="static" data-keyboard="false"
+     aria-hidden="true">
+    <div class="modal-dialog modal-md" style=" width: 600px">
+        <div class="modal-content">
+            <div id="title" class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                <h4 class="modal-title" id="myModalLabel" style=""></h4>
+            </div>
+            <div class="modal-body" style="overflow: auto;">
+
+                <form class="form-horizontal col-sm-12" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="required">*</span>单位名称</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" autofocus
+                                   v-model='danwei.deptname' id="deptname" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label"><span class="required">*</span>单位类型</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" autofocus
+                                   v-model='danwei.depttype' id="depttype" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-sm-12" style="text-align: center;">
+                            <input v-if="editFlag==1" type="button" class="btn btn-primary"
+                                   v-on:click="modify();"  value="修改" />
+                            <input v-else type="button" class="btn btn-primary"
+                                   v-on:click="add();"  value="保存" />
+
+
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
