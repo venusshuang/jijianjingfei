@@ -24,11 +24,18 @@ public class DeptService {
         Object mmCount = ddMapper.getCountByzhuangtai();
         return mmCount == null ? 0 : Integer.parseInt(mmCount.toString());
     }
-    public Dept findOne(String ppjungongJiesuanId){
-        return ddMapper.selectByPrimaryKey(ppjungongJiesuanId);
+    public Dept findOne(String ppdeptID){
+        return ddMapper.selectByPrimaryKey(ppdeptID);
     }
     public boolean add(Dept dept) {
         return ddMapper.insert(dept)==1;
     }
+    public boolean delete(String ppGuanliyuanId){
+        return ddMapper.deleteByPrimaryKey(ppGuanliyuanId)==1;
+    }
+    public boolean modify(Dept ppDept) {
+        return ddMapper.updateByPrimaryKey(ppDept)==1;
+    }
+
 
 }

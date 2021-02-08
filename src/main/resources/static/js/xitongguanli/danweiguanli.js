@@ -3,8 +3,8 @@ var DanWei = new Vue({
     el : '#Danweilist',
     data :{
 
-        AdminID : $("#AdminID").val(),
-        DeptID : $("#DeptID").val(),
+        adminID : $("#AdminID").val(),
+        deptID : $("#DeptID").val(),
         danwei : {},
         danweilist : [],
 
@@ -13,7 +13,7 @@ var DanWei = new Vue({
         show : false,					// 显示列表是否有数据
 
         pageIndex : 1,
-        pageSize : 2,
+        pageSize :10,
         pageCount : 0,
         recordCount : 0,
         inputPageIndexValue : "",
@@ -21,6 +21,7 @@ var DanWei = new Vue({
 
     },
     created : function() {
+
         this.findVaild();
 
     },
@@ -75,7 +76,7 @@ var DanWei = new Vue({
 
                     if(ppData.result == "1"){
                         var data = ppData.resultContent
-                        _this.guanliyuan = data;
+                        _this.danwei = data;
                     }else{
                         layer.alert(ppData.message);
                     }
@@ -99,9 +100,8 @@ var DanWei = new Vue({
 
 
         add: function(){
-            alert(AdminID);
-            alert(DeptID);
             var _this = this;
+
             if (!$.trim(_this.danwei.deptname)) {
                 layer.alert("请填写单位名称！");
                 return false;
@@ -116,7 +116,8 @@ var DanWei = new Vue({
             $.post('/dept/add',{
                 deptname:$.trim(_this.danwei.deptname),
                 depttype:$.trim(_this.danwei.depttype),
-
+                shangjideptid:$.trim(_this.deptID),
+                creator:$.trim(_this.adminID),
 
                 random : Math.random()
             },function(ppData){
@@ -143,52 +144,36 @@ var DanWei = new Vue({
 
 
 
-        toModify : function(ppGuanliyuanID){
-            $("#guanliyuanModal").modal();
+        toModify : function(ppDeptID){
+            $("#danweiModal").modal();
             this.editFlag = 1;
-            $("#myModalLabel").html("修改管理员信息");
+            $("#myModalLabel").html("修改单位信息");
 
-            this.guanliyuanId=ppGuanliyuanID;
-            this.guanliyuan = {};
-            this.bindGuanliyuan();
+            this.deptId=ppDeptID;
+            this.danwei = {};
+            this.bindDanwei();
         },
 
         modify : function(){
             var _this = this;
-            if (!$.trim(_this.guanliyuan.loginname)) {
-                layer.alert("请填写登录账号！");
+            if (!$.trim(_this.danwei.deptname)) {
+                layer.alert("请填写单位名称！");
                 return false;
             }
 
-            if (!$.trim(_this.guanliyuan.loginpassword)) {
-                layer.alert("请填写登录密码！");
-                return false;
-            }
-
-            if (!$.trim(_this.guanliyuan.truename)) {
-                layer.alert("请填写姓名！");
-                return false;
-            }
-
-            if (!$.trim(_this.guanliyuan.lianxihaoma)) {
-                layer.alert("请填写联系号码！");
-                return false;
-            }
-
-            if (!$.trim(_this.guanliyuan.keshi)) {
-                layer.alert("请填写科室！");
+            if (!$.trim(_this.danwei.depttype)) {
+                layer.alert("请填写单位类型！");
                 return false;
             }
 
 
             layer.open({type:3});
-            $.post('/admin/modify_all',{
-                guanliyuanID:_this.guanliyuanId,
-                loginname:$.trim(_this.guanliyuan.loginname),
-                loginpassword:$.trim(_this.guanliyuan.loginpassword),
-                truename:$.trim(_this.guanliyuan.truename),
-                lianxihaoma:$.trim(_this.guanliyuan.lianxihaoma),
-                keshi:$.trim(_this.guanliyuan.keshi),
+            $.post('/dept/modify',{
+                deptid:_this.deptId,
+                deptname:$.trim(_this.danwei.deptname),
+                depttype:$.trim(_this.danwei.depttype),
+                modifier:$.trim(_this.adminID),
+
 
                 random : Math.random()
             },function(ppData){
@@ -201,7 +186,7 @@ var DanWei = new Vue({
                             btn:[],
                             content:"修改成功!",
                         });
-                        $("#guanliyuanModal").modal("hide");
+                        $("#danweiModal").modal("hide");
                         _this.findVaild();
                     }else{
                         layer.alert(ppData.message);
@@ -213,15 +198,15 @@ var DanWei = new Vue({
         },
 
 
-        toDelete : function(ppGuanliyuanID){
+        toDelete : function(ppDeptID){
             var _this = this;
-            layer.confirm("确定删除该条管理员信息吗？",{
+            layer.confirm("确定删除该条单位信息吗？",{
                 btn : ['是','否']
             },function(){
                 layer.open({type:3});
 
-                $.post("/admin/delete", {
-                    guanliyuanID : ppGuanliyuanID,
+                $.post("/dept/delete", {
+                    deptID : ppDeptID,
                     random : Math.random()
                 }, function(ppData) {
                     if (ppData != null) {
@@ -279,6 +264,7 @@ var DanWei = new Vue({
     watch :{
         //监控分页情况，刷新列表
         pageIndex : function(){
+
             this.findVaild();
         }
     }

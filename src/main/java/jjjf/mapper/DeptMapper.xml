@@ -23,7 +23,7 @@ LIMIT #{startindex},#{pagesize}
   </select>
 
   <select id="getCountByzhuangtai" resultType="Object">
-  select count(*) from admin
+  select count(*) from Dept
 where zhuangtai=100
 
 

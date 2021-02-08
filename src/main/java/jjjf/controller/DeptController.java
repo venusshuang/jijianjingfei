@@ -44,9 +44,9 @@ public class DeptController {
     }
 
     @RequestMapping("findOne")
-    public JsonResult<?> findOne(@RequestParam("deptId") String ppdeptId){
+    public JsonResult<?> findOne(@RequestParam("deptID") String ppdeptID){
         try {
-            return JsonResult.getSuccessResult(ddService.findOne(ppdeptId));
+            return JsonResult.getSuccessResult(ddService.findOne(ppdeptID));
         }catch (Exception e){
             e.printStackTrace();
             log.error("dept/findOne:error",e);
@@ -55,20 +55,25 @@ public class DeptController {
     }
     @RequestMapping("add")
     public JsonResult<?> add(@RequestParam("deptname") String ppdeptname,
-                             @RequestParam("depttype") String ppdepttype) {
+                             @RequestParam("depttype") String ppdepttype,
+                             @RequestParam("shangjideptid") String ppshangjideptid,
+                             @RequestParam("creator") String ppcreator) {
 
         try {
 
             String mmDeptId= UUID.randomUUID().toString();
             Dept mmDept =new Dept();
             mmDept.setDeptid(mmDeptId);
+            mmDept.setShangjideptid(ppshangjideptid);
+            mmDept.setCreator(ppcreator);
             mmDept.setCreatetime(new Date());
+            mmDept.setZhuangtai(100);
 
 
 
             BooleanMessage mmBooleanMessage = checkInputData(mmDept,ppdeptname,ppdepttype);
             if (!mmBooleanMessage.isOk()) {
-                log.error("admin/add:error",mmBooleanMessage.getMessage().toString());
+                log.error("dept/add:error",mmBooleanMessage.getMessage().toString());
                 return JsonResult.getErrorResult(mmBooleanMessage.getMessage().toString());
             }
 
@@ -82,6 +87,42 @@ public class DeptController {
         }
 
     }
+    @RequestMapping("modify")
+    public JsonResult<?> modify(
+            @RequestParam("deptid") String ppdeptid,
+            @RequestParam("deptname") String ppdeptname,
+            @RequestParam("depttype") String ppdepttype,
+            @RequestParam("modifier") String ppmodifier){
+
+        try {
+
+
+            Dept mmDept =ddService.findOne(ppdeptid);
+            if(mmDept==null){
+                return JsonResult.getErrorResult("dept/modify:error ");
+            }
+
+            mmDept.setModifier(ppmodifier);
+            mmDept.setLastupdatetime(new Date());
+
+
+            BooleanMessage mmBooleanMessage = checkInputData(mmDept,ppdeptname,ppdepttype);
+            if (!mmBooleanMessage.isOk()) {
+                log.error("dept/modify:error",mmBooleanMessage.getMessage().toString());
+                return JsonResult.getErrorResult(mmBooleanMessage.getMessage().toString());
+            }
+
+            return ddService.modify(mmDept) ? JsonResult.getSuccessResult("修改成功")
+                    : JsonResult.getErrorResult("修改失败");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("dept/modify:error",e);
+            return JsonResult.getErrorResult("dept/modify:error " + e.getMessage());
+        }
+    }
+
     private BooleanMessage checkInputData(Dept ppDept,String ppdeptname,String ppdepttype) {
 
 
@@ -101,6 +142,19 @@ public class DeptController {
         return BooleanMessage.getSuccessMessage(ppDept);
 
     }
+    @RequestMapping("delete")
+    public JsonResult<?> delete(@RequestParam("deptID") String ppdeptID) {
+        try {
+            return ddService.delete(ppdeptID) == true ? JsonResult.getSuccessResult("删除单位信息成功")
+                    : JsonResult.getErrorResult("删除单位信息失败");
+        }catch (Exception e) {
+            e.printStackTrace();
+            log.error("dept/delete:error",e);
+            return JsonResult.getErrorResult("dept/delete:error " + e.getMessage());
+        }
+    }
+
+
 
 
 }

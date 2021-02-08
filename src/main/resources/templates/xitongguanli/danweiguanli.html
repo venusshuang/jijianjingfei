@@ -3,20 +3,20 @@
 <head th:replace="public::head('单位管理')">
 </head>
 <body>
-<input type="hidden" th:value="${session.AdminID}" id="AdminID"/>
-<input type="hidden" th:value="${session.DeptID}" id="DeptID"/>
+<div class="container-fluid">
+<input type="hidden" th:value="${AdminID}" id="AdminID"/>
+<input type="hidden" th:value="${DeptID}" id="DeptID"/>
 
 <div id="Danweilist" class="main">
     <div th:replace="xitongguanli/edit_danwei" ></div>
 
     <div class="primary-title">
-        单位管理
-
-        <span class="btn btn-primary" style="float:right;margin-right:15px;margin-top:10px;"
+        单位管理<span class="btn btn-primary" style="float:right;margin-right:15px;margin-top:10px;"
               v-on:click="toAdd()">新 增</span>
     </div>
 
     <div class="primary-content">
+
         <table class="table table-hover table-striped">
             <thead>
             <th style="text-align:center;vertical-align:middle;width: 50px;">序号</th>
@@ -64,7 +64,11 @@
 
     </div>
 
+    </div>
 </div>
 </body>
 <script src="../js/xitongguanli/danweiguanli.js?ver=1.6"></script>
+<link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
+<link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
+<link rel="stylesheet" href="/css/xadmin.css?ver=0.6">
 </html>
