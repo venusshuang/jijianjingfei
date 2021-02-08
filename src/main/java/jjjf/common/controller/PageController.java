@@ -56,20 +56,34 @@ public class PageController {
 		return "pc/welcome";
 	}
 
-	// 专家管理
-	@RequestMapping("/expert/main_expert.html")
-	public String MainExpert(HttpServletRequest request, ModelMap map) {
+	//类别标签
+	@RequestMapping("/gongchengguanli/biaoqianguanli.html")
+	public String LeibieBiaoqian(HttpServletRequest request, ModelMap map) {
 		if(!isLoginPC(request)) {
 			return "redirect:/manage/login.html";
 		}
+		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
+		map.put("AdminID", mmAdminId);
+		map.put("DeptID", mmDeptId);
 
-		String mmRoleType = request.getSession().getAttribute("RoleType").toString();
-		String mmAdministratorId = request.getSession().getAttribute("AdministratorId").toString();
-		map.put("RoleType", mmRoleType);
-		map.put("AdministratorId", mmAdministratorId);
-		return "pc/expert/main_expert";
+		return "gongchengguanli/biaoqianguanli_list";
+
 	}
-	
+	//上传demo
+	@RequestMapping("/gongchengguanli/shangchuandemo.html")
+	public String shangchuandemo(HttpServletRequest request, ModelMap map) {
+		if(!isLoginPC(request)) {
+			return "redirect:/manage/login.html";
+		}
+		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
+		map.put("AdminID", mmAdminId);
+		map.put("DeptID", mmDeptId);
+
+		return "gongchengguanli/shangchuandemo";
+
+	}
 	// 仪表盘
 	@RequestMapping("/guahao/yibiaopan.html")
 	public String Yibiaopan(HttpServletRequest request, ModelMap map) {
@@ -257,7 +271,7 @@ public class PageController {
 
 
 	//军建计划下达情况
-	@RequestMapping("/gongchenguanli/junjianxiada.html")
+	@RequestMapping("/gongchengguanli/junjianxiada.html")
 	public String Junjianxiada(HttpServletRequest request, ModelMap map) {
 
 		if(!isLoginPC(request)) {
@@ -271,7 +285,7 @@ public class PageController {
 
 
 
-		return "gongchenguanli/junjianxiada_list";
+		return "gongchengguanli/junjianxiada_list";
 
 	}
 

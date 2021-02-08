@@ -625,73 +625,73 @@ public class JingfeiyusuanExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeptidIsNull() {
-            addCriterion("deptid is null");
+        public Criteria andChengshoujingfeidanweiIsNull() {
+            addCriterion("chengshoujingfeidanwei is null");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidIsNotNull() {
-            addCriterion("deptid is not null");
+        public Criteria andChengshoujingfeidanweiIsNotNull() {
+            addCriterion("chengshoujingfeidanwei is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidEqualTo(String value) {
-            addCriterion("deptid =", value, "deptid");
+        public Criteria andChengshoujingfeidanweiEqualTo(String value) {
+            addCriterion("chengshoujingfeidanwei =", value, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidNotEqualTo(String value) {
-            addCriterion("deptid <>", value, "deptid");
+        public Criteria andChengshoujingfeidanweiNotEqualTo(String value) {
+            addCriterion("chengshoujingfeidanwei <>", value, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidGreaterThan(String value) {
-            addCriterion("deptid >", value, "deptid");
+        public Criteria andChengshoujingfeidanweiGreaterThan(String value) {
+            addCriterion("chengshoujingfeidanwei >", value, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidGreaterThanOrEqualTo(String value) {
-            addCriterion("deptid >=", value, "deptid");
+        public Criteria andChengshoujingfeidanweiGreaterThanOrEqualTo(String value) {
+            addCriterion("chengshoujingfeidanwei >=", value, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidLessThan(String value) {
-            addCriterion("deptid <", value, "deptid");
+        public Criteria andChengshoujingfeidanweiLessThan(String value) {
+            addCriterion("chengshoujingfeidanwei <", value, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidLessThanOrEqualTo(String value) {
-            addCriterion("deptid <=", value, "deptid");
+        public Criteria andChengshoujingfeidanweiLessThanOrEqualTo(String value) {
+            addCriterion("chengshoujingfeidanwei <=", value, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidLike(String value) {
-            addCriterion("deptid like", value, "deptid");
+        public Criteria andChengshoujingfeidanweiLike(String value) {
+            addCriterion("chengshoujingfeidanwei like", value, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidNotLike(String value) {
-            addCriterion("deptid not like", value, "deptid");
+        public Criteria andChengshoujingfeidanweiNotLike(String value) {
+            addCriterion("chengshoujingfeidanwei not like", value, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidIn(List<String> values) {
-            addCriterion("deptid in", values, "deptid");
+        public Criteria andChengshoujingfeidanweiIn(List<String> values) {
+            addCriterion("chengshoujingfeidanwei in", values, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidNotIn(List<String> values) {
-            addCriterion("deptid not in", values, "deptid");
+        public Criteria andChengshoujingfeidanweiNotIn(List<String> values) {
+            addCriterion("chengshoujingfeidanwei not in", values, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidBetween(String value1, String value2) {
-            addCriterion("deptid between", value1, value2, "deptid");
+        public Criteria andChengshoujingfeidanweiBetween(String value1, String value2) {
+            addCriterion("chengshoujingfeidanwei between", value1, value2, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 
-        public Criteria andDeptidNotBetween(String value1, String value2) {
-            addCriterion("deptid not between", value1, value2, "deptid");
+        public Criteria andChengshoujingfeidanweiNotBetween(String value1, String value2) {
+            addCriterion("chengshoujingfeidanwei not between", value1, value2, "chengshoujingfeidanwei");
             return (Criteria) this;
         }
 

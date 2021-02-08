@@ -19,7 +19,7 @@ public class Jingfeiyusuan {
 
     private Double zhongxinkuaijihao;
 
-    private String deptid;
+    private String chengshoujingfeidanwei;
 
     private String jingfeikemu;
 
@@ -97,12 +97,12 @@ public class Jingfeiyusuan {
         this.zhongxinkuaijihao = zhongxinkuaijihao;
     }
 
-    public String getDeptid() {
-        return deptid;
+    public String getChengshoujingfeidanwei() {
+        return chengshoujingfeidanwei;
     }
 
-    public void setDeptid(String deptid) {
-        this.deptid = deptid;
+    public void setChengshoujingfeidanwei(String chengshoujingfeidanwei) {
+        this.chengshoujingfeidanwei = chengshoujingfeidanwei;
     }
 
     public String getJingfeikemu() {

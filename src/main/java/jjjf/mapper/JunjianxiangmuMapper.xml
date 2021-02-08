@@ -10,12 +10,44 @@
     <result column="lianbaoyuliujine" property="lianbaoyuliujine" jdbcType="DOUBLE" />
     <result column="xiangmuleibie" property="xiangmuleibie" jdbcType="VARCHAR" />
     <result column="beizhu" property="beizhu" jdbcType="VARCHAR" />
-    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="jieshoudanweiid" property="jieshoudanweiid" jdbcType="VARCHAR" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="modifier" property="modifier" jdbcType="VARCHAR" />
     <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
     <result column="zhuangtai" property="zhuangtai" jdbcType="INTEGER" />
   </resultMap>
+
+  <select id="findXiangmuBydeptId" resultType="Map">
+    select xm.xiangmuid,xiangmuname,xm.xiangmupifu,xm.lianbaopifujine,
+    xm.zhongxinpifujine,xm.lianbaoyuliujine,lb.text,xm.beizhu
+    from junjianxiangmu xm
+    left join dict_leibiebiaoqian lb on lb.id=xm.xiangmuleibie
+    where 1=1
+    <if test='deptid != "1"'>
+      and xm.jieshoudanweiid=#{deptid}
+    </if>
+    order by xm.xiangmuname
+    LIMIT #{startindex},#{pagesize}
+
+  </select>
+
+
+  <select id="getCountBydeptId" resultType="Object">
+
+    select count(*) from junjianxiangmu xm
+    left join dict_leibiebiaoqian lb on lb.id=xm.xiangmuleibie
+    where 1=1
+    <if test="deptid != '1'">
+      and xm.jieshoudanweiid=#{deptid}
+    </if>
+    order by xm.xiangmuname
+
+  </select>
+
+
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -76,7 +108,8 @@
   </sql>
   <sql id="Base_Column_List" >
     xiangmuid, xiangmuname, xiangmupifu, lianbaopifujine, zhongxinpifujine, lianbaoyuliujine, 
-    xiangmuleibie, beizhu, creator, createtime, modifier, lastupdatetime, zhuangtai
+    xiangmuleibie, beizhu, jieshoudanweiid, creater, createtime, modifier, lastupdatetime, 
+    zhuangtai
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="jjjf.model.JunjianxiangmuExample" >
     select
@@ -111,14 +144,14 @@
   <insert id="insert" parameterType="jjjf.model.Junjianxiangmu" >
     insert into junjianxiangmu (xiangmuid, xiangmuname, xiangmupifu, 
       lianbaopifujine, zhongxinpifujine, lianbaoyuliujine, 
-      xiangmuleibie, beizhu, creator, 
-      createtime, modifier, lastupdatetime, 
-      zhuangtai)
+      xiangmuleibie, beizhu, jieshoudanweiid, 
+      creater, createtime, modifier, 
+      lastupdatetime, zhuangtai)
     values (#{xiangmuid,jdbcType=VARCHAR}, #{xiangmuname,jdbcType=VARCHAR}, #{xiangmupifu,jdbcType=VARCHAR}, 
       #{lianbaopifujine,jdbcType=DOUBLE}, #{zhongxinpifujine,jdbcType=DOUBLE}, #{lianbaoyuliujine,jdbcType=DOUBLE}, 
-      #{xiangmuleibie,jdbcType=VARCHAR}, #{beizhu,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, 
-      #{zhuangtai,jdbcType=INTEGER})
+      #{xiangmuleibie,jdbcType=VARCHAR}, #{beizhu,jdbcType=VARCHAR}, #{jieshoudanweiid,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
+      #{lastupdatetime,jdbcType=TIMESTAMP}, #{zhuangtai,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="jjjf.model.Junjianxiangmu" >
     insert into junjianxiangmu
@@ -147,8 +180,11 @@
       <if test="beizhu != null" >
         beizhu,
       </if>
-      <if test="creator != null" >
-        creator,
+      <if test="jieshoudanweiid != null" >
+        jieshoudanweiid,
+      </if>
+      <if test="creater != null" >
+        creater,
       </if>
       <if test="createtime != null" >
         createtime,
@@ -188,8 +224,11 @@
       <if test="beizhu != null" >
         #{beizhu,jdbcType=VARCHAR},
       </if>
-      <if test="creator != null" >
-        #{creator,jdbcType=VARCHAR},
+      <if test="jieshoudanweiid != null" >
+        #{jieshoudanweiid,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
@@ -238,8 +277,11 @@
       <if test="record.beizhu != null" >
         beizhu = #{record.beizhu,jdbcType=VARCHAR},
       </if>
-      <if test="record.creator != null" >
-        creator = #{record.creator,jdbcType=VARCHAR},
+      <if test="record.jieshoudanweiid != null" >
+        jieshoudanweiid = #{record.jieshoudanweiid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        creater = #{record.creater,jdbcType=VARCHAR},
       </if>
       <if test="record.createtime != null" >
         createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -268,7 +310,8 @@
       lianbaoyuliujine = #{record.lianbaoyuliujine,jdbcType=DOUBLE},
       xiangmuleibie = #{record.xiangmuleibie,jdbcType=VARCHAR},
       beizhu = #{record.beizhu,jdbcType=VARCHAR},
-      creator = #{record.creator,jdbcType=VARCHAR},
+      jieshoudanweiid = #{record.jieshoudanweiid,jdbcType=VARCHAR},
+      creater = #{record.creater,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       modifier = #{record.modifier,jdbcType=VARCHAR},
       lastupdatetime = #{record.lastupdatetime,jdbcType=TIMESTAMP},
@@ -301,8 +344,11 @@
       <if test="beizhu != null" >
         beizhu = #{beizhu,jdbcType=VARCHAR},
       </if>
-      <if test="creator != null" >
-        creator = #{creator,jdbcType=VARCHAR},
+      <if test="jieshoudanweiid != null" >
+        jieshoudanweiid = #{jieshoudanweiid,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
         createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -328,7 +374,8 @@
       lianbaoyuliujine = #{lianbaoyuliujine,jdbcType=DOUBLE},
       xiangmuleibie = #{xiangmuleibie,jdbcType=VARCHAR},
       beizhu = #{beizhu,jdbcType=VARCHAR},
-      creator = #{creator,jdbcType=VARCHAR},
+      jieshoudanweiid = #{jieshoudanweiid,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       modifier = #{modifier,jdbcType=VARCHAR},
       lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},

@@ -19,7 +19,9 @@ public class Junjianxiangmu {
 
     private String beizhu;
 
-    private String creator;
+    private String jieshoudanweiid;
+
+    private String creater;
 
     private Date createtime;
 
@@ -93,12 +95,20 @@ public class Junjianxiangmu {
         this.beizhu = beizhu;
     }
 
-    public String getCreator() {
-        return creator;
+    public String getJieshoudanweiid() {
+        return jieshoudanweiid;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setJieshoudanweiid(String jieshoudanweiid) {
+        this.jieshoudanweiid = jieshoudanweiid;
+    }
+
+    public String getCreater() {
+        return creater;
+    }
+
+    public void setCreater(String creater) {
+        this.creater = creater;
     }
 
     public Date getCreatetime() {
