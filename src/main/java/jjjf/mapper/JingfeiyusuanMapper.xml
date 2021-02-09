@@ -19,7 +19,7 @@
     <result column="zhuangtai" property="zhuangtai" jdbcType="INTEGER" />
   </resultMap>
 
-  <select id="findJinagfeiyusuanBydeptId" resultType="Map">
+  <select id="findJingfeiyusuanBydeptId" resultType="Map">
     SELECT xm.xiangmuid,xm.xiangmuname,ys.jingfeiyuansuanid,ys.jingfeixiadaqingkuang,ys.yusuanniandu,
     ys.lianbaojingfeizhibiao,ys.zhongxinjingfeizhibiao,ys.zhongxinyuliujine,ys.zhongxinkuaijihao,
     ys.chengshoujingfeidanwei,ys.jingfeikemu
