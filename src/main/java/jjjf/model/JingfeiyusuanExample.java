@@ -1025,63 +1025,63 @@ public class JingfeiyusuanExample {
             return (Criteria) this;
         }
 
-        public Criteria and状态IsNull() {
-            addCriterion("状态 is null");
+        public Criteria andZhuangtaiIsNull() {
+            addCriterion("zhuangtai is null");
             return (Criteria) this;
         }
 
-        public Criteria and状态IsNotNull() {
-            addCriterion("状态 is not null");
+        public Criteria andZhuangtaiIsNotNull() {
+            addCriterion("zhuangtai is not null");
             return (Criteria) this;
         }
 
-        public Criteria and状态EqualTo(Integer value) {
-            addCriterion("状态 =", value, "状态");
+        public Criteria andZhuangtaiEqualTo(Integer value) {
+            addCriterion("zhuangtai =", value, "zhuangtai");
             return (Criteria) this;
         }
 
-        public Criteria and状态NotEqualTo(Integer value) {
-            addCriterion("状态 <>", value, "状态");
+        public Criteria andZhuangtaiNotEqualTo(Integer value) {
+            addCriterion("zhuangtai <>", value, "zhuangtai");
             return (Criteria) this;
         }
 
-        public Criteria and状态GreaterThan(Integer value) {
-            addCriterion("状态 >", value, "状态");
+        public Criteria andZhuangtaiGreaterThan(Integer value) {
+            addCriterion("zhuangtai >", value, "zhuangtai");
             return (Criteria) this;
         }
 
-        public Criteria and状态GreaterThanOrEqualTo(Integer value) {
-            addCriterion("状态 >=", value, "状态");
+        public Criteria andZhuangtaiGreaterThanOrEqualTo(Integer value) {
+            addCriterion("zhuangtai >=", value, "zhuangtai");
             return (Criteria) this;
         }
 
-        public Criteria and状态LessThan(Integer value) {
-            addCriterion("状态 <", value, "状态");
+        public Criteria andZhuangtaiLessThan(Integer value) {
+            addCriterion("zhuangtai <", value, "zhuangtai");
             return (Criteria) this;
         }
 
-        public Criteria and状态LessThanOrEqualTo(Integer value) {
-            addCriterion("状态 <=", value, "状态");
+        public Criteria andZhuangtaiLessThanOrEqualTo(Integer value) {
+            addCriterion("zhuangtai <=", value, "zhuangtai");
             return (Criteria) this;
         }
 
-        public Criteria and状态In(List<Integer> values) {
-            addCriterion("状态 in", values, "状态");
+        public Criteria andZhuangtaiIn(List<Integer> values) {
+            addCriterion("zhuangtai in", values, "zhuangtai");
             return (Criteria) this;
         }
 
-        public Criteria and状态NotIn(List<Integer> values) {
-            addCriterion("状态 not in", values, "状态");
+        public Criteria andZhuangtaiNotIn(List<Integer> values) {
+            addCriterion("zhuangtai not in", values, "zhuangtai");
             return (Criteria) this;
         }
 
-        public Criteria and状态Between(Integer value1, Integer value2) {
-            addCriterion("状态 between", value1, value2, "状态");
+        public Criteria andZhuangtaiBetween(Integer value1, Integer value2) {
+            addCriterion("zhuangtai between", value1, value2, "zhuangtai");
             return (Criteria) this;
         }
 
-        public Criteria and状态NotBetween(Integer value1, Integer value2) {
-            addCriterion("状态 not between", value1, value2, "状态");
+        public Criteria andZhuangtaiNotBetween(Integer value1, Integer value2) {
+            addCriterion("zhuangtai not between", value1, value2, "zhuangtai");
             return (Criteria) this;
         }
     }

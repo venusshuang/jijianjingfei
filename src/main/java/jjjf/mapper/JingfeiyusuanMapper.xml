@@ -16,8 +16,48 @@
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="modifier" property="modifier" jdbcType="VARCHAR" />
     <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
-    <result column="状态" property="状态" jdbcType="INTEGER" />
+    <result column="zhuangtai" property="zhuangtai" jdbcType="INTEGER" />
   </resultMap>
+
+  <select id="findJinagfeiyusuanBydeptId" resultType="Map">
+    SELECT xm.xiangmuid,xm.xiangmuname,ys.jingfeiyuansuanid,ys.jingfeixiadaqingkuang,ys.yusuanniandu,
+    ys.lianbaojingfeizhibiao,ys.zhongxinjingfeizhibiao,ys.zhongxinyuliujine,ys.zhongxinkuaijihao,
+    ys.chengshoujingfeidanwei,ys.jingfeikemu
+    from junjianxiangmu xm
+    left join jingfeiyusuan ys on ys.xiangmuid=xm.xiangmuid
+    where 1=1
+
+    <if test="xiangmuname != ''">
+      and xiangmuname like #{xiangmuname}
+    </if>
+
+    <if test='deptid != "1"'>
+      and xm.jieshoudanweiid=#{deptid}
+    </if>
+    order by xm.xiangmuname
+    LIMIT #{startindex},#{pagesize}
+
+  </select>
+
+
+  <select id="getCountBydeptId" resultType="Object">
+
+    SELECT count(*)  from junjianxiangmu xm
+    left join jingfeiyusuan ys on ys.xiangmuid=xm.xiangmuid
+    where 1=1
+
+    <if test="xiangmuname != ''">
+      and xiangmuname like #{xiangmuname}
+    </if>
+
+    <if test='deptid != "1"'>
+      and xm.jieshoudanweiid=#{deptid}
+    </if>
+    order by xm.xiangmuname
+
+  </select>
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -79,7 +119,7 @@
   <sql id="Base_Column_List" >
     jingfeiyuansuanid, xiangmuid, jingfeixiadaqingkuang, yusuanniandu, lianbaojingfeizhibiao, 
     zhongxinjingfeizhibiao, zhongxinyuliujine, zhongxinkuaijihao, chengshoujingfeidanwei, 
-    jingfeikemu, creater, createtime, modifier, lastupdatetime, 状态
+    jingfeikemu, creater, createtime, modifier, lastupdatetime, zhuangtai
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="jjjf.model.JingfeiyusuanExample" >
     select
@@ -116,13 +156,13 @@
       yusuanniandu, lianbaojingfeizhibiao, zhongxinjingfeizhibiao, 
       zhongxinyuliujine, zhongxinkuaijihao, chengshoujingfeidanwei, 
       jingfeikemu, creater, createtime, 
-      modifier, lastupdatetime, 状态
+      modifier, lastupdatetime, zhuangtai
       )
     values (#{jingfeiyuansuanid,jdbcType=VARCHAR}, #{xiangmuid,jdbcType=VARCHAR}, #{jingfeixiadaqingkuang,jdbcType=VARCHAR}, 
       #{yusuanniandu,jdbcType=VARCHAR}, #{lianbaojingfeizhibiao,jdbcType=DOUBLE}, #{zhongxinjingfeizhibiao,jdbcType=DOUBLE}, 
       #{zhongxinyuliujine,jdbcType=DOUBLE}, #{zhongxinkuaijihao,jdbcType=DOUBLE}, #{chengshoujingfeidanwei,jdbcType=VARCHAR}, 
       #{jingfeikemu,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{modifier,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{状态,jdbcType=INTEGER}
+      #{modifier,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{zhuangtai,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="jjjf.model.Jingfeiyusuan" >
@@ -170,8 +210,8 @@
       <if test="lastupdatetime != null" >
         lastupdatetime,
       </if>
-      <if test="状态 != null" >
-        状态,
+      <if test="zhuangtai != null" >
+        zhuangtai,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -217,8 +257,8 @@
       <if test="lastupdatetime != null" >
         #{lastupdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="状态 != null" >
-        #{状态,jdbcType=INTEGER},
+      <if test="zhuangtai != null" >
+        #{zhuangtai,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -273,8 +313,8 @@
       <if test="record.lastupdatetime != null" >
         lastupdatetime = #{record.lastupdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.状态 != null" >
-        状态 = #{record.状态,jdbcType=INTEGER},
+      <if test="record.zhuangtai != null" >
+        zhuangtai = #{record.zhuangtai,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -297,7 +337,7 @@
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       modifier = #{record.modifier,jdbcType=VARCHAR},
       lastupdatetime = #{record.lastupdatetime,jdbcType=TIMESTAMP},
-      状态 = #{record.状态,jdbcType=INTEGER}
+      zhuangtai = #{record.zhuangtai,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -344,8 +384,8 @@
       <if test="lastupdatetime != null" >
         lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="状态 != null" >
-        状态 = #{状态,jdbcType=INTEGER},
+      <if test="zhuangtai != null" >
+        zhuangtai = #{zhuangtai,jdbcType=INTEGER},
       </if>
     </set>
     where jingfeiyuansuanid = #{jingfeiyuansuanid,jdbcType=VARCHAR}
@@ -365,7 +405,7 @@
       createtime = #{createtime,jdbcType=TIMESTAMP},
       modifier = #{modifier,jdbcType=VARCHAR},
       lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
-      状态 = #{状态,jdbcType=INTEGER}
+      zhuangtai = #{zhuangtai,jdbcType=INTEGER}
     where jingfeiyuansuanid = #{jingfeiyuansuanid,jdbcType=VARCHAR}
   </update>
 </mapper>

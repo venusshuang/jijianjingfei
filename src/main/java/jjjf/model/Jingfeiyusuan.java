@@ -31,7 +31,7 @@ public class Jingfeiyusuan {
 
     private Date lastupdatetime;
 
-    private Integer 状态;
+    private Integer zhuangtai;
 
     public String getJingfeiyuansuanid() {
         return jingfeiyuansuanid;
@@ -145,11 +145,11 @@ public class Jingfeiyusuan {
         this.lastupdatetime = lastupdatetime;
     }
 
-    public Integer get状态() {
-        return 状态;
+    public Integer getZhuangtai() {
+        return zhuangtai;
     }
 
-    public void set状态(Integer 状态) {
-        this.状态 = 状态;
+    public void setZhuangtai(Integer zhuangtai) {
+        this.zhuangtai = zhuangtai;
     }
 }

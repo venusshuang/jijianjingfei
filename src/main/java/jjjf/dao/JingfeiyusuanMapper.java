@@ -1,11 +1,22 @@
 package jjjf.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import jjjf.model.Jingfeiyusuan;
 import jjjf.model.JingfeiyusuanExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface JingfeiyusuanMapper {
+
+    List<Map<String, Object>> findJinagfeiyusuanBydeptId(@Param("xiangmuname") String mmXiangmuName, @Param("deptid") String mmDeptId, @Param("startindex") int mmStartIndex,
+                                                  @Param("pagesize") int mmPageSize);
+
+    Object getCountBydeptId(@Param("xiangmuname") String mmXiangmuName,@Param("deptid") String mmDeptId);
+
+
+
+
     int countByExample(JingfeiyusuanExample example);
 
     int deleteByExample(JingfeiyusuanExample example);
