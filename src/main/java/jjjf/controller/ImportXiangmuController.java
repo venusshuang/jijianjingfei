@@ -10,10 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jjjf.model.Junjianxiangmu;
+import jjjf.service.JunjianxiangmuService;
+import jjjf.util.DataBaseUtil;
 import jjjf.util.JsonResult;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -32,10 +36,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("import_paichugaoxiao")
+@RequestMapping("import_xiangmu")
 public class ImportXiangmuController {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
+
+	@Resource
+	JunjianxiangmuService ddService;
 
 	@Value("${userfilepath}")
 	private String userfilepath;
@@ -46,7 +53,6 @@ public class ImportXiangmuController {
 	@RequestMapping("get_value")
 	public JsonResult<?> get_value(
 			@RequestParam("fileurl") String mmFileUrl,
-			@RequestParam("piciid") String ppPiciId,
 			HttpServletRequest request
 	){
 		try {
@@ -55,7 +61,8 @@ public class ImportXiangmuController {
 				userfilepath  = userfilepath.substring(0, userfilepath.length()-1);
 			}
 
-			String url = userfilepath+mmFileUrl;
+			mmFileUrl=mmFileUrl.substring(mmFileUrl.indexOf("jjjf"));
+			String url = userfilepath+"/"+mmFileUrl;
 			Workbook book = null;
 
 			File f = new File(url);
@@ -71,23 +78,25 @@ public class ImportXiangmuController {
 			}
 
 			Sheet sheet = book.getSheetAt(0);
-			int column= sheet.getRow(0).getPhysicalNumberOfCells();
+			if (sheet==null){
+				return JsonResult.getErrorResult("请上传规范格式的EXCEL（确保上传数据在SHEET1中）！");
+			}
+			//int column= sheet.getRow(0).getPhysicalNumberOfCells();
 			int rows = sheet.getPhysicalNumberOfRows();
-
 			List<Map<String,Object>> mmReturnList = new ArrayList<Map<String,Object>>();
 
-			for (int i = 1; i < rows ; i++) { //行
+			for (int i = 4; i < rows ; i++) { //行
 				Map<String,Object> mmMap = new HashMap<String,Object>();
 				mmMap.put("序号", getCellFormatValue(sheet.getRow(i).getCell(0)));
-				mmMap.put("中文名称", getCellFormatValue(sheet.getRow(i).getCell(1)));
-				mmMap.put("英文名称", getCellFormatValue(sheet.getRow(i).getCell(2)));
-				mmMap.put("国家", getCellFormatValue(sheet.getRow(i).getCell(3)));
-				mmMap.put("批次", ppPiciId);
+				mmMap.put("项目名称", getCellFormatValue(sheet.getRow(i).getCell(1)));
+				mmMap.put("两级批复情况", getCellFormatValue(sheet.getRow(i).getCell(2)));
+				mmMap.put("联保批复金额", getCellFormatValue(sheet.getRow(i).getCell(3)));
 				mmReturnList.add(mmMap);
 			}
 			in.close();
 			return JsonResult.getSuccessResult(mmReturnList);
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error("ImportPaichuGaoxiaoController -> get_value: "+e.getMessage());
 			return JsonResult.getErrorResult("获取派出项目上传文件中的数据失败！");
 		}
@@ -96,46 +105,47 @@ public class ImportXiangmuController {
 	// 导入高校名单
 	@RequestMapping("import")
 	public JsonResult<?> importvalue(
-			@RequestParam("piciid") String ppPiciId,
-			@RequestParam("zhongwenming") String ppZhongwenming,
-			@RequestParam("yinwenming") String ppYinwenming,
-			@RequestParam("guojiamingcheng") String ppGuojiamingcheng,
+			@RequestParam("xiangmumingcheng") String ppXiangmuMingcheng,
+			@RequestParam("pifuqingkuang") String ppPifuQingkuang,
+			@RequestParam("pifujine") Double ppPifuJine,
 			HttpServletRequest request
 	){
 		try {
 
-			/*// 判断导入的高校国家是否与字典表匹配
-			Map<String, Object> mmMap = dd引进项目世界前100高校Service.findByGuojiamingcheng(ppGuojiamingcheng);
-			if(mmMap==null) {
-				return JsonResult.getErrorResult("国家"+ppGuojiamingcheng+"不存在！请检查修改后重新导入该数据！");
-			}else {
+			//从session里取出adminid作为creator和modifier
+			String mmUserId=request.getSession().getAttribute("ADMINID").toString();
 
-				boolean mmGuojijiaoliuxuexiaoResult = dd国际交流学校Service.findByPiciIdAndZhongwenming(ppPiciId, ppZhongwenming);
+			List<Junjianxiangmu> mmList= ddService.findByXiangmuMingcheng(ppXiangmuMingcheng);
+			if (mmList.size()>=1){
+				return JsonResult.getErrorResult("已存在该项目："+ppXiangmuMingcheng+"，跳过导入！");
+			}
 
-				// 判断是否重复导入高校
-				if(!mmGuojijiaoliuxuexiaoResult) {
-					return JsonResult.getErrorResult("同批次已存在高校"+ppZhongwenming+"，跳过导入！");
-				}
-				String mmGuojiaID = mmMap.get("国家ID")==null?"":mmMap.get("国家ID").toString();
+			String mmXiangmuId=UUID.randomUUID().toString();
 
-				// 添加国际交流学校
-				国际交流学校 mm国际交流学校 = new 国际交流学校();
-				mm国际交流学校.set学校id(UUID.randomUUID().toString());
-				mm国际交流学校.set学校名称(ppZhongwenming);
-				mm国际交流学校.set学校名称英文(ppYinwenming);
-				mm国际交流学校.set批次id(ppPiciId);
-				mm国际交流学校.set排序号(null);
-				mm国际交流学校.set国家id(mmGuojiaID);
+			Junjianxiangmu mmJunjianxiangmu = new Junjianxiangmu();
+			mmJunjianxiangmu.setXiangmuid(mmXiangmuId);
+			mmJunjianxiangmu.setCreater(mmUserId);
+			mmJunjianxiangmu.setCreatetime(new Date());
+			mmJunjianxiangmu.setLastupdatetime(new Date());
+			mmJunjianxiangmu.setBeizhu("");
+			mmJunjianxiangmu.setJieshoudanweiid("");
+			mmJunjianxiangmu.setLianbaopifujine(ppPifuJine);
+			mmJunjianxiangmu.setLianbaoyuliujine(0.0);
+			mmJunjianxiangmu.setXiangmuleibie("");
+			mmJunjianxiangmu.setModifier(mmUserId);
+			mmJunjianxiangmu.setXiangmuname(ppXiangmuMingcheng);
+			mmJunjianxiangmu.setXiangmupifu(ppPifuQingkuang);
+			mmJunjianxiangmu.setZhongxinpifujine(0.0);
+			mmJunjianxiangmu.setZhuangtai(100);
 
-				if(!dd国际交流学校Service.add(mm国际交流学校)) {
-					return JsonResult.getErrorResult("导入错误！");
-				}
-				return JsonResult.getSuccessResult("导入成功！");
-			}*/
+			if(!ddService.add(mmJunjianxiangmu)) {
+				return JsonResult.getErrorResult("导入错误！");
+			}
 			return JsonResult.getSuccessResult("导入成功！");
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error("ImportPaichuGaoxiaoController -> importvalue: "+e.getMessage());
-			return JsonResult.getErrorResult("导入派出项目高校名单失败！");
+			return JsonResult.getErrorResult("导入项目失败！");
 		}
 	}
 
@@ -174,4 +184,20 @@ public class ImportXiangmuController {
 		}
 		return cellvalue;
 	}
+
+	// 备份数据库
+	@SuppressWarnings("resource")
+	@RequestMapping("backup")
+	public void backup(
+			HttpServletRequest request
+	){
+		try {
+			DataBaseUtil.backup();
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("ImportPaichuGaoxiaoController -> get_value: "+e.getMessage());
+		}
+	}
+
+
 }

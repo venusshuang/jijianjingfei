@@ -3,6 +3,7 @@ package jjjf.service;
 
 import jjjf.dao.JunjianxiangmuMapper;
 import jjjf.model.Junjianxiangmu;
+import jjjf.model.JunjianxiangmuExample;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,4 +43,9 @@ public class JunjianxiangmuService {
     }
 
 
+    public List<Junjianxiangmu> findByXiangmuMingcheng(String ppXiangmuMingcheng) {
+        JunjianxiangmuExample mmExample=new JunjianxiangmuExample();
+        mmExample.createCriteria().andXiangmunameEqualTo(ppXiangmuMingcheng).andZhuangtaiEqualTo(100);
+        return ddMapper.selectByExample(mmExample);
+    }
 }

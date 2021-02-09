@@ -5,7 +5,6 @@
 </head>
 <body>
 	<div >
-		<input type="hidden" th:value="${PiciId}" id="piciid" />
 		<div class="main" id="paichugaoxiao">
 			<div id="uploadModal" style="" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg">
@@ -19,12 +18,81 @@
 							</h4>
 						</div>
 						<div class="modal-body" style="overflow:auto;">
-							<div id="uploadModalPart" style=""></div>
+							<div id="uploadModalPart" style="">
+								<div class="weui-uploader__bd">
+									<!-- 放置上传上来的文件，里面拼接li -->
+									<ul class="weui-uploader__files" id="uploaderFiles">
+
+									</ul>
+									<input type="text" class="form-control" id="imageurl" >
+									<div id="filelist" ></div>
+									<div class="weui-uploader__input-box" id="container" style="width:200px;height:200px;margin-left:10px;">
+										<input id="pickfiles" class="btn btn-lg btn-success" type="file" value="选择文件" style="width: 50px;" />
+									</div>
+									<div id="UploadedFiles"></div>
+								</div>
+							</div>
+							<span class="btn btn-success" style="float: right; margin-right: 15px; margin-top: 10px;" @click="getValue()">确定上传</span>
+							<span class="btn btn-success" style="float: right; margin-right: 15px; margin-top: 10px;" @click="backup()">确定备份</span>
 						</div>
 					</div><!-- /.modal-content -->
 				</div><!-- /.modal -->
 			</div>
-			<div th:replace="guojijiaoliu/manage/paichugaoxiaolist::edits"></div>
+
+			<div id="XiangmuListModal" style="" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+				 aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+				<div class="modal-dialog modal-md" style="width: 1000px;height:400px;">
+					<div class="modal-content">
+
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true" @click="close()">&times;</button>
+							<h4 class="modal-title">查看项目名单</h4>
+						</div>
+
+						<div class="modal-body" style="height: 400px;overflow: scroll;">
+							<table class="table table-hover table-striped" style="margin: 0 auto;" id="list_gaoxiao">
+
+								<thead>
+								<th style="text-align: center; vertical-align: middle;width:50px;">序号</th>
+								<th style="text-align: center; vertical-align: middle;width:80px;">项目名称</th>
+								<th style="text-align: center; vertical-align: middle;">两级批复情况</th>
+								<th style="text-align: center; vertical-align: middle;">联保批复金额</th>
+								<th style="text-align: center; vertical-align: middle;width:100px;">导入状态</th>
+								<th style="text-align: center; vertical-align: middle;width:100px;">操作</th>
+								</thead>
+
+								<tbody>
+								<tr v-for="xiangmu in xiangmulist">
+									<td style="text-align: center; vertical-align: middle;"
+										v-text="xiangmu.序号"></td>
+									<td name="guojiamingcheng" style="text-align: center; vertical-align: middle;"
+										v-text="xiangmu.项目名称"></td>
+									<td name="zhongwenmingcheng" style="text-align: center; vertical-align: middle;"
+										v-text="xiangmu.两级批复情况"></td>
+									<td name="yingwenmingcheng" style="text-align: center; vertical-align: middle;"
+										v-text="xiangmu.联保批复金额"></td>
+									<td style="text-align: center; vertical-align: middle;"
+										class="daoruzhuangtai" :id="xiangmu.序号"></td>
+									<td style="text-align: center; vertical-align: middle;">
+										<button class="btn btn-sm btn-primary"  @click="dangedaoru(xiangmu)">导入</button>
+									</td>
+								</tr>
+								</tbody>
+
+							</table>
+
+						</div>
+						<div style="width:100%;height:100px;text-align:center;">
+							<button id="daoru" class="btn btn-lg btn-info" style="margin-top:30px;" v-on:click="importGaoxiao()">批量导入</button>
+						</div>
+
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal -->
+			</div>
+			<!--<div th:replace="guojijiaoliu/manage/paichugaoxiaolist::edits"></div>-->
 			<div class="primary-title">
 				<span v-text="piciname"></span>项目名单管理
 				
@@ -53,11 +121,18 @@
 				</table>
 			</div>-->
 		</div>
+
+		<script type="text/javascript" charset="utf-8" src="../../js/plupload/plupload.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/plupload/plupload.full.js"></script>
+		<script src="../../js/upload_image.js?ver=0.7"></script>
+		<script type="text/javascript">
+			var mmImageUrls = "";
+			$(function(){
+				InitUpLoader();
+			});
+		</script>
 		
-		<script type="text/javascript" src="/res/js/plupload/plupload.js"></script>
-		<script type="text/javascript" src="/res/js/plupload/plupload.full.js"></script>
-		
-		<script th:src="@{/js/guojijiaoliu/manage/paichugaoxiao.js?ver=1.3}"></script>
+		<script src="/js/gongchengguanli/shangchuanxiangmu.js?ver=1.3"></script>
 	</div>
 </body>
 </html>
