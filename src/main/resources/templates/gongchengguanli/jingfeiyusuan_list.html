@@ -10,7 +10,7 @@
     <input type="hidden" th:value="${AdminID}" id="adminid">
     <input type="hidden" th:value="${DeptID}" id="deptid">
     <!-- 内容 -->
-    <div id="Junjianxiada" class="main">
+    <div id="Jingfeiyusuan" class="main">
 
 
         <div class="primary-title">
@@ -20,7 +20,7 @@
 
             <div style="margin-top:15px;text-align: center;">
                 <label  style="margin-left: 20px;">项目名称：</label><input type="text" class="form-control" style="width: 150px;display:inline-block;"  v-model="xiangmutext"  >
-                <button class="btn btn-info" @click="bindJingfeiList()" style="margin-left:15px;">查询</button>
+                <button class="btn btn-info" @click="bindJingfeiyusuanList()" style="margin-left:15px;">查询</button>
             </div>
 
             <div class="table-responsive" style="overflow:inherit;margin-top:40px;">
@@ -42,23 +42,27 @@
 
                     </thead>
                     <tbody>
-                   <!-- <tr v-for="(xiangmuitem,index) in xiangmulist" v-if="show">
+                   <tr v-for="(jingfeiitem,index) in jingfeilist" v-if="show">
 
                         <td style="text-align:center;vertical-align:middle;" v-text="index+1+(pageIndex-1)*pageSize"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="xiangmuitem.xiangmuname"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="xiangmuitem.xiangmupifu"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="xiangmuitem.lianbaopifujine"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="xiangmuitem.zhongxinpifujine"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="xiangmuitem.lianbaoyuliujine"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="xiangmuitem.text"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="xiangmuitem.beizhu"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-text="jingfeiitem.xiangmuname"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-text="jingfeiitem.jingfeixiadaqingkuang"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-text="jingfeiitem.yusuanniandu"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-text="jingfeiitem.lianbaojingfeizhibiao"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-text="jingfeiitem.zhongxinjingfeizhibiao"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-text="jingfeiitem.zhongxinyuliujine"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-text="jingfeiitem.zhongxinkuaijihao"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-text="jingfeiitem.chengshoujingfeidanwei"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-text="jingfeiitem.jingfeikemu"></td>
                         <td style="text-align:center;vertical-align:middle;">
 
-                            <button class="btn btn-primary" @click="perpareToModifyXiangmu(xiangmuitem.xiangmuid)">编 辑</button>
-                            <button class="btn btn-danger" @click="toDelete(xiangmuitem.xiangmuid)">删 除</button>
+
+                            <button class="btn btn-primary" v-if="jingfeiitem.jingfeiyuansuanid==null" @click="toAdd(jingfeiitem.xiangmuname,jingfeiitem.xiangmuid)">新 增</button>
+                            <button class="btn btn-primary" v-if="jingfeiitem.jingfeiyuansuanid!=null" @click="perpareToModifyJingfei(jingfeiitem.xiangmuname,jingfeiitem.jingfeiyuansuanid)">编 辑</button>
+                            <button class="btn btn-danger" v-if="jingfeiitem.jingfeiyuansuanid!=null" @click="toDelete(jingfeiitem.jingfeiyuansuanid)">删 除</button>
                         </td>
 
-                    </tr>-->
+                    </tr>
                     </tbody>
                 </table>
 
@@ -76,7 +80,7 @@
                     <button class="btn btn-default" v-on:click="JumpPage">跳</button>
                 </div>
 
-               <!-- <div th:replace="gongchengguanli/junjianxiada_edit::editXiadaxiamgmu"></div>-->
+                <div th:replace="gongchengguanli/jingfeiyusuan_edit::editJingfeiyusuan"></div>
 
 
             </div>
@@ -91,7 +95,7 @@
 
 
 </body>
-<script src="../js/gongchengguanli/jingfeiyusuan_list.js?ver=1.1"></script>
+<script src="../js/gongchengguanli/jingfeiyusuan_list.js?ver=1.5"></script>
 <link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
 <link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
 <link rel="stylesheet" href="/css/xadmin.css?ver=0.6">

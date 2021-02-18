@@ -575,52 +575,62 @@ public class JingfeiyusuanExample {
             return (Criteria) this;
         }
 
-        public Criteria andZhongxinkuaijihaoEqualTo(Double value) {
+        public Criteria andZhongxinkuaijihaoEqualTo(String value) {
             addCriterion("zhongxinkuaijihao =", value, "zhongxinkuaijihao");
             return (Criteria) this;
         }
 
-        public Criteria andZhongxinkuaijihaoNotEqualTo(Double value) {
+        public Criteria andZhongxinkuaijihaoNotEqualTo(String value) {
             addCriterion("zhongxinkuaijihao <>", value, "zhongxinkuaijihao");
             return (Criteria) this;
         }
 
-        public Criteria andZhongxinkuaijihaoGreaterThan(Double value) {
+        public Criteria andZhongxinkuaijihaoGreaterThan(String value) {
             addCriterion("zhongxinkuaijihao >", value, "zhongxinkuaijihao");
             return (Criteria) this;
         }
 
-        public Criteria andZhongxinkuaijihaoGreaterThanOrEqualTo(Double value) {
+        public Criteria andZhongxinkuaijihaoGreaterThanOrEqualTo(String value) {
             addCriterion("zhongxinkuaijihao >=", value, "zhongxinkuaijihao");
             return (Criteria) this;
         }
 
-        public Criteria andZhongxinkuaijihaoLessThan(Double value) {
+        public Criteria andZhongxinkuaijihaoLessThan(String value) {
             addCriterion("zhongxinkuaijihao <", value, "zhongxinkuaijihao");
             return (Criteria) this;
         }
 
-        public Criteria andZhongxinkuaijihaoLessThanOrEqualTo(Double value) {
+        public Criteria andZhongxinkuaijihaoLessThanOrEqualTo(String value) {
             addCriterion("zhongxinkuaijihao <=", value, "zhongxinkuaijihao");
             return (Criteria) this;
         }
 
-        public Criteria andZhongxinkuaijihaoIn(List<Double> values) {
+        public Criteria andZhongxinkuaijihaoLike(String value) {
+            addCriterion("zhongxinkuaijihao like", value, "zhongxinkuaijihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhongxinkuaijihaoNotLike(String value) {
+            addCriterion("zhongxinkuaijihao not like", value, "zhongxinkuaijihao");
+            return (Criteria) this;
+        }
+
+        public Criteria andZhongxinkuaijihaoIn(List<String> values) {
             addCriterion("zhongxinkuaijihao in", values, "zhongxinkuaijihao");
             return (Criteria) this;
         }
 
-        public Criteria andZhongxinkuaijihaoNotIn(List<Double> values) {
+        public Criteria andZhongxinkuaijihaoNotIn(List<String> values) {
             addCriterion("zhongxinkuaijihao not in", values, "zhongxinkuaijihao");
             return (Criteria) this;
         }
 
-        public Criteria andZhongxinkuaijihaoBetween(Double value1, Double value2) {
+        public Criteria andZhongxinkuaijihaoBetween(String value1, String value2) {
             addCriterion("zhongxinkuaijihao between", value1, value2, "zhongxinkuaijihao");
             return (Criteria) this;
         }
 
-        public Criteria andZhongxinkuaijihaoNotBetween(Double value1, Double value2) {
+        public Criteria andZhongxinkuaijihaoNotBetween(String value1, String value2) {
             addCriterion("zhongxinkuaijihao not between", value1, value2, "zhongxinkuaijihao");
             return (Criteria) this;
         }

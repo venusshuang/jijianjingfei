@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 public interface JingfeiyusuanMapper {
 
     List<Map<String, Object>> findJingfeiyusuanBydeptId(@Param("xiangmuname") String mmXiangmuName, @Param("deptid") String mmDeptId, @Param("startindex") int mmStartIndex,
-                                                  @Param("pagesize") int mmPageSize);
+                                                        @Param("pagesize") int mmPageSize);
 
     Object getCountBydeptId(@Param("xiangmuname") String mmXiangmuName,@Param("deptid") String mmDeptId);
 

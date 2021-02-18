@@ -17,7 +17,7 @@ public class Jingfeiyusuan {
 
     private Double zhongxinyuliujine;
 
-    private Double zhongxinkuaijihao;
+    private String zhongxinkuaijihao;
 
     private String chengshoujingfeidanwei;
 
@@ -89,11 +89,11 @@ public class Jingfeiyusuan {
         this.zhongxinyuliujine = zhongxinyuliujine;
     }
 
-    public Double getZhongxinkuaijihao() {
+    public String getZhongxinkuaijihao() {
         return zhongxinkuaijihao;
     }
 
-    public void setZhongxinkuaijihao(Double zhongxinkuaijihao) {
+    public void setZhongxinkuaijihao(String zhongxinkuaijihao) {
         this.zhongxinkuaijihao = zhongxinkuaijihao;
     }
 

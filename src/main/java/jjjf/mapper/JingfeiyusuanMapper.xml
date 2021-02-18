@@ -9,7 +9,7 @@
     <result column="lianbaojingfeizhibiao" property="lianbaojingfeizhibiao" jdbcType="DOUBLE" />
     <result column="zhongxinjingfeizhibiao" property="zhongxinjingfeizhibiao" jdbcType="DOUBLE" />
     <result column="zhongxinyuliujine" property="zhongxinyuliujine" jdbcType="DOUBLE" />
-    <result column="zhongxinkuaijihao" property="zhongxinkuaijihao" jdbcType="DOUBLE" />
+    <result column="zhongxinkuaijihao" property="zhongxinkuaijihao" jdbcType="VARCHAR" />
     <result column="chengshoujingfeidanwei" property="chengshoujingfeidanwei" jdbcType="VARCHAR" />
     <result column="jingfeikemu" property="jingfeikemu" jdbcType="VARCHAR" />
     <result column="creater" property="creater" jdbcType="VARCHAR" />
@@ -56,6 +56,8 @@
     order by xm.xiangmuname
 
   </select>
+
+
 
 
   <sql id="Example_Where_Clause" >
@@ -160,7 +162,7 @@
       )
     values (#{jingfeiyuansuanid,jdbcType=VARCHAR}, #{xiangmuid,jdbcType=VARCHAR}, #{jingfeixiadaqingkuang,jdbcType=VARCHAR}, 
       #{yusuanniandu,jdbcType=VARCHAR}, #{lianbaojingfeizhibiao,jdbcType=DOUBLE}, #{zhongxinjingfeizhibiao,jdbcType=DOUBLE}, 
-      #{zhongxinyuliujine,jdbcType=DOUBLE}, #{zhongxinkuaijihao,jdbcType=DOUBLE}, #{chengshoujingfeidanwei,jdbcType=VARCHAR}, 
+      #{zhongxinyuliujine,jdbcType=DOUBLE}, #{zhongxinkuaijihao,jdbcType=VARCHAR}, #{chengshoujingfeidanwei,jdbcType=VARCHAR}, 
       #{jingfeikemu,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
       #{modifier,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{zhuangtai,jdbcType=INTEGER}
       )
@@ -237,7 +239,7 @@
         #{zhongxinyuliujine,jdbcType=DOUBLE},
       </if>
       <if test="zhongxinkuaijihao != null" >
-        #{zhongxinkuaijihao,jdbcType=DOUBLE},
+        #{zhongxinkuaijihao,jdbcType=VARCHAR},
       </if>
       <if test="chengshoujingfeidanwei != null" >
         #{chengshoujingfeidanwei,jdbcType=VARCHAR},
@@ -293,7 +295,7 @@
         zhongxinyuliujine = #{record.zhongxinyuliujine,jdbcType=DOUBLE},
       </if>
       <if test="record.zhongxinkuaijihao != null" >
-        zhongxinkuaijihao = #{record.zhongxinkuaijihao,jdbcType=DOUBLE},
+        zhongxinkuaijihao = #{record.zhongxinkuaijihao,jdbcType=VARCHAR},
       </if>
       <if test="record.chengshoujingfeidanwei != null" >
         chengshoujingfeidanwei = #{record.chengshoujingfeidanwei,jdbcType=VARCHAR},
@@ -330,7 +332,7 @@
       lianbaojingfeizhibiao = #{record.lianbaojingfeizhibiao,jdbcType=DOUBLE},
       zhongxinjingfeizhibiao = #{record.zhongxinjingfeizhibiao,jdbcType=DOUBLE},
       zhongxinyuliujine = #{record.zhongxinyuliujine,jdbcType=DOUBLE},
-      zhongxinkuaijihao = #{record.zhongxinkuaijihao,jdbcType=DOUBLE},
+      zhongxinkuaijihao = #{record.zhongxinkuaijihao,jdbcType=VARCHAR},
       chengshoujingfeidanwei = #{record.chengshoujingfeidanwei,jdbcType=VARCHAR},
       jingfeikemu = #{record.jingfeikemu,jdbcType=VARCHAR},
       creater = #{record.creater,jdbcType=VARCHAR},
@@ -364,7 +366,7 @@
         zhongxinyuliujine = #{zhongxinyuliujine,jdbcType=DOUBLE},
       </if>
       <if test="zhongxinkuaijihao != null" >
-        zhongxinkuaijihao = #{zhongxinkuaijihao,jdbcType=DOUBLE},
+        zhongxinkuaijihao = #{zhongxinkuaijihao,jdbcType=VARCHAR},
       </if>
       <if test="chengshoujingfeidanwei != null" >
         chengshoujingfeidanwei = #{chengshoujingfeidanwei,jdbcType=VARCHAR},
@@ -398,7 +400,7 @@
       lianbaojingfeizhibiao = #{lianbaojingfeizhibiao,jdbcType=DOUBLE},
       zhongxinjingfeizhibiao = #{zhongxinjingfeizhibiao,jdbcType=DOUBLE},
       zhongxinyuliujine = #{zhongxinyuliujine,jdbcType=DOUBLE},
-      zhongxinkuaijihao = #{zhongxinkuaijihao,jdbcType=DOUBLE},
+      zhongxinkuaijihao = #{zhongxinkuaijihao,jdbcType=VARCHAR},
       chengshoujingfeidanwei = #{chengshoujingfeidanwei,jdbcType=VARCHAR},
       jingfeikemu = #{jingfeikemu,jdbcType=VARCHAR},
       creater = #{creater,jdbcType=VARCHAR},
