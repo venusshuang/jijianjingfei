@@ -1,11 +1,23 @@
 package jjjf.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import jjjf.model.Gongchengjinzhan;
 import jjjf.model.GongchengjinzhanExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface GongchengjinzhanMapper {
+
+    List<Map<String, Object>> findGongchengjinzhanBydeptId(@Param("xiangmuname") String mmXiangmuName, @Param("deptid") String mmDeptId, @Param("startindex") int mmStartIndex,
+                                                           @Param("pagesize") int mmPageSize);
+
+    Object getCountBydeptId(@Param("xiangmuname") String mmXiangmuName,@Param("deptid") String mmDeptId);
+
+
+
+
+
     int countByExample(GongchengjinzhanExample example);
 
     int deleteByExample(GongchengjinzhanExample example);

@@ -17,6 +17,49 @@
     <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
     <result column="zhuangtai" property="zhuangtai" jdbcType="INTEGER" />
   </resultMap>
+
+  <select id="findGongchengjinzhanBydeptId" resultType="Map">
+    SELECT xm.xiangmuid,xm.xiangmuname,jz.gongchengjinzhanid,xmzt.text,jz.xiangmuzhuangtaiid,
+    date_format(jz.kaigongshijian,'%Y-%m') as kaigongshijian,jz.hetongzongjia,
+    jz.wangchengtouzi,jz.jindukuaizhifu,jz.jindukuanbili,
+    date_format(jz.wangongshijian,'%Y-%m') as wangongshijian
+    from junjianxiangmu xm
+    left join gongchengjinzhan jz on jz.xiangmuid=xm.xiangmuid
+    left join dict_xiangmuzhuangtai xmzt on xmzt.id=jz.xiangmuzhuangtaiid
+    where 1=1
+
+    <if test="xiangmuname != ''">
+      and xiangmuname like #{xiangmuname}
+    </if>
+
+    <if test='deptid != "1"'>
+      and xm.jieshoudanweiid=#{deptid}
+    </if>
+    order by xm.xiangmuname
+    LIMIT #{startindex},#{pagesize}
+
+  </select>
+
+  <select id="getCountBydeptId" resultType="Object">
+
+    SELECT count(*) from junjianxiangmu xm
+    left join gongchengjinzhan jz on jz.xiangmuid=xm.xiangmuid
+    left join dict_xiangmuzhuangtai xmzt on xmzt.id=jz.xiangmuzhuangtaiid
+    where 1=1
+
+    <if test="xiangmuname != ''">
+      and xiangmuname like #{xiangmuname}
+    </if>
+
+    <if test='deptid != "1"'>
+      and xm.jieshoudanweiid=#{deptid}
+    </if>
+
+  </select>
+
+
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

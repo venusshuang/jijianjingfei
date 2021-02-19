@@ -129,6 +129,7 @@ public class JingfeiyusuanController {
                     : JsonResult.getErrorResult("修改经费预算下达情况失败");
 
 
+
         }catch (Exception e) {
             e.printStackTrace();
             log.error("jingfeiyusuan/modify:error",e);
@@ -147,9 +148,9 @@ public class JingfeiyusuanController {
                 return JsonResult.getErrorResult("经费预算不存在!");
             }
             if (!ddService.delete(ppjingfeiyusuanId)){
-                return JsonResult.getErrorResult("经费预算除失败!");
+                return JsonResult.getErrorResult("经费预算删除失败!");
             }
-            return JsonResult.getSuccessResult("经费预算除成功!");
+            return JsonResult.getSuccessResult("经费预算删除成功!");
 
         }catch (Exception e) {
             e.printStackTrace();
