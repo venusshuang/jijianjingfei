@@ -338,4 +338,21 @@ public class PageController {
 
 	}
 
+	//竣工结算和决算情况（已完工项目填写）
+	@RequestMapping("/gongchengguanli/jungongjiesuan.html")
+	public String jungongjiesuan(HttpServletRequest request, ModelMap map) {
+
+		if(!isLoginPC(request)) {
+			return "redirect:/manage/login.html";
+		}
+
+		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
+		map.put("AdminID", mmAdminId);
+		map.put("DeptID", mmDeptId);
+
+		return "gongchengguanli/jungongjiesuan_list";
+
+	}
+
 }
