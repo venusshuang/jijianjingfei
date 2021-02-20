@@ -13,7 +13,7 @@ var uploader = new plupload.Uploader({
 	flash_swf_url : '../js/plupload/plupload.flash.swf',
 	silverlight_xap_url : '../js/plupload/plupload.silverlight.xap',
 	filters : [
-		{title : "Image files", extensions : "*"}
+		{title : "Image files", extensions : "xls,xlsx"}
 	]
 });
 
@@ -47,12 +47,12 @@ function InitUpLoader()
 
 	    console.log(mmFileUrl);
 
-	    $("#imageurl").append(mmFileUrl+";");
-	    mmImageUrls += mmFileUrl+";";
+		$("#imageurl").val(mmFileUrl);
+	   // mmImageUrls += mmFileUrl+";";
 	    
-	    var mmHtml = "<img name='imageurl'  src='"+mmFileUrl+"' width=200 height=200 style='margin:10px;'/>";
+	 /*   var mmHtml = "<img name='imageurl'  src='"+mmFileUrl+"' width=200 height=200 style='margin:10px;'/>";*/
 
-	    $("#uploaderFiles").append(mmHtml);
+	   /* $("#uploaderFiles").append(mmHtml);*/
 
 	    file.value = unescape(mmFileUrl);
 	});

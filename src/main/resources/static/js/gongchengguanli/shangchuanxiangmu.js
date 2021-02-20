@@ -6,76 +6,27 @@ var vm_paichugaoxiao = new Vue({
 		xianyougaoxiao:{},
 		gaoxiao:{},
 		xianyougaoxiaolist : [],   //现有高校名单
-		gaoxiaolist : [],		   //需要上传的高校名单
+		xiangmulist : [],		   //需要上传的项目名单
 
 	},
 	created : function(){
-		this.findPiciInfo();
-		this.findXianyouGaoxiao();
+		/*this.findPiciInfo();
+		this.findXianyouGaoxiao();*/
 	},
 	methods : {
-		
-		// 绑定批次名称
-		findPiciInfo : function(){
-			var _this = this;
-			layer.open({type:3});
-			
-			$.post("/ds/sszhuanxiang/api/guojijiaoliupici/find_one", {
-				piciid :  _this.piciid,
-				rdm : Math.random()
-			}, function(ppData) {
-				if (ppData != null) {
-					layer.closeAll("loading");
-					var mmData = ppData;
-					var result = mmData.result;
-					var message = mmData.message;
-					
-					if(result == "1") {
-						var data = ppData.resultContent;
-						_this.piciname = data.批次;
-					}else{
-						layer.alert(message);
-					}
-				}
-			}, "json");
-		},
 
-		// 查询此批次现有高校名单
-		findXianyouGaoxiao : function(){
-			var _this = this;
-			layer.open({type:3});
-			
-			$.post("/ds/sszhuanxiang/api/guojijiaoliuxuexiao/find_gaoxiaolist_by_piciid", {
-				piciid :  _this.piciid,
-				rdm : Math.random()
-			}, function(ppData) {
-				if (ppData != null) {
-					layer.closeAll("loading");
-					var mmData = ppData;
-					var result = mmData.result;
-					var message = mmData.message;
-					
-					if(result == "1") {
-						_this.xianyougaoxiaolist = ppData.resultContent;
-					}else{
-						layer.alert(message);
-					}
-				}
-			}, "json");
-		},
-
-		
 		//弹出上传高校名单xls模态框
 		showUploadXls: function () {
-			let _this= this;
+			let fileurl=$("#imageurl").val();
 			$("#uploadModal").modal("show");
-			this.getFileUrl("gaoxiaomingdan",'51200','xls,xlsx',_this.piciid);
+			//this.getFileUrl("gaoxiaomingdan",'51200','xls,xlsx',_this.piciid);
+			//this.getValue(fileurl);
 		},
 		
 		// 将文件上传到指定地址,并接受返回过来的路径，																
 		getFileUrl : function(ppFolderName,ppFileSize,ppShangChuanWenJianLeiXing,ppPiciId){
-			var _this = this;
-			
+			let _this = this;
+			alert(111)
 			// load统一上传项目
 			$("#uploadModal-body").load("/ds/sszhuanxiang/upload_batch.html?fujianpath=/ds/paichu/"+ppFolderName+"&filesize="+ppFileSize, function(){
 				UploadVue.Init(ppShangChuanWenJianLeiXing,ppFileSize+"kb",function(jsonList){
@@ -93,12 +44,11 @@ var vm_paichugaoxiao = new Vue({
 		},
 		
 		// 
-		getValue : function(ppFileurl,ppPiciId){
-			var _this = this;
+		getValue : function(){
+			let _this = this;
 			layer.open({type:3});
-			$.post("/ds/sszhuanxiang/api/import_paichugaoxiao/get_value",{
-				fileurl:ppFileurl,
-				piciid:ppPiciId,
+			$.post("/import_xiangmu/get_value",{
+				fileurl:$("#imageurl").val(),
 				random : Math.random()
 			},function(ppData){
 				layer.closeAll("loading");
@@ -109,9 +59,9 @@ var vm_paichugaoxiao = new Vue({
 					var data = mmData.resultContent;
 					if(result == "1") {
 						$(".daoruzhuangtai").html("");
-						_this.gaoxiaolist = ppData.resultContent;
+						_this.xiangmulist = ppData.resultContent;
 						$("#uploadModal").modal("hide");
-						$("#PaichuGaoxiaolistModal").modal("show");
+						$("#XiangmuListModal").modal("show");
 						
 					}else{
 						layer.alert(message);
@@ -119,11 +69,28 @@ var vm_paichugaoxiao = new Vue({
 				}
 			},"json");
 		},
+		//
+		backup : function(){
+			let _this = this;
+			//layer.open({type:3});
+			$.post("/import_xiangmu/backup",{
+				random : Math.random()
+			},function(ppData){
+				layer.closeAll("loading");
+				if(ppData != null){
+					var mmData = ppData;
+					var result = mmData.result;
+					var message = mmData.message;
+					var data = mmData.resultContent;
+					alert(111);
+				}
+			},"json");
+		},
 
 		// 批量导入项目目录
 		importGaoxiao : function(){
-			var _this = this;
-			layer.confirm("确定要导入所有高校名单吗？",{
+			let _this = this;
+			layer.confirm("确定要导入所有项目吗？",{
 				btn : ["是","否"]
 			},function(){
 				layer.closeAll("dialog");
@@ -144,28 +111,27 @@ var vm_paichugaoxiao = new Vue({
 		// 单个导入
 		daoru : function(ppGaoxiaoCurrentIndex){
 			layer.open({type:3});
-			var _this=this;
-			
-			var  CurrentIndex = ppGaoxiaoCurrentIndex+1;
+			let _this=this;
+
+			let  CurrentIndex = ppGaoxiaoCurrentIndex+1;
 			
 			layer.open({
 				type: 3,
-				content: "<div style='font-size:18px;font-weight:bold;padding-top:40px;width:200px;text-align:left;'>正在导入高校名单<br/>当前进度    "+CurrentIndex+" / "+_this.gaoxiaolist.length+"</div>"
+				content: "<div style='font-size:18px;font-weight:bold;padding-top:40px;width:200px;text-align:left;'>正在导入项目<br/>当前进度    "+CurrentIndex+" / "+_this.xiangmulist.length+"</div>"
 			});
 
-			$.post("/ds/sszhuanxiang/api/import_paichugaoxiao/import",{
-				piciid:_this.piciid,
-				zhongwenming:_this.gaoxiaolist[ppGaoxiaoCurrentIndex].中文名称,
-				yinwenming:_this.gaoxiaolist[ppGaoxiaoCurrentIndex].英文名称,
-				guojiamingcheng:_this.gaoxiaolist[ppGaoxiaoCurrentIndex].国家,
+			$.post("/import_xiangmu/import",{
+				xiangmumingcheng:_this.xiangmulist[ppGaoxiaoCurrentIndex].项目名称,
+				pifuqingkuang:_this.xiangmulist[ppGaoxiaoCurrentIndex].两级批复情况,
+				pifujine:_this.xiangmulist[ppGaoxiaoCurrentIndex].联保批复金额,
 				random : Math.random()
 			}, function(ppData) {
 				layer.closeAll("loading");
 				
 				if (ppData.result == "0") {
 					// 未成功导入
-					$("#"+_this.gaoxiaolist[ppGaoxiaoCurrentIndex].序号).html("<span style='color:red;'>"+ppData.message+"</span>");
-					if(ppGaoxiaoCurrentIndex >= _this.gaoxiaolist.length - 1){
+					$("#"+_this.xiangmulist[ppGaoxiaoCurrentIndex].序号).html("<span style='color:red;'>"+ppData.message+"</span>");
+					if(ppGaoxiaoCurrentIndex >= _this.xiangmulist.length - 1){
 						layer.alert("导入完成！");
 					}else{
 						ppGaoxiaoCurrentIndex++; // 将待导入的高校下标+1
@@ -176,8 +142,8 @@ var vm_paichugaoxiao = new Vue({
 					$("#daoru").removeAttr("disabled");
 				}else{
 					//成功导入
-					$("#"+_this.gaoxiaolist[ppGaoxiaoCurrentIndex].序号).html("<span style='color:green;'>导入成功</span>");
-					if(ppGaoxiaoCurrentIndex >=_this.gaoxiaolist.length - 1){
+					$("#"+_this.xiangmulist[ppGaoxiaoCurrentIndex].序号).html("<span style='color:green;'>导入成功</span>");
+					if(ppGaoxiaoCurrentIndex >=_this.xiangmulist.length - 1){
 						$("#daoru").removeAttr("disabled");
 						layer.alert("导入完成！");	
 					}else{
@@ -190,23 +156,21 @@ var vm_paichugaoxiao = new Vue({
 		},
 
 		// 单个手动导入
-		dangedaoru : function(ppGaoxiao){
-			var _this = this;
-			var mm序号 = ppGaoxiao.序号;
+		dangedaoru : function(ppXiangmu){
+			let _this = this;
+			let mm序号 = ppXiangmu.序号;
 			
-			layer.confirm("确定要导入此条高校吗？",{
+			layer.confirm("确定要导入此条项目吗？",{
 				btn : ["是","否"]
 			},function(){
 				layer.open({type: 3});
-				$.post("/ds/sszhuanxiang/api/import_paichugaoxiao/import",{
-					piciid : _this.piciid,
-					zhongwenming:ppGaoxiao.中文名称,
-					yinwenming:ppGaoxiao.英文名称,
-					guojiamingcheng:ppGaoxiao.国家,
+				$.post("/import_xiangmu/import",{
+					xiangmumingcheng:ppXiangmu.项目名称,
+					pifuqingkuang:ppXiangmu.两级批复情况,
+					pifujine:ppXiangmu.联保批复金额,
 					random : Math.random()
 				}, function(ppData) {
 					layer.closeAll("loading");
-					
 					if (ppData.result == "0") {
 						layer.alert(ppData.message);
 						$("#"+mm序号).html("<span style='color:red;'>"+ppData.message+"</span>");
@@ -221,35 +185,6 @@ var vm_paichugaoxiao = new Vue({
 		// 重写关闭模态框的方法 -- 刷新列表
 		close : function(){
 			this.findXianyouGaoxiao();
-		},
-
-		// 删除此批次下的全部项目目录
-		toDelete : function(){
-			var _this = this;
-
-			layer.confirm("确定要删除列表中的全部高校吗？",{
-				btn : ["是","否"]
-			},function(){
-				layer.open({type: 3});
-				$.post("/ds/sszhuanxiang/api/import_paichugaoxiao/delete_gaoxiaomingdan",{
-					piciid : _this.piciid,
-					random : Math.random()
-				}, function(ppData) {
-					layer.closeAll("loading");
-					
-					if (ppData.result == "0") {
-						layer.alert(ppData.message);
-					}else{
-						layer.open({
-							time:1000,
-							btn:[],
-							content:"删除成功！",
-						});
-						
-						_this.findXianyouGaoxiao();
-					}
-				},"json")
-			})
 		},
 		
 	}	

@@ -17,7 +17,7 @@ public class Jingfeiyusuan {
 
     private Double zhongxinyuliujine;
 
-    private Double zhongxinkuaijihao;
+    private String zhongxinkuaijihao;
 
     private String chengshoujingfeidanwei;
 
@@ -31,7 +31,7 @@ public class Jingfeiyusuan {
 
     private Date lastupdatetime;
 
-    private Integer 状态;
+    private Integer zhuangtai;
 
     public String getJingfeiyuansuanid() {
         return jingfeiyuansuanid;
@@ -89,11 +89,11 @@ public class Jingfeiyusuan {
         this.zhongxinyuliujine = zhongxinyuliujine;
     }
 
-    public Double getZhongxinkuaijihao() {
+    public String getZhongxinkuaijihao() {
         return zhongxinkuaijihao;
     }
 
-    public void setZhongxinkuaijihao(Double zhongxinkuaijihao) {
+    public void setZhongxinkuaijihao(String zhongxinkuaijihao) {
         this.zhongxinkuaijihao = zhongxinkuaijihao;
     }
 
@@ -145,11 +145,11 @@ public class Jingfeiyusuan {
         this.lastupdatetime = lastupdatetime;
     }
 
-    public Integer get状态() {
-        return 状态;
+    public Integer getZhuangtai() {
+        return zhuangtai;
     }
 
-    public void set状态(Integer 状态) {
-        this.状态 = 状态;
+    public void setZhuangtai(Integer zhuangtai) {
+        this.zhuangtai = zhuangtai;
     }
 }

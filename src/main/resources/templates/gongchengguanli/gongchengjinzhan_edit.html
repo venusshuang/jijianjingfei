@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="editGongchengjinzhan">
+    <div id="editGongchengjinzhanModal" style="" class="modal fade bs-example-modal-lg"
+         tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" style="width: 650px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="myModalLabel_gongchengjinzhan"></h3>
+                </div>
+                <div class="modal-body" style="overflow: auto;">
+                    <div style="width: 600px; margin: 0 auto; margin-top: 15px">
+                        <form class="form-horizontal col-sm-12" role="form">
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">*</span>项目状态
+                                </label>
+                                <div class="col-sm-8">
+                                    <select class="input form-control" v-model="jinzhan.xiangmuzhuangtaiid"  >
+                                        <option value=''>--请选择--</option>
+                                        <option v-for="xiangmuzhuangtaiitem in xiangmuzhuangtailist"
+                                                :value="xiangmuzhuangtaiitem.id" v-text="xiangmuzhuangtaiitem.text"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">*</span>开工时间
+                                </label>
+                                <div class="col-sm-8">
+                                    <input v-model="jinzhan.kaigongshijian" class="form-control Wdate"
+                                           id="kgsj" type="text" readonly="readonly"
+                                           onclick="WdatePicker({dateFmt:'yyyy-MM'})"
+                                           v-on:blur="getkgsj()"
+                                           style="background-color: #fff; height: 34px; border: 1px solid #ccc;"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">*</span>各类合同总价
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" placeholder="万元" class="form-control" v-model="jinzhan.hetongzongjia">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">*</span>完成投资
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" placeholder="万元" class="form-control" v-model="jinzhan.wangchengtouzi">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">*</span>进度款支付
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text" placeholder="万元" class="form-control" v-model="jinzhan.jindukuaizhifu">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">*</span>进度款占总合同比例%
+                                </label>
+                                <div class="col-sm-8">
+                                    <input type="text"  class="form-control" v-model="jinzhan.jindukuanbili">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    完工时间（预计）
+                                </label>
+                                <div class="col-sm-8">
+                                    <input v-model="jinzhan.wangongshijian" class="form-control Wdate"
+                                           id="wgsj" type="text" readonly="readonly"
+                                           onclick="WdatePicker({dateFmt:'yyyy-MM'})"
+                                           v-on:blur="getwgsj()"
+                                           style="background-color: #fff; height: 34px; border: 1px solid #ccc;"/>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-sm-12" style="text-align: center;">
+                                    <input v-if="editFlag == '0'" type="button" class="btn btn-success"
+                                           value="新 增" @click="addJinzhan()">
+                                    <input v-if="editFlag == '1'" type="button" class="btn btn-success"
+                                           value="修 改" @click="modifyJinzhan()">
+                                    <input type="button" class="btn btn-default" value="返 回"
+                                           data-dismiss="modal">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal -->
+    </div>
+</div>
+</html>

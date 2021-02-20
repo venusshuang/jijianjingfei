@@ -283,9 +283,41 @@ public class PageController {
 		map.put("AdminID", mmAdminId);
 		map.put("DeptID", mmDeptId);
 
-
-
 		return "gongchengguanli/junjianxiada_list";
+
+	}
+
+	//经费预算下达情况
+	@RequestMapping("/gongchengguanli/jingfeiyusuan.html")
+	public String Jingfeiyusuan(HttpServletRequest request, ModelMap map) {
+
+		if(!isLoginPC(request)) {
+			return "redirect:/manage/login.html";
+		}
+
+		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
+		map.put("AdminID", mmAdminId);
+		map.put("DeptID", mmDeptId);
+
+		return "gongchengguanli/jingfeiyusuan_list";
+
+	}
+
+	//工程进展情况
+	@RequestMapping("/gongchengguanli/gongchengjinzhan.html")
+	public String Gongchengjinzhan(HttpServletRequest request, ModelMap map) {
+
+		if(!isLoginPC(request)) {
+			return "redirect:/manage/login.html";
+		}
+
+		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
+		map.put("AdminID", mmAdminId);
+		map.put("DeptID", mmDeptId);
+
+		return "gongchengguanli/gongchengjinzhan_list";
 
 	}
 
