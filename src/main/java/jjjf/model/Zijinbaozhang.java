@@ -1,5 +1,8 @@
 package jjjf.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Zijinbaozhang {
@@ -57,6 +60,8 @@ public class Zijinbaozhang {
         this.xiangzhongxinshenqingzijin = xiangzhongxinshenqingzijin;
     }
 
+    @DateTimeFormat(pattern="yyyy-MM")  // HH:mm:ss
+    @JsonFormat(pattern="yyyy-MM",timezone = "GMT+8")
     public Date getShenqingshijian() {
         return shenqingshijian;
     }
@@ -72,7 +77,8 @@ public class Zijinbaozhang {
     public void setXianglianbaoshenqingzijin(Double xianglianbaoshenqingzijin) {
         this.xianglianbaoshenqingzijin = xianglianbaoshenqingzijin;
     }
-
+    @DateTimeFormat(pattern="yyyy-MM")  // HH:mm:ss
+    @JsonFormat(pattern="yyyy-MM",timezone = "GMT+8")
     public Date getXianglianbaoshenqingbofushijian() {
         return xianglianbaoshenqingbofushijian;
     }
@@ -88,7 +94,8 @@ public class Zijinbaozhang {
     public void setLianbaobofujine(Double lianbaobofujine) {
         this.lianbaobofujine = lianbaobofujine;
     }
-
+    @DateTimeFormat(pattern="yyyy-MM")  // HH:mm:ss
+    @JsonFormat(pattern="yyyy-MM",timezone = "GMT+8")
     public Date getLianbaobofushijian() {
         return lianbaobofushijian;
     }
@@ -104,7 +111,8 @@ public class Zijinbaozhang {
     public void setZhongxinbofujine(Double zhongxinbofujine) {
         this.zhongxinbofujine = zhongxinbofujine;
     }
-
+    @DateTimeFormat(pattern="yyyy-MM")  // HH:mm:ss
+    @JsonFormat(pattern="yyyy-MM",timezone = "GMT+8")
     public Date getZhongxinbofushijian() {
         return zhongxinbofushijian;
     }
