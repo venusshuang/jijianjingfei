@@ -13,7 +13,7 @@
     <div th:replace="xitongguanli/edit_yonghu" ></div>
 
     <div class="primary-title">
-        单位管理<span class="btn btn-primary" style="float:right;margin-right:15px;margin-top:10px;"
+        单位管理<span class="btn btn-success" style="float:right;margin-right:15px;margin-top:10px;"
               v-on:click="toAdd()">新 增</span>
     </div>
 
@@ -43,13 +43,13 @@
                 <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.modifier"></td>
                 <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.lastupdatetime"></td>-->
                 <td style="text-align:center;vertical-align:middle;" >
-                    <button v-on:click="toAddYonghu(danweiitem.deptid)" class="btn btn-info">新增</button>
+                    <button v-on:click="toAddYonghu(danweiitem.deptid)" class="btn btn-success">新增</button>
                 </td>
                 <td style="text-align:center;vertical-align:middle;" >
                     <button v-on:click="toSeeYonghu(danweiitem.deptid)" class="btn btn-info">查看</button>
                 </td>
                 <td style="text-align:center;vertical-align:middle;">
-                    <button v-on:click="toModify(danweiitem.deptid)" class="btn btn-info">修 改</button>
+                    <button v-on:click="toModify(danweiitem.deptid)" class="btn btn-primary">修 改</button>
                     <button class="btn btn-danger" v-on:click="toDelete(danweiitem.deptid)">删 除</button>
                 </td>
             </tr>
@@ -77,7 +77,7 @@
     </div>
 </div>
 </body>
-<script src="../js/xitongguanli/danweiguanli.js?ver=1.6"></script>
+<script src="../js/xitongguanli/danweiguanli.js?ver=1.7"></script>
 <link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
 <link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
 <link rel="stylesheet" href="/css/xadmin.css?ver=0.6">

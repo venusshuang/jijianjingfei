@@ -2,6 +2,7 @@ package jjjf.service;
 
 import jjjf.dao.DeptMapper;
 import jjjf.model.Dept;
+import jjjf.model.DeptExample;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +20,16 @@ public class DeptService {
 
         return ddMapper.findDanweiByzhuangtai(mmStartIndex, ppPageSize);
 
+    }
+    public boolean  checkDeptname(String ppdeptname) {
+        DeptExample mmExample=new DeptExample();
+        mmExample.createCriteria().andDeptnameEqualTo(ppdeptname);
+        return ddMapper.selectByExample(mmExample).size()>0?true:false;
+    }
+    public boolean  checkDeptnameBydeptid(String ppdeptname,String ppdeptid) {
+        DeptExample mmExample=new DeptExample();
+        mmExample.createCriteria().andDeptnameEqualTo(ppdeptname).andDeptidNotEqualTo(ppdeptid);
+        return ddMapper.selectByExample(mmExample).size()>0?true:false;
     }
     public Integer getCountByisvalid() {
         Object mmCount = ddMapper.getCountByzhuangtai();

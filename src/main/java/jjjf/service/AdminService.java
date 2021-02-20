@@ -15,6 +15,19 @@ public class AdminService {
 
     @Resource
     AdminMapper ddMapper;
+
+    public boolean  checkAccount(String ppaccount) {
+        AdminExample mmExample=new AdminExample();
+        mmExample.createCriteria().andAccountEqualTo(ppaccount);
+        return ddMapper.selectByExample(mmExample).size()>0?true:false;
+    }
+
+    public Admin findOne(String ppAdminId) {
+        return ddMapper.selectByPrimaryKey(ppAdminId);
+    }
+    public boolean modify(Admin ppAdmin) {
+        return ddMapper.updateByPrimaryKeySelective(ppAdmin)==1;
+    }
     public List<Map<String, Object>> findSomeByDeptId(String ppdeptID){
 
         return ddMapper.findSomeByDeptId(ppdeptID);

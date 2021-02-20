@@ -15,7 +15,7 @@ var DanWei = new Vue({
         show : false,					// 显示列表是否有数据
 
         pageIndex : 1,
-        pageSize :10,
+        pageSize :6,
         pageCount : 0,
         recordCount : 0,
         inputPageIndexValue : "",
@@ -60,11 +60,7 @@ var DanWei = new Vue({
             $("#xinzengModal").modal();
             $("#xinzengModalLabel").html("新增用户");
             this.deptID=ppdeptID;
-            this.admin.adminname='';
-            this.admin.contactinformation='';
-            this.admin.buzhibie='';
-            this.admin.account='';
-            this.admin.password='';
+            this.admin={};
 
         },
         addYonghu: function(){
@@ -114,6 +110,7 @@ var DanWei = new Vue({
                             content:"新增成功!",
                         });
                         $("#xinzengModal").modal("hide");
+                        _this.toBindadminlist();
 
                     }else{
                         layer.alert(ppData.message);

@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("admin")
@@ -26,6 +27,43 @@ public class AdminController {
     @Resource
     AdminService ddService;
     public Logger log = LoggerFactory.getLogger(JungongjiesuanController.class);
+
+    @RequestMapping("find_one")
+    public JsonResult<?> find_one(@RequestParam("adminID") String ppAdminId) {
+        try {
+            return JsonResult.getSuccessResult(ddService.findOne(ppAdminId));
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            log.error("admin/find_one:error",e);
+            return JsonResult.getErrorResult("admin/find_one:error " + e.getMessage());
+        }
+    }
+
+    @RequestMapping("modify")
+    public JsonResult<?> modify(
+            @RequestParam("adminID") String ppadminID,
+            @RequestParam("account") String ppaccount,
+            @RequestParam("password") String pppassword){
+
+        try {
+
+            Admin mmAdmin =ddService.findOne(ppadminID);
+            if(mmAdmin==null){
+                return JsonResult.getErrorResult("admin/modify:error ");
+            }
+            mmAdmin.setPassword(pppassword);
+
+            return ddService.modify(mmAdmin) == true ? JsonResult.getSuccessResult("修改密码成功")
+                    : JsonResult.getErrorResult("修改密码失败");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("admin/modify:error",e);
+            return JsonResult.getErrorResult("admin/modify:error " + e.getMessage());
+        }
+    }
 
     @RequestMapping("findSomeByDeptId")
     public JsonResult<?> findSomeByDeptId(@RequestParam("deptID") String ppdeptID) {
@@ -91,12 +129,34 @@ public class AdminController {
         if (StringHandle.getStringByteLength(ppcontactinformation) > 255) {
             return BooleanMessage.getErrorMessage("联系方式不能超过255字节");
         }
+        if(ppcontactinformation.length() != 11) {
+            return BooleanMessage.getErrorMessage("保存失败！联系方式长度必须为11位数。");
+        }
+        Pattern pattern = Pattern.compile("[0-9]*");
+        if (!pattern.matcher(ppcontactinformation.toString()).matches()) {
+            return BooleanMessage.getErrorMessage("保存失败！联系方式只能为正整数");
+        }
+        if (StringHandle.getStringByteLength(ppbuzhibie) > 255) {
+            return BooleanMessage.getErrorMessage("部职别不能超过255字节");
+        }
+        if (StringHandle.getStringByteLength(ppaccount) > 255) {
+            return BooleanMessage.getErrorMessage("账号不能超过255字节");
+        }
+        if (StringHandle.getStringByteLength(pppassword) > 255) {
+            return BooleanMessage.getErrorMessage("密码不能超过255字节");
+        }
+
+        if (ddService.checkAccount(ppaccount)) {
+            return BooleanMessage.getErrorMessage("账号已存在，请重新输入！");
+        }
 
         ppAdmin.setAdminname(ppadminname);
         ppAdmin.setContactinformation(ppcontactinformation);
         ppAdmin.setBuzhibie(ppbuzhibie);
         ppAdmin.setAccount(ppaccount);
         ppAdmin.setPassword(pppassword);
+
+
 
         return BooleanMessage.getSuccessMessage(ppAdmin);
 

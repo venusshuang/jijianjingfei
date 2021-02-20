@@ -76,6 +76,11 @@ public class DeptController {
                 log.error("dept/add:error",mmBooleanMessage.getMessage().toString());
                 return JsonResult.getErrorResult(mmBooleanMessage.getMessage().toString());
             }
+            if (ddService.checkDeptname(ppdeptname)) {
+                return JsonResult.getErrorResult("单位名称已存在，请重新输入！");
+            }
+            mmDept.setDeptname(ppdeptname);
+            mmDept.setDepttype(ppdepttype);
 
             return ddService.add(mmDept) == true ? JsonResult.getSuccessResult("新增单位信息成功")
                     : JsonResult.getErrorResult("新增单位信息失败");
@@ -111,7 +116,11 @@ public class DeptController {
                 log.error("dept/modify:error",mmBooleanMessage.getMessage().toString());
                 return JsonResult.getErrorResult(mmBooleanMessage.getMessage().toString());
             }
-
+            if (ddService.checkDeptnameBydeptid(ppdeptname,ppdeptid)) {
+                return JsonResult.getErrorResult("单位名称已存在，请重新输入！");
+            }
+            mmDept.setDeptname(ppdeptname);
+            mmDept.setDepttype(ppdepttype);
             return ddService.modify(mmDept) ? JsonResult.getSuccessResult("修改成功")
                     : JsonResult.getErrorResult("修改失败");
 
@@ -133,13 +142,7 @@ public class DeptController {
             return BooleanMessage.getErrorMessage("单位类型不能超过255字节");
         }
 
-
-
-        ppDept.setDeptname(ppdeptname);
-        ppDept.setDepttype(ppdepttype);
-
-
-        return BooleanMessage.getSuccessMessage(ppDept);
+        return BooleanMessage.getSuccessMessage("验证通过");
 
     }
     @RequestMapping("delete")
