@@ -9,6 +9,8 @@
 
 <div id="Danweilist" class="main">
     <div th:replace="xitongguanli/edit_danwei" ></div>
+    <div th:replace="xitongguanli/yonghulist" ></div>
+    <div th:replace="xitongguanli/edit_yonghu" ></div>
 
     <div class="primary-title">
         单位管理<span class="btn btn-primary" style="float:right;margin-right:15px;margin-top:10px;"
@@ -22,10 +24,12 @@
             <th style="text-align:center;vertical-align:middle;width: 50px;">序号</th>
             <th style="text-align:center;vertical-align:middle;">单位名称</th>
             <th style="text-align:center;vertical-align:middle;">单位类型</th>
-            <th style="text-align:center;vertical-align:middle;">创建者</th>
+            <th style="text-align:center;vertical-align:middle;">新增管理员</th>
+            <th style="text-align:center;vertical-align:middle;">查看管理员</th>
+          <!--  <th style="text-align:center;vertical-align:middle;">创建者</th>
             <th style="text-align:center;vertical-align:middle;">创建时间</th>
             <th style="text-align:center;vertical-align:middle;">最后修改者</th>
-            <th style="text-align:center;vertical-align:middle;">最后修改时间</th>
+            <th style="text-align:center;vertical-align:middle;">最后修改时间</th>-->
             <th style="text-align:center;vertical-align:middle;">操作</th>
             </thead>
 
@@ -34,10 +38,16 @@
                 <td style="text-align:center;vertical-align:middle;" v-text="index+1+(pageIndex-1)*pageSize"></td>
                 <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.deptname"></td>
                 <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.depttype"></td>
-                <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.creator"></td>
+             <!--   <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.creator"></td>
                 <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.createtime"></td>
                 <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.modifier"></td>
-                <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.lastupdatetime"></td>
+                <td style="text-align:center;vertical-align:middle;" v-text="danweiitem.lastupdatetime"></td>-->
+                <td style="text-align:center;vertical-align:middle;" >
+                    <button v-on:click="toAddYonghu(danweiitem.deptid)" class="btn btn-info">新增</button>
+                </td>
+                <td style="text-align:center;vertical-align:middle;" >
+                    <button v-on:click="toSeeYonghu(danweiitem.deptid)" class="btn btn-info">查看</button>
+                </td>
                 <td style="text-align:center;vertical-align:middle;">
                     <button v-on:click="toModify(danweiitem.deptid)" class="btn btn-info">修 改</button>
                     <button class="btn btn-danger" v-on:click="toDelete(danweiitem.deptid)">删 除</button>

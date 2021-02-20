@@ -1,11 +1,15 @@
 package jjjf.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import jjjf.model.Admin;
 import jjjf.model.AdminExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface AdminMapper {
+    List<Map<String, Object>> findSomeByDeptId(@Param("deptID") String mmdeptID);
+
     int countByExample(AdminExample example);
 
     int deleteByExample(AdminExample example);
