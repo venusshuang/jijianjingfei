@@ -1,0 +1,18 @@
+CREATE TABLE `zijinbaozhang` (
+  `zijinbaozhangid` varchar(50) NOT NULL,
+  `xiangmuid` varchar(50) DEFAULT NULL,
+  `xiangzhongxinshenqingzijin` double DEFAULT NULL,
+  `shenqingshijian` datetime DEFAULT NULL,
+  `xianglianbaoshenqingzijin` double DEFAULT NULL,
+  `xianglianbaoshenqingbofushijian` datetime DEFAULT NULL,
+  `lianbaobofujine` double DEFAULT NULL,
+  `lianbaobofushijian` datetime DEFAULT NULL,
+  `zhongxinbofujine` double DEFAULT NULL,
+  `zhongxinbofushijian` datetime DEFAULT NULL,
+  `creater` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `createtime` datetime DEFAULT NULL,
+  `modifier` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `lastupdatetime` datetime DEFAULT NULL,
+  `zhuangtai` int(11) DEFAULT NULL,
+  PRIMARY KEY (`zijinbaozhangid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

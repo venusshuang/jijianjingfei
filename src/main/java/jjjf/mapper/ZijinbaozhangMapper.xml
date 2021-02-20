@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jjjf.dao.ZijinbaozhangMapper" >
+  <resultMap id="BaseResultMap" type="jjjf.model.Zijinbaozhang" >
+    <id column="zijinbaozhangid" property="zijinbaozhangid" jdbcType="VARCHAR" />
+    <result column="xiangmuid" property="xiangmuid" jdbcType="VARCHAR" />
+    <result column="xiangzhongxinshenqingzijin" property="xiangzhongxinshenqingzijin" jdbcType="DOUBLE" />
+    <result column="shenqingshijian" property="shenqingshijian" jdbcType="TIMESTAMP" />
+    <result column="xianglianbaoshenqingzijin" property="xianglianbaoshenqingzijin" jdbcType="DOUBLE" />
+    <result column="xianglianbaoshenqingbofushijian" property="xianglianbaoshenqingbofushijian" jdbcType="TIMESTAMP" />
+    <result column="lianbaobofujine" property="lianbaobofujine" jdbcType="DOUBLE" />
+    <result column="lianbaobofushijian" property="lianbaobofushijian" jdbcType="TIMESTAMP" />
+    <result column="zhongxinbofujine" property="zhongxinbofujine" jdbcType="DOUBLE" />
+    <result column="zhongxinbofushijian" property="zhongxinbofushijian" jdbcType="TIMESTAMP" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifier" property="modifier" jdbcType="VARCHAR" />
+    <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="zhuangtai" property="zhuangtai" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="findZijinbaozhangBydeptId" resultType="Map">
+    SELECT xm.xiangmuid,xm.xiangmuname,bz.zijinbaozhangid,bz.xiangzhongxinshenqingzijin,
+    date_format(bz.shenqingshijian,'%Y-%m') as shenqingshijian,bz.xianglianbaoshenqingzijin,
+    date_format(bz.xianglianbaoshenqingbofushijian,'%Y-%m') as xianglianbaoshenqingbofushijian,
+    bz.lianbaobofujine,date_format(bz.lianbaobofushijian,'%Y-%m') as lianbaobofushijian,
+    bz.zhongxinbofujine,date_format(bz.zhongxinbofushijian,'%Y-%m') as zhongxinbofushijian
+    from junjianxiangmu xm
+    left join zijinbaozhang bz on bz.xiangmuid=xm.xiangmuid
+    where 1=1
+
+    <if test="xiangmuname != ''">
+      and xiangmuname like #{xiangmuname}
+    </if>
+
+    <if test='deptid != "1"'>
+      and xm.jieshoudanweiid=#{deptid}
+    </if>
+    order by xm.xiangmuname
+    LIMIT #{startindex},#{pagesize}
+
+  </select>
+
+  <select id="getCountBydeptId" resultType="Object">
+
+    SELECT count(*) from junjianxiangmu xm
+    left join zijinbaozhang bz on bz.xiangmuid=xm.xiangmuid
+    where 1=1
+
+    <if test="xiangmuname != ''">
+      and xiangmuname like #{xiangmuname}
+    </if>
+
+    <if test='deptid != "1"'>
+      and xm.jieshoudanweiid=#{deptid}
+    </if>
+
+  </select>
+
+
+
+
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    zijinbaozhangid, xiangmuid, xiangzhongxinshenqingzijin, shenqingshijian, xianglianbaoshenqingzijin, 
+    xianglianbaoshenqingbofushijian, lianbaobofujine, lianbaobofushijian, zhongxinbofujine, 
+    zhongxinbofushijian, creater, createtime, modifier, lastupdatetime, zhuangtai
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="jjjf.model.ZijinbaozhangExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zijinbaozhang
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from zijinbaozhang
+    where zijinbaozhangid = #{zijinbaozhangid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from zijinbaozhang
+    where zijinbaozhangid = #{zijinbaozhangid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="jjjf.model.ZijinbaozhangExample" >
+    delete from zijinbaozhang
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="jjjf.model.Zijinbaozhang" >
+    insert into zijinbaozhang (zijinbaozhangid, xiangmuid, xiangzhongxinshenqingzijin, 
+      shenqingshijian, xianglianbaoshenqingzijin, 
+      xianglianbaoshenqingbofushijian, lianbaobofujine, 
+      lianbaobofushijian, zhongxinbofujine, 
+      zhongxinbofushijian, creater, createtime, 
+      modifier, lastupdatetime, zhuangtai
+      )
+    values (#{zijinbaozhangid,jdbcType=VARCHAR}, #{xiangmuid,jdbcType=VARCHAR}, #{xiangzhongxinshenqingzijin,jdbcType=DOUBLE}, 
+      #{shenqingshijian,jdbcType=TIMESTAMP}, #{xianglianbaoshenqingzijin,jdbcType=DOUBLE}, 
+      #{xianglianbaoshenqingbofushijian,jdbcType=TIMESTAMP}, #{lianbaobofujine,jdbcType=DOUBLE}, 
+      #{lianbaobofushijian,jdbcType=TIMESTAMP}, #{zhongxinbofujine,jdbcType=DOUBLE}, 
+      #{zhongxinbofushijian,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=VARCHAR}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{zhuangtai,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="jjjf.model.Zijinbaozhang" >
+    insert into zijinbaozhang
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zijinbaozhangid != null" >
+        zijinbaozhangid,
+      </if>
+      <if test="xiangmuid != null" >
+        xiangmuid,
+      </if>
+      <if test="xiangzhongxinshenqingzijin != null" >
+        xiangzhongxinshenqingzijin,
+      </if>
+      <if test="shenqingshijian != null" >
+        shenqingshijian,
+      </if>
+      <if test="xianglianbaoshenqingzijin != null" >
+        xianglianbaoshenqingzijin,
+      </if>
+      <if test="xianglianbaoshenqingbofushijian != null" >
+        xianglianbaoshenqingbofushijian,
+      </if>
+      <if test="lianbaobofujine != null" >
+        lianbaobofujine,
+      </if>
+      <if test="lianbaobofushijian != null" >
+        lianbaobofushijian,
+      </if>
+      <if test="zhongxinbofujine != null" >
+        zhongxinbofujine,
+      </if>
+      <if test="zhongxinbofushijian != null" >
+        zhongxinbofushijian,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdatetime,
+      </if>
+      <if test="zhuangtai != null" >
+        zhuangtai,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zijinbaozhangid != null" >
+        #{zijinbaozhangid,jdbcType=VARCHAR},
+      </if>
+      <if test="xiangmuid != null" >
+        #{xiangmuid,jdbcType=VARCHAR},
+      </if>
+      <if test="xiangzhongxinshenqingzijin != null" >
+        #{xiangzhongxinshenqingzijin,jdbcType=DOUBLE},
+      </if>
+      <if test="shenqingshijian != null" >
+        #{shenqingshijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xianglianbaoshenqingzijin != null" >
+        #{xianglianbaoshenqingzijin,jdbcType=DOUBLE},
+      </if>
+      <if test="xianglianbaoshenqingbofushijian != null" >
+        #{xianglianbaoshenqingbofushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lianbaobofujine != null" >
+        #{lianbaobofujine,jdbcType=DOUBLE},
+      </if>
+      <if test="lianbaobofushijian != null" >
+        #{lianbaobofushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhongxinbofujine != null" >
+        #{zhongxinbofujine,jdbcType=DOUBLE},
+      </if>
+      <if test="zhongxinbofushijian != null" >
+        #{zhongxinbofushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhuangtai != null" >
+        #{zhuangtai,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="jjjf.model.ZijinbaozhangExample" resultType="java.lang.Integer" >
+    select count(*) from zijinbaozhang
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update zijinbaozhang
+    <set >
+      <if test="record.zijinbaozhangid != null" >
+        zijinbaozhangid = #{record.zijinbaozhangid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xiangmuid != null" >
+        xiangmuid = #{record.xiangmuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xiangzhongxinshenqingzijin != null" >
+        xiangzhongxinshenqingzijin = #{record.xiangzhongxinshenqingzijin,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shenqingshijian != null" >
+        shenqingshijian = #{record.shenqingshijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.xianglianbaoshenqingzijin != null" >
+        xianglianbaoshenqingzijin = #{record.xianglianbaoshenqingzijin,jdbcType=DOUBLE},
+      </if>
+      <if test="record.xianglianbaoshenqingbofushijian != null" >
+        xianglianbaoshenqingbofushijian = #{record.xianglianbaoshenqingbofushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lianbaobofujine != null" >
+        lianbaobofujine = #{record.lianbaobofujine,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lianbaobofushijian != null" >
+        lianbaobofushijian = #{record.lianbaobofushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zhongxinbofujine != null" >
+        zhongxinbofujine = #{record.zhongxinbofujine,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zhongxinbofushijian != null" >
+        zhongxinbofushijian = #{record.zhongxinbofushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creater != null" >
+        creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null" >
+        modifier = #{record.modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastupdatetime != null" >
+        lastupdatetime = #{record.lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zhuangtai != null" >
+        zhuangtai = #{record.zhuangtai,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update zijinbaozhang
+    set zijinbaozhangid = #{record.zijinbaozhangid,jdbcType=VARCHAR},
+      xiangmuid = #{record.xiangmuid,jdbcType=VARCHAR},
+      xiangzhongxinshenqingzijin = #{record.xiangzhongxinshenqingzijin,jdbcType=DOUBLE},
+      shenqingshijian = #{record.shenqingshijian,jdbcType=TIMESTAMP},
+      xianglianbaoshenqingzijin = #{record.xianglianbaoshenqingzijin,jdbcType=DOUBLE},
+      xianglianbaoshenqingbofushijian = #{record.xianglianbaoshenqingbofushijian,jdbcType=TIMESTAMP},
+      lianbaobofujine = #{record.lianbaobofujine,jdbcType=DOUBLE},
+      lianbaobofushijian = #{record.lianbaobofushijian,jdbcType=TIMESTAMP},
+      zhongxinbofujine = #{record.zhongxinbofujine,jdbcType=DOUBLE},
+      zhongxinbofushijian = #{record.zhongxinbofushijian,jdbcType=TIMESTAMP},
+      creater = #{record.creater,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifier = #{record.modifier,jdbcType=VARCHAR},
+      lastupdatetime = #{record.lastupdatetime,jdbcType=TIMESTAMP},
+      zhuangtai = #{record.zhuangtai,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="jjjf.model.Zijinbaozhang" >
+    update zijinbaozhang
+    <set >
+      <if test="xiangmuid != null" >
+        xiangmuid = #{xiangmuid,jdbcType=VARCHAR},
+      </if>
+      <if test="xiangzhongxinshenqingzijin != null" >
+        xiangzhongxinshenqingzijin = #{xiangzhongxinshenqingzijin,jdbcType=DOUBLE},
+      </if>
+      <if test="shenqingshijian != null" >
+        shenqingshijian = #{shenqingshijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xianglianbaoshenqingzijin != null" >
+        xianglianbaoshenqingzijin = #{xianglianbaoshenqingzijin,jdbcType=DOUBLE},
+      </if>
+      <if test="xianglianbaoshenqingbofushijian != null" >
+        xianglianbaoshenqingbofushijian = #{xianglianbaoshenqingbofushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lianbaobofujine != null" >
+        lianbaobofujine = #{lianbaobofujine,jdbcType=DOUBLE},
+      </if>
+      <if test="lianbaobofushijian != null" >
+        lianbaobofushijian = #{lianbaobofushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhongxinbofujine != null" >
+        zhongxinbofujine = #{zhongxinbofujine,jdbcType=DOUBLE},
+      </if>
+      <if test="zhongxinbofushijian != null" >
+        zhongxinbofushijian = #{zhongxinbofushijian,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zhuangtai != null" >
+        zhuangtai = #{zhuangtai,jdbcType=INTEGER},
+      </if>
+    </set>
+    where zijinbaozhangid = #{zijinbaozhangid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jjjf.model.Zijinbaozhang" >
+    update zijinbaozhang
+    set xiangmuid = #{xiangmuid,jdbcType=VARCHAR},
+      xiangzhongxinshenqingzijin = #{xiangzhongxinshenqingzijin,jdbcType=DOUBLE},
+      shenqingshijian = #{shenqingshijian,jdbcType=TIMESTAMP},
+      xianglianbaoshenqingzijin = #{xianglianbaoshenqingzijin,jdbcType=DOUBLE},
+      xianglianbaoshenqingbofushijian = #{xianglianbaoshenqingbofushijian,jdbcType=TIMESTAMP},
+      lianbaobofujine = #{lianbaobofujine,jdbcType=DOUBLE},
+      lianbaobofushijian = #{lianbaobofushijian,jdbcType=TIMESTAMP},
+      zhongxinbofujine = #{zhongxinbofujine,jdbcType=DOUBLE},
+      zhongxinbofushijian = #{zhongxinbofushijian,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      lastupdatetime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      zhuangtai = #{zhuangtai,jdbcType=INTEGER}
+    where zijinbaozhangid = #{zijinbaozhangid,jdbcType=VARCHAR}
+  </update>
+</mapper>
