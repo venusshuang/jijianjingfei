@@ -7,6 +7,8 @@ var DanWei = new Vue({
         deptID : $("#DeptID").val(),
         danwei : {},
         danweilist : [],
+        admin : {},
+        adminlist : [],
 
 
         editFlag : 0,					// 0:新增，1：修改
@@ -26,6 +28,103 @@ var DanWei = new Vue({
 
     },
     methods : {
+        toSeeYonghu : function(ppdeptID){
+
+            $("#yonghuModal").modal();
+            $("#chakanModalLabel").html("查看用户");
+            this.deptID=ppdeptID;
+            this.adminlist = [];
+            this.toBindadminlist();
+
+        },
+        toBindadminlist : function(){
+
+            var _this = this;
+            layer.open({type:3});
+
+            $.post('/admin/findSomeByDeptId', {
+                deptID : _this.deptID,
+                rdm:Math.random()
+            },function(ppData) {
+                layer.closeAll("loading");
+                if (ppData != null) {
+
+                    if(ppData.result == "1"){
+                        _this.adminlist = ppData.resultContent;
+                    }
+                }
+            },"json");
+        },
+        toAddYonghu : function(ppdeptID){
+
+            $("#xinzengModal").modal();
+            $("#xinzengModalLabel").html("新增用户");
+            this.deptID=ppdeptID;
+            this.admin.adminname='';
+            this.admin.contactinformation='';
+            this.admin.buzhibie='';
+            this.admin.account='';
+            this.admin.password='';
+
+        },
+        addYonghu: function(){
+            var _this = this;
+
+            if (!$.trim(_this.admin.adminname)) {
+                layer.alert("请填写管理员姓名！");
+                return false;
+            }
+
+            if (!$.trim(_this.admin.contactinformation)) {
+                layer.alert("请填写联系方式！");
+                return false;
+            }
+            if (!$.trim(_this.admin.buzhibie)) {
+                layer.alert("请填写部职别！");
+                return false;
+            }
+            if (!$.trim(_this.admin.account)) {
+                layer.alert("请填写账号！");
+                return false;
+            }
+            if (!$.trim(_this.admin.password)) {
+                layer.alert("请填写密码！");
+                return false;
+            }
+
+            layer.open({type:3});
+            $.post('/admin/add',{
+                deptID : _this.deptID,
+                adminname:$.trim(_this.admin.adminname),
+                contactinformation:$.trim(_this.admin.contactinformation),
+                buzhibie:$.trim(_this.admin.buzhibie),
+                account:$.trim(_this.admin.account),
+                password:$.trim(_this.admin.password),
+                creator:$.trim(_this.adminID),
+
+                random : Math.random()
+            },function(ppData){
+                if(ppData != null){
+                    layer.closeAll("loading");
+
+                    if(ppData.result == "1"){
+                        layer.open({
+                            time:1000,
+                            btn:[],
+                            content:"新增成功!",
+                        });
+                        $("#xinzengModal").modal("hide");
+
+                    }else{
+                        layer.alert(ppData.message);
+                    }
+                }
+            },"json");
+
+        },
+
+
+
 
         findVaild: function(){
             var _this = this;
@@ -39,8 +138,6 @@ var DanWei = new Vue({
                 if (ppData != null){
                     if(ppData.result == "1"){
                         var data=ppData.resultContent;
-
-
 
                         if(data.DanweiList.length > 0){
                             _this.show = true;
@@ -94,9 +191,8 @@ var DanWei = new Vue({
             this.danwei.deptname='';
             this.danwei.depttype='';
 
-
-
         },
+
 
 
         add: function(){
@@ -222,6 +318,35 @@ var DanWei = new Vue({
                             });
 
                             _this.findVaild();
+                        }
+                    }
+                },"json");
+            })
+        },
+        toDeleteYonghu : function(ppAdminId){
+            var _this = this;
+            layer.confirm("确定删除该条用户信息吗？",{
+                btn : ['是','否']
+            },function(){
+                layer.open({type:3});
+
+                $.post("/admin/delete", {
+                    adminID : ppAdminId,
+                    random : Math.random()
+                }, function(ppData) {
+                    if (ppData != null) {
+                        layer.closeAll("loading");
+
+                        if(ppData.result != "1"){
+                            layer.alert(ppData.message);
+                        }else{
+                            layer.open({
+                                time:1000,
+                                btn:[],
+                                content:"删除成功!",
+                            });
+
+                            _this.toBindadminlist();
                         }
                     }
                 },"json");

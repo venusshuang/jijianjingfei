@@ -15,6 +15,14 @@
     <result column="lastupdatetime" property="lastupdatetime" jdbcType="TIMESTAMP" />
     <result column="zhuangtai" property="zhuangtai" jdbcType="INTEGER" />
   </resultMap>
+  <select id="findSomeByDeptId" resultType="Map">
+
+  SELECT * FROM admin t
+where t.deptid=#{deptID}
+order by adminname
+
+
+  </select>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

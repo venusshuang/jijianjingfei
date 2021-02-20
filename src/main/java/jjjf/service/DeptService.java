@@ -30,8 +30,8 @@ public class DeptService {
     public boolean add(Dept dept) {
         return ddMapper.insert(dept)==1;
     }
-    public boolean delete(String ppGuanliyuanId){
-        return ddMapper.deleteByPrimaryKey(ppGuanliyuanId)==1;
+    public boolean delete(String ppdeptID){
+        return ddMapper.deleteByPrimaryKey(ppdeptID)==1;
     }
     public boolean modify(Dept ppDept) {
         return ddMapper.updateByPrimaryKey(ppDept)==1;
