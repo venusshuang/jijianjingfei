@@ -1,5 +1,8 @@
 package jjjf.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Jungongjiesuan {
@@ -54,7 +57,8 @@ public class Jungongjiesuan {
     public void setJiesuanzhuangtaiid(String jiesuanzhuangtaiid) {
         this.jiesuanzhuangtaiid = jiesuanzhuangtaiid;
     }
-
+    @DateTimeFormat(pattern="yyyy-MM")  // HH:mm:ss
+    @JsonFormat(pattern="yyyy-MM",timezone = "GMT+8")
     public Date getJiesuanwanchengtime() {
         return jiesuanwanchengtime;
     }
