@@ -48,12 +48,14 @@ public class PageController {
 			return "redirect:/manage/login.html";
 		}
 
-		String mmRoleType = request.getSession().getAttribute("RoleType").toString();
-		String mmAdministratorId = request.getSession().getAttribute("AdministratorId").toString();
-		map.put("RoleType", mmRoleType);
-		map.put("AdministratorId", mmAdministratorId);
+		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
+		String mmAdminName = request.getSession().getAttribute("ADMINNAME").toString();
+		map.put("AdminId", mmAdminId);
+		map.put("DeptId", mmDeptId);
+		map.put("AdminName", mmAdminName);
 
-		return "pc/welcome";
+		return "welcome";
 	}
 
 	//类别标签
