@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head th:replace="public::head('项目上传管理')">
 <meta charset="UTF-8">
 </head>
@@ -27,7 +27,7 @@
 									<input type="text" class="form-control" id="imageurl" >
 									<div id="filelist" ></div>
 									<div class="weui-uploader__input-box" id="container" style="width:200px;height:200px;margin-left:10px;">
-										<input id="pickfiles" class="btn btn-lg btn-success" type="file" value="选择文件" style="width: 50px;" />
+										<input id="pickfiles" class="btn btn-lg btn-success" type="file" value="选择文件" style="width: 110px;" />
 									</div>
 									<div id="UploadedFiles"></div>
 								</div>
@@ -94,10 +94,10 @@
 			</div>
 			<!--<div th:replace="guojijiaoliu/manage/paichugaoxiaolist::edits"></div>-->
 			<div class="primary-title">
-				<span v-text="piciname"></span>项目名单管理
+				项目名单管理
 				
 				<div style="float: right;margin-bottom: 20px;padding-right:15px;">
-					<button class="btn btn-lm btn-primary" @click="showUploadXls()">上传高校名单</button>
+					<button class="btn btn-lm btn-primary" @click="showUploadXls()">上传项目名单</button>
 				</div>
 			</div>
 			<!--<div class="primary-content">

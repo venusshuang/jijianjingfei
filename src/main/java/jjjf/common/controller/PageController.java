@@ -84,6 +84,20 @@ public class PageController {
 		return "gongchengguanli/shangchuandemo";
 
 	}
+	//信息查询
+	@RequestMapping("/xinxichaxun/xinxichaxun.html")
+	public String xinxichaxun(HttpServletRequest request, ModelMap map) {
+		if(!isLoginPC(request)) {
+			return "redirect:/manage/login.html";
+		}
+		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
+		map.put("AdminID", mmAdminId);
+		map.put("DeptID", mmDeptId);
+
+		return "xinxichaxun/xinxichaxun";
+
+	}
 	// 仪表盘
 	@RequestMapping("/guahao/yibiaopan.html")
 	public String Yibiaopan(HttpServletRequest request, ModelMap map) {
