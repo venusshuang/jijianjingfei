@@ -58,16 +58,19 @@ public class JungongjiesuanController {
                              @RequestParam("jieyushangjiaojine") Double ppjieyushangjiaojine){
         try {
 
-            SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM");
-            Date mmjiesuanwanchengtime=simdate.parse("0001-01");
-            if(!ppjiesuanwanchengtime.equals("")){
-                mmjiesuanwanchengtime=simdate.parse(ppjiesuanwanchengtime);
-            }
+           SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM");
+
+
             Jungongjiesuan mmJungongjiesuan=new Jungongjiesuan();
             mmJungongjiesuan.setJungongjiesuanid(UUID.randomUUID().toString());
             mmJungongjiesuan.setXiangmuid(ppxiangmuId);
             mmJungongjiesuan.setJiesuanzhuangtaiid(ppjiesuanzhuangtaiid);
-            mmJungongjiesuan.setJiesuanwanchengtime(mmjiesuanwanchengtime);
+            if(!ppjiesuanwanchengtime.equals("")){
+                Date  mmjiesuanwanchengtime=simdate.parse(ppjiesuanwanchengtime);
+                mmJungongjiesuan.setJiesuanwanchengtime(mmjiesuanwanchengtime);
+            }
+
+
             mmJungongjiesuan.setJiesuanqingkuangid(ppjiesuanqingkuangid);
             mmJungongjiesuan.setShifoujizhang(ppshifoujizhang);
             mmJungongjiesuan.setJiesuanpifuwenhao(ppjiesuanpifuwenhao);
