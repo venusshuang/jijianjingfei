@@ -189,10 +189,12 @@ public class AdminController {
             if(mmAdmin == null) {
                 return JsonResult.getErrorResult("登录失败！登录名密码错误或账号无效!");
             }
+
             // 登录成功,记录session
             HttpSession session = request.getSession();
             session.setAttribute("ADMINID", mmAdmin.getAdminid());
             session.setAttribute("DEPTID", mmAdmin.getDeptid());
+            session.setAttribute("ADMINNAME",mmAdmin.getAdminname());
             return JsonResult.getSuccessResult("登录成功");
 
         }catch(Exception e) {
