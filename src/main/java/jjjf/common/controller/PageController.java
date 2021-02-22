@@ -87,8 +87,8 @@ public class PageController {
 
 	}
 	//信息查询
-	@RequestMapping("/xinxichaxun/xinxichaxun.html")
-	public String xinxichaxun(HttpServletRequest request, ModelMap map) {
+	@RequestMapping("/xinxichaxun1/xinxichaxun1.html")
+	public String xinxichaxun_(HttpServletRequest request, ModelMap map) {
 		if(!isLoginPC(request)) {
 			return "redirect:/manage/login.html";
 		}
