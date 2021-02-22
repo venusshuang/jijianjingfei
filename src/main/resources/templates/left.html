@@ -8,31 +8,38 @@
                     <cite>工程管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
-                	<li>
+                	<li v-show="deptId=='1'">
 
-                        <a onclick="xadmin.add_tab('军建计划下达情况','/gongchengguanli/junjianxiada.html')">
+                        <a  onclick="xadmin.add_tab('军建计划下达情况','/gongchengguanli/junjianxiada.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>军建计划下达情况</cite></a>
-                        <a onclick="xadmin.add_tab('经费预算下达情况','/gongchengguanli/jingfeiyusuan.html')">
+                    </li>
+                    <li v-show="deptId=='1'">
+                        <a  onclick="xadmin.add_tab('经费预算下达情况','/gongchengguanli/jingfeiyusuan.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>经费预算下达情况</cite></a>
-
+                    </li>
+                    <li>
                         <a onclick="xadmin.add_tab('工程进展情况','/gongchengguanli/gongchengjinzhan.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>工程进展情况</cite></a>
-
+                    </li>
+                    <li>
                         <a onclick="xadmin.add_tab('资金保障情况','/gongchengguanli/zijinbaozhang.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>资金保障情况</cite></a>
-
+                    </li>
+                    <li>
                         <a onclick="xadmin.add_tab('竣工结算和决算情况','/gongchengguanli/jungongjiesuan.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>竣工结算和决算情况</cite></a>
-
-
-                        <a onclick="xadmin.add_tab('类别标签','/gongchengguanli/biaoqianguanli.html')">
+                    </li>
+                    <li v-show="deptId=='1'">
+                        <a  onclick="xadmin.add_tab('类别标签','/gongchengguanli/biaoqianguanli.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>类别标签</cite></a>
+                    </li>
+                    <li>
                         <a onclick="xadmin.add_tab('上传demo','/gongchengguanli/shangchuandemo.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>上传demo</cite></a>
@@ -75,13 +82,13 @@
                     <cite>系统管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
-                    <li>
-                        <a onclick="xadmin.add_tab('数据备份','')">
+                    <li v-show="deptId=='1'">
+                        <a  onclick="xadmin.add_tab('数据备份','')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>数据备份</cite></a>
                     </li>
-                    <li>
-                        <a onclick="xadmin.add_tab('单位管理','/xitongguanli/danweiguanli.html')">
+                    <li v-show="deptId=='1'">
+                        <a  onclick="xadmin.add_tab('单位管理','/xitongguanli/danweiguanli.html')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>单位管理</cite></a>
                     </li>

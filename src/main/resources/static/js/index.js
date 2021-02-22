@@ -1,10 +1,14 @@
 var vm_index = new Vue({
 	el : "#index_div",
 	data : {
+
+		adminId : $("#adminid").val(),
+		deptId : $("#deptid").val(),
+
 		roletype : $("#roletype").val(),
 	},
 	created : function(){
-		
+
 	},
 	methods : {
 		// 退出登录
