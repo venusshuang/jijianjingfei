@@ -56,6 +56,116 @@
   </select>
 
 
+  <select id="searchXiangmu" resultType="Map">
+select xm.xiangmuid,xiangmuname,dw.deptname,xm.xiangmupifu,xm.lianbaopifujine,
+xm.zhongxinpifujine,xm.lianbaoyuliujine,lb.text as lbtext,xm.beizhu,
+
+ys.jingfeixiadaqingkuang,ys.yusuanniandu,ys.lianbaojingfeizhibiao,ys.zhongxinjingfeizhibiao,
+ys.zhongxinyuliujine,ys.zhongxinkuaijihao,ys.chengshoujingfeidanwei,ys.jingfeikemu,
+
+jz.xiangmuzhuangtaiid,xmzt.text as xmzttext,jz.xiangmuzhuangtaiid,
+date_format(jz.kaigongshijian,'%Y-%m') as kaigongshijian,
+jz.hetongzongjia,jz.wangchengtouzi,jz.jindukuaizhifu,jz.jindukuanbili,
+date_format(jz.wangongshijian,'%Y-%m') as wangongshijian,
+
+bz.xiangzhongxinshenqingzijin,date_format(bz.shenqingshijian,'%Y-%m') as shenqingshijian,
+bz.xianglianbaoshenqingzijin,
+date_format(bz.xianglianbaoshenqingbofushijian,'%Y-%m') as xianglianbaoshenqingbofushijian,
+bz.lianbaobofujine,date_format(bz.lianbaobofushijian,'%Y-%m') as lianbaobofushijian,
+bz.zhongxinbofujine,date_format(bz.zhongxinbofushijian,'%Y-%m') as zhongxinbofushijian,
+
+jg.jiesuanzhuangtaiid,jszt.text as jszttext,date_format(jg.jiesuanwanchengtime,'%Y-%m') as jiesuanwanchengtime,
+jg.jiesuanqingkuangid,jsqk.text as jsqktext,jg.shifoujizhang,jg.jiesuanpifuwenhao,
+jg.jiesuanpifujine,jg.jieyushangjiaojine
+
+from junjianxiangmu xm
+left join jingfeiyusuan ys on ys.xiangmuid=xm.xiangmuid
+left join gongchengjinzhan jz on jz.xiangmuid=xm.xiangmuid
+left join zijinbaozhang bz on bz.xiangmuid=xm.xiangmuid
+left join jungongjiesuan jg on jg.xiangmuid=jg.xiangmuid
+left join dept dw on dw.deptid=xm.jieshoudanweiid
+left join dict_leibiebiaoqian lb on lb.id=xm.xiangmuleibie
+left join dict_xiangmuzhuangtai xmzt on xmzt.id=jz.xiangmuzhuangtaiid
+left join dict_jiesuanzhuangtai jszt on jszt.id=jg.jiesuanzhuangtaiid
+left join dict_jiesuanqingkuang jsqk on jsqk.id=jg.jiesuanqingkuangid
+where 1=1
+
+    <if test="xiangmuname != ''">
+      and xiangmuname like #{xiangmuname}
+    </if>
+    <if test="deptname != ''">
+      and deptname like #{deptname}
+    </if>
+    <if test="xiangmupifu != ''">
+      and xiangmupifu like #{xiangmupifu}
+    </if>
+    <if test="jingfeixiadaqingkuang != ''">
+      and jingfeixiadaqingkuang like #{jingfeixiadaqingkuang}
+    </if>
+    <if test="jingfeikemu != ''">
+      and jingfeikemu like #{jingfeikemu}
+    </if>
+    <if test="xiangmuzhuangtaiid != ''">
+      and xiangmuzhuangtaiid=#{xiangmuzhuangtaiid}
+    </if>
+    <if test="jiesuanzhuangtaiid != ''">
+      and jiesuanzhuangtaiid=#{jiesuanzhuangtaiid}
+    </if>
+    <if test="jiesuanqingkuangid != ''">
+      and jiesuanqingkuangid=#{jiesuanqingkuangid}
+    </if>
+
+order by deptname,xiangmuname
+LIMIT #{startindex},#{pagesize}
+
+  </select>
+
+
+  <select id="getSearchXiangmuCountBydeptId" resultType="Object">
+
+    select count(*) from junjianxiangmu xm
+    left join jingfeiyusuan ys on ys.xiangmuid=xm.xiangmuid
+    left join gongchengjinzhan jz on jz.xiangmuid=xm.xiangmuid
+    left join zijinbaozhang bz on bz.xiangmuid=xm.xiangmuid
+    left join jungongjiesuan jg on jg.xiangmuid=jg.xiangmuid
+    left join dept dw on dw.deptid=xm.jieshoudanweiid
+    left join dict_leibiebiaoqian lb on lb.id=xm.xiangmuleibie
+    left join dict_xiangmuzhuangtai xmzt on xmzt.id=jz.xiangmuzhuangtaiid
+    left join dict_jiesuanzhuangtai jszt on jszt.id=jg.jiesuanzhuangtaiid
+    left join dict_jiesuanqingkuang jsqk on jsqk.id=jg.jiesuanqingkuangid
+    where 1=1
+
+    <if test="xiangmuname != ''">
+      and xiangmuname like #{xiangmuname}
+    </if>
+    <if test="deptname != ''">
+      and deptname like #{deptname}
+    </if>
+    <if test="xiangmupifu != ''">
+      and xiangmupifu like #{xiangmupifu}
+    </if>
+    <if test="jingfeixiadaqingkuang != ''">
+      and jingfeixiadaqingkuang like #{jingfeixiadaqingkuang}
+    </if>
+    <if test="jingfeikemu != ''">
+      and jingfeikemu like #{jingfeikemu}
+    </if>
+    <if test="xiangmuzhuangtaiid != ''">
+      and xiangmuzhuangtaiid=#{xiangmuzhuangtaiid}
+    </if>
+    <if test="jiesuanzhuangtaiid != ''">
+      and jiesuanzhuangtaiid=#{jiesuanzhuangtaiid}
+    </if>
+    <if test="jiesuanqingkuangid != ''">
+      and jiesuanqingkuangid=#{jiesuanqingkuangid}
+    </if>
+
+
+
+
+
+  </select>
+
 
 
   <sql id="Example_Where_Clause" >

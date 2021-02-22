@@ -388,4 +388,21 @@ public class PageController {
 
 	}
 
+	//信息查询
+	@RequestMapping("/xinxichaxun/xinxichaxun_list.html")
+	public String xinxichaxun(HttpServletRequest request, ModelMap map) {
+
+		if(!isLoginPC(request)) {
+			return "redirect:/manage/login.html";
+		}
+
+		String mmAdminId = request.getSession().getAttribute("ADMINID").toString();
+		String mmDeptId = request.getSession().getAttribute("DEPTID").toString();
+		map.put("AdminID", mmAdminId);
+		map.put("DeptID", mmDeptId);
+
+		return "xinxichaxun/xinxichaxun_list";
+
+	}
+
 }
