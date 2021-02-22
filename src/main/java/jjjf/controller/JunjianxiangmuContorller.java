@@ -161,5 +161,56 @@ public class JunjianxiangmuContorller {
         }
     }
 
+    @RequestMapping("searchXiangmu")
+    public JsonResult<?> searchXiangmu(@RequestParam("xiangmumingcheng") String ppxiangmumingcheng,
+                                            @RequestParam("danweimingcheng") String ppdanweimingcheng,
+                                            @RequestParam("jihuawenhao") String ppjihuawenhao,
+                                            @RequestParam("yusuanwenhao") String ppyusuanwenhao,
+                                            @RequestParam("jingfeikemu") String ppjingfeikemu,
+                                            @RequestParam("xiangmuzhuangtaiid") String ppxiangmuzhuangtaiid,
+                                            @RequestParam("jungongzhuangtaiid") String ppjungongzhuangtaiid,
+                                            @RequestParam("jiesuanqingkuangid") String ppjiesuanqingkuangid,
+                                            @RequestParam("pageindex") int ppPageIndex,
+                                            @RequestParam("pagesize") int ppPageSize) {
+        try {
+            if(!ppxiangmumingcheng.equals("")) {
+                ppxiangmumingcheng = "%" + ppxiangmumingcheng + "%";
+            }
+            if(!ppdanweimingcheng.equals("")) {
+                ppdanweimingcheng = "%" + ppdanweimingcheng + "%";
+            }
+            if(!ppjihuawenhao.equals("")) {
+                ppjihuawenhao = "%" + ppjihuawenhao + "%";
+            }
+            if(!ppyusuanwenhao.equals("")) {
+                ppyusuanwenhao = "%" + ppyusuanwenhao + "%";
+            }
+            if(!ppjingfeikemu.equals("")) {
+                ppjingfeikemu = "%" + ppjingfeikemu + "%";
+            }
+            List<Map<String, Object>> mmList=ddService.searchXiangmu(ppxiangmumingcheng,ppdanweimingcheng,
+                    ppjihuawenhao,ppyusuanwenhao,ppjingfeikemu,ppxiangmuzhuangtaiid,ppjungongzhuangtaiid,
+                    ppjiesuanqingkuangid,ppPageIndex,ppPageSize);
+            Integer mmCount = ddService.getSearchXiangmuCount(ppxiangmumingcheng,ppdanweimingcheng,
+                    ppjihuawenhao,ppyusuanwenhao,ppjingfeikemu,ppxiangmuzhuangtaiid,ppjungongzhuangtaiid,
+                    ppjiesuanqingkuangid);
+            PageInfo mmPageInfo = new PageInfo(ppPageIndex, ppPageSize, mmCount);
+
+            Map<String, Object> mmMap = new HashMap<String, Object>();
+            mmMap.put("SearchxiangmuList", mmList);
+            mmMap.put("PageInfo", mmPageInfo);
+            return JsonResult.getSuccessResult(mmMap);
+
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            log.error("junjianxiangmu/findXiangmuBydeptId:error",e);
+            return JsonResult.getErrorResult("junjianxiangmu/findXiangmuBydeptId:error " + e.getMessage());
+        }
+    }
+
+
+
 
 }

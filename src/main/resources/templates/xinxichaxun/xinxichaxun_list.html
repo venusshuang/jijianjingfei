@@ -113,6 +113,17 @@
                 <th style="text-align:center;vertical-align:middle;width: 150px;">经费预算文号</th>
                 <th style="text-align:center;vertical-align:middle;width: 150px;">经费科目</th>
                 </thead>
+                <tbody>
+                <tr v-for="(searchxiangmuitem,index) in searchxiangmulist">
+                    <td style="text-align:center;vertical-align:middle;" v-text="index+1+(pageIndex-1)*pageSize"></td>
+                    <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.deptname"></td>
+                    <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.xiangmuname"></td>
+                    <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.xiangmupifu"></td>
+                    <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.jingfeixiadaqingkuang"></td>
+                    <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.jingfeikemu"></td>
+
+                </tr>
+                </tbody>
             </table>
 
             <div class="my-page-navigation">

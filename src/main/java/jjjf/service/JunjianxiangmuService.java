@@ -48,4 +48,24 @@ public class JunjianxiangmuService {
         mmExample.createCriteria().andXiangmunameEqualTo(ppXiangmuMingcheng).andZhuangtaiEqualTo(100);
         return ddMapper.selectByExample(mmExample);
     }
+
+
+    public List<Map<String, Object>>searchXiangmu(String ppxiangmuName,String mmDeptName,
+                                                  String mmXiangmuPifu,String mmJingfeixiadaqingkuang,
+                                                  String mmJingfeikemu,String mmXiangmuzhuangtaiid,
+                                                  String mmJiesuanzhuangtaiid,String mmJiesuanqingkuangid,
+                                                  int mmStartIndex,int mmPageSize){
+        int ppStartIndex = (mmStartIndex - 1) * mmPageSize;
+        return ddMapper.searchXiangmu(ppxiangmuName,mmDeptName, mmXiangmuPifu, mmJingfeixiadaqingkuang,
+                mmJingfeikemu,mmXiangmuzhuangtaiid,mmJiesuanzhuangtaiid,mmJiesuanqingkuangid,
+                ppStartIndex, mmPageSize);
+    }
+    public Integer getSearchXiangmuCount(String ppxiangmuName,String mmDeptName,
+                                         String mmXiangmuPifu,String mmJingfeixiadaqingkuang,
+                                         String mmJingfeikemu,String mmXiangmuzhuangtaiid,
+                                         String mmJiesuanzhuangtaiid,String mmJiesuanqingkuangid) {
+        Object mmCount = ddMapper.getSearchXiangmuCount(ppxiangmuName,mmDeptName, mmXiangmuPifu, mmJingfeixiadaqingkuang,
+                mmJingfeikemu,mmXiangmuzhuangtaiid,mmJiesuanzhuangtaiid,mmJiesuanqingkuangid);
+        return mmCount == null ? 0 : Integer.parseInt(mmCount.toString());
+    }
 }

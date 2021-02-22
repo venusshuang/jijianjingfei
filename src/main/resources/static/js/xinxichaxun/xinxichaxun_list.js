@@ -12,6 +12,7 @@ var Xinxichaxun = new Vue({
         s_xiangmuzhuangtaiid:'',
         s_jungongzhuangtaiid:'',
         s_jiesuanqingkuangid:'',
+        searchxiangmulist:[],
 
         xiangmuzhuangtailist:[],
         jiesuanzhuangtailist:[],
@@ -92,11 +93,50 @@ var Xinxichaxun = new Vue({
             },"json");
         },
 
+        bindXiangmuList:function (){
+            var _this = this;
+            layer.open({type:3});
+            $.post("/junjianxiangmu/searchXiangmu",{
+                xiangmumingcheng :_this.s_xiangmumingcheng,
+                danweimingcheng : _this.s_danweimingcheng,
+                jihuawenhao : _this.s_jihuawenhao,
+                yusuanwenhao : _this.s_yusuanwenhao,
+                jingfeikemu : _this.s_jingfeikemu,
+                xiangmuzhuangtaiid : _this.s_xiangmuzhuangtaiid,
+                jungongzhuangtaiid : _this.s_jungongzhuangtaiid,
+                jiesuanqingkuangid : _this.s_jiesuanqingkuangid,
+                pageindex : _this.pageIndex,
+                pagesize : _this.pageSize,
+                rdm : Math.random()
+            },function(ppData){
+                layer.closeAll("loading");
+                if (ppData != null){
+                    if(ppData.result == "1"){
+                        var data=ppData.resultContent;
 
 
+                        if(data.SearchxiangmuList.length > 0){
+                            $("#searchresult").show();
+                            _this.searchxiangmulist=data.SearchxiangmuList;
 
+                            var PageInfo = data.PageInfo;
+                            _this.pageIndex = PageInfo.pageIndex;
+                            _this.recordCount = PageInfo.recordCount;
+                            _this.pageCount = PageInfo.pageCount;
 
+                        }else {
+                            $("#searchresult").hide();
+                            layer.alert("未查询到符合条件数据！");
 
+                        }
+
+                    }else{
+                        layer.alert(ppData.message);
+                    }
+                }
+
+            },"json");
+        },
 
 
 
