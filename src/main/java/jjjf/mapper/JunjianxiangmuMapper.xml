@@ -121,7 +121,7 @@ LIMIT #{startindex},#{pagesize}
   </select>
 
 
-  <select id="getSearchXiangmuCountBydeptId" resultType="Object">
+  <select id="getSearchXiangmuCount" resultType="Object">
 
     select count(*) from junjianxiangmu xm
     left join jingfeiyusuan ys on ys.xiangmuid=xm.xiangmuid
