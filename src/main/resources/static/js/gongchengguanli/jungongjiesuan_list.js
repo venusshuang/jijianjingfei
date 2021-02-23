@@ -10,6 +10,8 @@ var Jungongjiesuan = new Vue({
         jiesuanzhuangtailist:[],
         jiesuanqingkuanglist:[],
 
+
+
         xiangmuId:'',
         jungongjiesuanId:'',
         editFlag : 0,					// 0:新增，1：修改
@@ -123,10 +125,19 @@ var Jungongjiesuan = new Vue({
             this.xiangmuId=ppXiangmuId;
             $("#shifoujizhang_y").prop('checked',false);
             $("#shifoujizhang_n").prop('checked',true);
+            this.jiesuan.shifoujizhang='0';
 
         },
         addJiesuan:function () {
             var _this = this;
+
+
+            if(_this.deptId!='1'){
+
+                _this.jiesuan.jiesuanpifujine=0;
+                _this.jiesuan.jieyushangjiaojine=0;
+            }
+
             if(_this.checkInputData()){
                 layer.open({type:3});
 
@@ -162,12 +173,13 @@ var Jungongjiesuan = new Vue({
             }
         },
 
-        perpareToModifyJiesuan :function (ppXiangmuName,ppJungongjiesuanId){
+        perpareToModifyJiesuan :function (ppXiangmuName,ppJungongjiesuanId,ppxiangmuid){
             $('#editJungongjiesuanModal').modal();
             $("#myModalLabel_jungongjiesuan").html(ppXiangmuName);
             this.editFlag = 1;
             this.jiesuan = {};
             this.jungongjiesuanId=ppJungongjiesuanId;
+            this.xiangmuId=ppxiangmuid;
 
             this.bindJungongjiesuan();
         },
@@ -197,6 +209,7 @@ var Jungongjiesuan = new Vue({
 
                 $.post('/jungongjiesuan/modify',{
                     adminId : _this.adminId,
+                    xiangmuId:_this.xiangmuId,
                     jungongjiesuanId : _this.jungongjiesuanId,
                     jiesuanzhuangtaiid:$.trim(_this.jiesuan.jiesuanzhuangtaiid),
                     jiesuanwanchengtime:$.trim(_this.jiesuan.jiesuanwanchengtime),
@@ -263,49 +276,50 @@ var Jungongjiesuan = new Vue({
             var _this = this;
 
             var jiesuanzhuangtaiid = !_this.jiesuan.jiesuanzhuangtaiid ? "" : $.trim(_this.jiesuan.jiesuanzhuangtaiid);
-            if("" == jiesuanzhuangtaiid){
+            if("" == jiesuanzhuangtaiid&&_this.deptId!="1"){
                 layer.alert("请选择竣工结算状态！");
                 return false;
             }
 
             var jiesuanqingkuangid = !_this.jiesuan.jiesuanqingkuangid ? "" : $.trim(_this.jiesuan.jiesuanqingkuangid);
-            if("" == jiesuanqingkuangid){
+            if("" == jiesuanqingkuangid&&_this.deptId!="1"){
                 layer.alert("请选择竣工决算情况！");
                 return false;
             }
 
             var shifoujizhang = !_this.jiesuan.shifoujizhang ? "" : $.trim(_this.jiesuan.shifoujizhang);
-            if("" == shifoujizhang){
+            if("" == shifoujizhang&&_this.deptId!="1"){
                 layer.alert("请选择决算是否记账和登记资产！");
                 return false;
             }
 
-           /* var jiesuanpifuwenhao = !_this.jiesuan.jiesuanpifuwenhao ? "" : $.trim(_this.jiesuan.jiesuanpifuwenhao);
-            if("" == jiesuanpifuwenhao){
+            var jiesuanpifuwenhao = !_this.jiesuan.jiesuanpifuwenhao ? "" : $.trim(_this.jiesuan.jiesuanpifuwenhao);
+            if("" == jiesuanpifuwenhao&&_this.deptId=="1"){
                 layer.alert("请填写两级决算批复文号！");
                 return false;
             }
 
-            var jiesuanpifujine = !_this.jiesuan.jiesuanpifujine ? "" : $.trim(_this.jiesuan.jiesuanpifujine);
-            if("" == jiesuanpifujine){
+          var jiesuanpifujine = !_this.jiesuan.jiesuanpifujine ? "" : $.trim(_this.jiesuan.jiesuanpifujine);
+
+            if("" == jiesuanpifujine&&_this.deptId=="1"){
                 layer.alert("请填写决算批复金额！");
                 return false;
             }
-            if (!_this.checknum(jiesuanpifujine)) {
+            if (!_this.checknum(jiesuanpifujine)&&_this.deptId=="1") {
                 layer.alert("决算批复金额请填写数字格式！");
                 return false;
             }
 
             var jieyushangjiaojine = !_this.jiesuan.jieyushangjiaojine ? "" : $.trim(_this.jiesuan.jieyushangjiaojine);
-            if("" == jieyushangjiaojine){
+            if("" == jieyushangjiaojine&&_this.deptId=="1"){
                 layer.alert("请填写结余上缴金额！");
                 return false;
             }
-            if (!_this.checknum(jieyushangjiaojine)) {
+            if (!_this.checknum(jieyushangjiaojine)&&_this.deptId=="1") {
                 layer.alert("结余上缴金额请填写数字格式！");
                 return false;
             }
-*/
+
 
 
             return true;

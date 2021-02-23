@@ -115,12 +115,14 @@ var Jingfeiyusuan = new Vue({
             }
         },
 
-        perpareToModifyJingfei:function (ppXiangmuName,ppJingfeiyuansuanId){
+        perpareToModifyJingfei:function (ppXiangmuName,ppJingfeiyuansuanId,ppxiangmuid){
             $('#editJingfeiyusuanModal').modal();
             $("#myModalLabel_jingfeiyusuan").html(ppXiangmuName);
             this.editFlag = 1;
             this.jingfei = {};
             this.jingfeiyusuanId=ppJingfeiyuansuanId;
+            this.xiangmuId=ppxiangmuid;
+
 
             this.bindJingfeiyusaun();
         },
@@ -151,6 +153,7 @@ var Jingfeiyusuan = new Vue({
 
                 $.post('/jingfeiyusuan/modify',{
                     adminId : _this.adminId,
+                    xiangmuId:_this.xiangmuId,
                     jingfeiyusuanId : _this.jingfeiyusuanId,
                     jingfeixiadaqingkuang:$.trim(_this.jingfei.jingfeixiadaqingkuang),
                     yusuanniandu:$.trim(_this.jingfei.yusuanniandu),

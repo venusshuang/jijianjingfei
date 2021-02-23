@@ -1,7 +1,9 @@
 package jjjf.controller;
 
 
+import jjjf.model.Jingfeiyusuan;
 import jjjf.model.Zijinbaozhang;
+import jjjf.service.JingfeiyusuanService;
 import jjjf.service.ZijinbaozhangService;
 import jjjf.util.JsonResult;
 import jjjf.util.PageInfo;
@@ -21,6 +23,9 @@ public class ZijinbaozhangController {
 
     @Resource
     ZijinbaozhangService ddService;
+    @Resource
+    JingfeiyusuanService ddJingfeiyusuanService;
+
     public Logger log = LoggerFactory.getLogger(ZijinbaozhangController.class);
 
     @RequestMapping("findZijinBydeptId")
@@ -58,6 +63,17 @@ public class ZijinbaozhangController {
                              @RequestParam("zhongxinbofujine") Double ppzhongxinbofujine,
                              @RequestParam("zhongxinbofushijian") String ppzhongxinbofushijian){
         try {
+
+            List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
+            if(mmList.size()!=1) {
+                return JsonResult.getErrorResult("获取错误");
+            }
+            Double mmzhongxinzhibiao=mmList.get(0).getZhongxinjingfeizhibiao();
+            Double mmxiangzhongxinshenqingzijin=ppxiangzhongxinshenqingzijin;
+            if(Double.doubleToLongBits(mmzhongxinzhibiao) < Double.doubleToLongBits(mmxiangzhongxinshenqingzijin)){
+                return JsonResult.getErrorResult("向中心申请资金不能大于中心下达经费指标");
+            }
+
             SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM");
 
             Date mmshenqingshijian=simdate.parse(ppshenqingshijian);
@@ -105,6 +121,7 @@ public class ZijinbaozhangController {
 
     @RequestMapping("modify")
     public JsonResult<?> modify(@RequestParam("adminId") String ppadminId,
+                                @RequestParam("xiangmuId") String ppxiangmuId,
                                 @RequestParam("zijinbaozhangId") String ppzijinbaozhangId,
                                 @RequestParam("xiangzhongxinshenqingzijin") Double ppxiangzhongxinshenqingzijin,
                                 @RequestParam("shenqingshijian") String ppshenqingshijian,
@@ -116,6 +133,17 @@ public class ZijinbaozhangController {
                                 @RequestParam("zhongxinbofushijian") String ppzhongxinbofushijian){
 
         try {
+
+            List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
+            if(mmList.size()!=1) {
+                return JsonResult.getErrorResult("获取错误");
+            }
+            Double mmzhongxinzhibiao=mmList.get(0).getZhongxinjingfeizhibiao();
+            Double mmxiangzhongxinshenqingzijin=ppxiangzhongxinshenqingzijin;
+            if(Double.doubleToLongBits(mmzhongxinzhibiao) < Double.doubleToLongBits(mmxiangzhongxinshenqingzijin)){
+                return JsonResult.getErrorResult("向中心申请资金不能大于中心下达经费指标");
+            }
+
             SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM");
 
             Date mmshenqingshijian=simdate.parse(ppshenqingshijian);

@@ -31,7 +31,7 @@ public class JungongjiesuanService {
 
 
     public boolean add(Jungongjiesuan ppjungongJiesuan){
-        return ddMapper.insert(ppjungongJiesuan)==1;
+        return ddMapper.insertSelective(ppjungongJiesuan)==1;
     }
 
 

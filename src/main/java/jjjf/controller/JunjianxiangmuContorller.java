@@ -62,6 +62,12 @@ public class JunjianxiangmuContorller {
                              @RequestParam("beizhu") String ppbeizhu){
 
         try {
+            Double mmlianbaopifujine=pplianbaopifujine;
+            Double mmzhongxinpifujine=ppzhongxinpifujine;
+
+            if(Double.doubleToLongBits(mmlianbaopifujine) < Double.doubleToLongBits(mmzhongxinpifujine)){
+                return JsonResult.getErrorResult("中心建设计划批复金额不能大于联保建设计划批复金额");
+            }
 
             Junjianxiangmu mmJunjianxiangmu=new Junjianxiangmu();
             mmJunjianxiangmu.setXiangmuid(UUID.randomUUID().toString());
@@ -114,6 +120,13 @@ public class JunjianxiangmuContorller {
                                 @RequestParam("jieshoudanweiid") String ppjieshoudanweiid,
                                 @RequestParam("beizhu") String ppbeizhu){
         try {
+
+            Double mmlianbaopifujine=pplianbaopifujine;
+            Double mmzhongxinpifujine=ppzhongxinpifujine;
+            if(Double.doubleToLongBits(mmlianbaopifujine) < Double.doubleToLongBits(mmzhongxinpifujine)){
+                return JsonResult.getErrorResult("中心建设计划批复金额不能大于联保建设计划批复金额");
+            }
+
             Junjianxiangmu mmJunjianxiangmu=new Junjianxiangmu();
             mmJunjianxiangmu.setXiangmuid(ppxiangmuId);
             mmJunjianxiangmu.setXiangmuname(ppxiangmuname);

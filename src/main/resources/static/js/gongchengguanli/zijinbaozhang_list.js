@@ -126,12 +126,14 @@ var Zijinbaozhang = new Vue({
             }
         },
 
-        perpareToModifyZijin :function (ppXiangmuName,ppZijinbaozhangId){
+        perpareToModifyZijin :function (ppXiangmuName,ppZijinbaozhangId,ppXiangmuId){
             $('#editZijinbaozhangModal').modal();
             $("#myModalLabel_zijinbaozhang").html(ppXiangmuName);
             this.editFlag = 1;
             this.zijin = {};
             this.zijinbaozhangId=ppZijinbaozhangId;
+            this.xiangmuId=ppXiangmuId;
+
 
             this.bindZijinbaozhang();
         },
@@ -157,11 +159,13 @@ var Zijinbaozhang = new Vue({
 
         modifyZijin:function (){
             var _this = this;
+
             if(_this.checkInputData()){
                 layer.open({type:3});
 
                 $.post('/zijinbaozhang/modify',{
                     adminId : _this.adminId,
+                    xiangmuId:_this.xiangmuId,
                     zijinbaozhangId : _this.zijinbaozhangId,
                     xiangzhongxinshenqingzijin:$.trim(_this.zijin.xiangzhongxinshenqingzijin),
                     shenqingshijian:$.trim(_this.zijin.shenqingshijian),

@@ -1,6 +1,8 @@
 package jjjf.controller;
 
+import jjjf.model.Jingfeiyusuan;
 import jjjf.model.Jungongjiesuan;
+import jjjf.service.JingfeiyusuanService;
 import jjjf.service.JungongjiesuanService;
 import jjjf.util.JsonResult;
 import jjjf.util.PageInfo;
@@ -20,6 +22,8 @@ public class JungongjiesuanController {
 
     @Resource
     JungongjiesuanService ddService;
+    @Resource
+    JingfeiyusuanService ddJingfeiyusuanService;
 
     public Logger log = LoggerFactory.getLogger(JungongjiesuanController.class);
 
@@ -57,6 +61,19 @@ public class JungongjiesuanController {
                              @RequestParam("jiesuanpifujine") Double ppjiesuanpifujine,
                              @RequestParam("jieyushangjiaojine") Double ppjieyushangjiaojine){
         try {
+
+            List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
+            if(mmList.size()!=1) {
+                return JsonResult.getErrorResult("获取错误");
+            }
+            Double mmzhongxinzhibiao=mmList.get(0).getZhongxinjingfeizhibiao();
+            Double mmjiesuanpifujine=ppjiesuanpifujine;
+            Double mmjieyushangjiaojine=ppjieyushangjiaojine;
+            Double mmjysj=mmzhongxinzhibiao-mmjiesuanpifujine;
+            if(!(Double.doubleToLongBits(mmjysj) == Double.doubleToLongBits(mmjieyushangjiaojine))){
+                return JsonResult.getErrorResult("结余上缴金额不符合要求，应为"+mmjysj+"万元!");
+            }
+
 
            SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM");
 
@@ -106,6 +123,7 @@ public class JungongjiesuanController {
 
     @RequestMapping("modify")
     public JsonResult<?> modify(@RequestParam("adminId") String ppadminId,
+                                @RequestParam("xiangmuId") String ppxiangmuId,
                                 @RequestParam("jungongjiesuanId") String ppjungongjiesuanId,
                                 @RequestParam("jiesuanzhuangtaiid") String ppjiesuanzhuangtaiid,
                                 @RequestParam("jiesuanwanchengtime") String ppjiesuanwanchengtime,
@@ -116,6 +134,18 @@ public class JungongjiesuanController {
                                 @RequestParam("jieyushangjiaojine") Double ppjieyushangjiaojine){
 
         try {
+            List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
+            if(mmList.size()!=1) {
+                return JsonResult.getErrorResult("获取错误");
+            }
+            Double mmzhongxinzhibiao=mmList.get(0).getZhongxinjingfeizhibiao();
+            Double mmjiesuanpifujine=ppjiesuanpifujine;
+            Double mmjieyushangjiaojine=ppjieyushangjiaojine;
+            Double mmjysj=mmzhongxinzhibiao-mmjiesuanpifujine;
+            if(!(Double.doubleToLongBits(mmjysj) == Double.doubleToLongBits(mmjieyushangjiaojine))){
+                return JsonResult.getErrorResult("结余上缴金额不符合要求，应为"+mmjysj+"万元!");
+            }
+
             SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM");
             Date mmjiesuanwanchengtime=simdate.parse("0001-01");
             if(!ppjiesuanwanchengtime.equals("")){

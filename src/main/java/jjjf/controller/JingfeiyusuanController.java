@@ -1,8 +1,11 @@
 package jjjf.controller;
 
 
+import jjjf.model.Dept;
 import jjjf.model.Jingfeiyusuan;
+import jjjf.model.Junjianxiangmu;
 import jjjf.service.JingfeiyusuanService;
+import jjjf.service.JunjianxiangmuService;
 import jjjf.util.JsonResult;
 import jjjf.util.PageInfo;
 import org.slf4j.Logger;
@@ -20,6 +23,9 @@ public class JingfeiyusuanController {
 
     @Resource
     JingfeiyusuanService ddService;
+    @Resource
+    JunjianxiangmuService ddJunjianxiangmuService;
+
     public Logger log = LoggerFactory.getLogger(JingfeiyusuanController.class);
 
     @RequestMapping("findJingfeiBydeptId")
@@ -59,6 +65,29 @@ public class JingfeiyusuanController {
                              @RequestParam("chengshoujingfeidanwei") String ppchengshoujingfeidanwei,
                              @RequestParam("jingfeikemu") String ppjingfeikemu){
         try {
+
+            Double mmlianbaojingfeizhibiao=pplianbaojingfeizhibiao;
+            Double mmzhongxinjingfeizhibiao=ppzhongxinjingfeizhibiao;
+            if(Double.doubleToLongBits(mmlianbaojingfeizhibiao) < Double.doubleToLongBits(mmzhongxinjingfeizhibiao)){
+                return JsonResult.getErrorResult("中心下达经费指标不能大于联保下达经费指标");
+            }
+
+            Junjianxiangmu mmjunjianxiangmu=ddJunjianxiangmuService.findOne(ppxiangmuId);
+            if(mmjunjianxiangmu==null){
+                return JsonResult.getErrorResult("军建计划下达情况不存在!");
+            }
+            Double mmlianbaopifujine=mmjunjianxiangmu.getLianbaopifujine();
+            Double mmlianbaoyuliujine=mmjunjianxiangmu.getLianbaoyuliujine();
+            Double mmlianbaoxiadazhibiao=mmlianbaopifujine-mmlianbaoyuliujine;
+            if(!(Double.doubleToLongBits(mmlianbaoxiadazhibiao) == Double.doubleToLongBits(pplianbaojingfeizhibiao))){
+                return JsonResult.getErrorResult("联保下达经费指标不符合要求，应为"+mmlianbaoxiadazhibiao+"万元!");
+            }
+            Double mmzhongxinyuliujine=ppzhongxinyuliujine;
+            Double mmzxyl=mmlianbaojingfeizhibiao-mmzhongxinjingfeizhibiao;
+            if(!(Double.doubleToLongBits(mmzhongxinyuliujine) == Double.doubleToLongBits(mmzxyl))){
+                return JsonResult.getErrorResult("中心预留预备费不符合要求，应为"+mmzxyl+"万元!");
+            }
+
             Jingfeiyusuan mmJingfeiyusuan=new Jingfeiyusuan();
             mmJingfeiyusuan.setJingfeiyuansuanid(UUID.randomUUID().toString());
             mmJingfeiyusuan.setXiangmuid(ppxiangmuId);
@@ -100,6 +129,7 @@ public class JingfeiyusuanController {
 
     @RequestMapping("modify")
     public JsonResult<?> modify(@RequestParam("adminId") String ppadminId,
+                                @RequestParam("xiangmuId") String ppxiangmuId,
                                 @RequestParam("jingfeiyusuanId") String ppjingfeiyusuanId,
                                 @RequestParam("jingfeixiadaqingkuang") String ppjingfeixiadaqingkuang,
                                 @RequestParam("yusuanniandu") String ppyusuanniandu,
@@ -111,8 +141,35 @@ public class JingfeiyusuanController {
                                 @RequestParam("jingfeikemu") String ppjingfeikemu){
 
         try {
-            Jingfeiyusuan mmJingfeiyusuan=new Jingfeiyusuan();
-            mmJingfeiyusuan.setJingfeiyuansuanid(ppjingfeiyusuanId);
+
+            Double mmlianbaojingfeizhibiao=pplianbaojingfeizhibiao;
+            Double mmzhongxinjingfeizhibiao=ppzhongxinjingfeizhibiao;
+            if(Double.doubleToLongBits(mmlianbaojingfeizhibiao) < Double.doubleToLongBits(mmzhongxinjingfeizhibiao)){
+                return JsonResult.getErrorResult("中心下达经费指标不能大于联保下达经费指标");
+            }
+
+            Junjianxiangmu mmjunjianxiangmu=ddJunjianxiangmuService.findOne(ppxiangmuId);
+            if(mmjunjianxiangmu==null){
+                return JsonResult.getErrorResult("军建计划下达情况不存在!");
+            }
+            Double mmlianbaopifujine=mmjunjianxiangmu.getLianbaopifujine();
+            Double mmlianbaoyuliujine=mmjunjianxiangmu.getLianbaoyuliujine();
+            Double mmlianbaoxiadazhibiao=mmlianbaopifujine-mmlianbaoyuliujine;
+            if(!(Double.doubleToLongBits(mmlianbaoxiadazhibiao) == Double.doubleToLongBits(pplianbaojingfeizhibiao))){
+                return JsonResult.getErrorResult("联保下达经费指标不符合要求，应为"+mmlianbaoxiadazhibiao+"万元!");
+            }
+
+            Double mmzhongxinyuliujine=ppzhongxinyuliujine;
+            Double mmzxyl=mmlianbaojingfeizhibiao-mmzhongxinjingfeizhibiao;
+            if(!(Double.doubleToLongBits(mmzhongxinyuliujine) == Double.doubleToLongBits(mmzxyl))){
+                return JsonResult.getErrorResult("中心预留预备费不符合要求，应为"+mmzxyl+"万元!");
+            }
+
+            Jingfeiyusuan mmJingfeiyusuan=ddService.findOne(ppjingfeiyusuanId);
+            if(mmJingfeiyusuan==null){
+                return JsonResult.getErrorResult("jingfeiyusuan/modify:error ");
+            }
+
             mmJingfeiyusuan.setJingfeixiadaqingkuang(ppjingfeixiadaqingkuang);
             mmJingfeiyusuan.setYusuanniandu(ppyusuanniandu);
             mmJingfeiyusuan.setLianbaojingfeizhibiao(pplianbaojingfeizhibiao);

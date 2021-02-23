@@ -2,7 +2,10 @@ package jjjf.service;
 
 
 import jjjf.dao.JingfeiyusuanMapper;
+import jjjf.model.DictJiesuanzhuangtai;
+import jjjf.model.DictJiesuanzhuangtaiExample;
 import jjjf.model.Jingfeiyusuan;
+import jjjf.model.JingfeiyusuanExample;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,6 +17,13 @@ public class JingfeiyusuanService {
 
     @Resource
     JingfeiyusuanMapper ddMapper;
+
+    public List<Jingfeiyusuan> findJingfeiyusuanByXiangmuId(String ppxiangmuId){
+        JingfeiyusuanExample mmExample=new JingfeiyusuanExample();
+        mmExample.createCriteria().andXiangmuidEqualTo(ppxiangmuId);
+        return ddMapper.selectByExample(mmExample);
+    }
+
     public List<Map<String, Object>> findJingfeiyusuanBydeptId(String ppxiangmuName, String ppdeptId, int ppPageIndex, int ppPageSize){
         int mmStartIndex = (ppPageIndex - 1) * ppPageSize;
         return ddMapper.findJingfeiyusuanBydeptId(ppxiangmuName,ppdeptId, mmStartIndex, ppPageSize);

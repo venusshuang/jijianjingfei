@@ -58,7 +58,7 @@
 
 
                             <button class="btn btn-success" v-if="zijinitem.zijinbaozhangid==null" @click="toAdd(zijinitem.xiangmuname,zijinitem.xiangmuid)">新 增</button>
-                            <button class="btn btn-primary" v-if="zijinitem.zijinbaozhangid!=null" @click="perpareToModifyZijin(zijinitem.xiangmuname,zijinitem.zijinbaozhangid)">编 辑</button>
+                            <button class="btn btn-primary" v-if="zijinitem.zijinbaozhangid!=null" @click="perpareToModifyZijin(zijinitem.xiangmuname,zijinitem.zijinbaozhangid,zijinitem.xiangmuid)">编 辑</button>
                             <button class="btn btn-danger"  v-if="zijinitem.zijinbaozhangid!=null" @click="toDelete(zijinitem.zijinbaozhangid)">删 除</button>
                         </td>
 
@@ -95,7 +95,7 @@
 
 
 </body>
-<script src="../js/gongchengguanli/zijinbaozhang_list.js?ver=1.1"></script>
+<script src="../js/gongchengguanli/zijinbaozhang_list.js?ver=1.0"></script>
 <link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
 <link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
 <link rel="stylesheet" href="/css/xadmin.css?ver=0.6">

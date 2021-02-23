@@ -59,7 +59,7 @@
 
 
                             <button class="btn btn-success" v-if="jiesuanitem.jungongjiesuanid==null" @click="toAdd(jiesuanitem.xiangmuname,jiesuanitem.xiangmuid)">新 增</button>
-                            <button class="btn btn-primary" v-if="jiesuanitem.jungongjiesuanid!=null" @click="perpareToModifyJiesuan(jiesuanitem.xiangmuname,jiesuanitem.jungongjiesuanid)">编 辑</button>
+                            <button class="btn btn-primary" v-if="jiesuanitem.jungongjiesuanid!=null" @click="perpareToModifyJiesuan(jiesuanitem.xiangmuname,jiesuanitem.jungongjiesuanid,jiesuanitem.xiangmuid)">编 辑</button>
                             <button class="btn btn-danger"  v-if="jiesuanitem.jungongjiesuanid!=null" @click="toDelete(jiesuanitem.jungongjiesuanid)">删 除</button>
                         </td>
 
