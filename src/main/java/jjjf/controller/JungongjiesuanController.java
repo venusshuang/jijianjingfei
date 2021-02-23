@@ -64,7 +64,7 @@ public class JungongjiesuanController {
 
             List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
             if(mmList.size()!=1) {
-                return JsonResult.getErrorResult("获取错误");
+                return JsonResult.getErrorResult("获取中心下达经费指标失败");
             }
             Double mmzhongxinzhibiao=mmList.get(0).getZhongxinjingfeizhibiao();
             Double mmjiesuanpifujine=ppjiesuanpifujine;
