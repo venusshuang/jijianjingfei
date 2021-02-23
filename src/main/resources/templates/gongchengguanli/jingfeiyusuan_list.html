@@ -57,7 +57,7 @@
                         <td style="text-align:center;vertical-align:middle;">
 
 
-                            <button class="btn btn-primary" v-if="jingfeiitem.jingfeiyuansuanid==null" @click="toAdd(jingfeiitem.xiangmuname,jingfeiitem.xiangmuid)">新 增</button>
+                            <button class="btn btn-success" v-if="jingfeiitem.jingfeiyuansuanid==null" @click="toAdd(jingfeiitem.xiangmuname,jingfeiitem.xiangmuid)">新 增</button>
                             <button class="btn btn-primary" v-if="jingfeiitem.jingfeiyuansuanid!=null" @click="perpareToModifyJingfei(jingfeiitem.xiangmuname,jingfeiitem.jingfeiyuansuanid)">编 辑</button>
                             <button class="btn btn-danger" v-if="jingfeiitem.jingfeiyuansuanid!=null" @click="toDelete(jingfeiitem.jingfeiyuansuanid)">删 除</button>
                         </td>

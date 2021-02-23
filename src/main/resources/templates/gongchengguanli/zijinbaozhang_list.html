@@ -32,10 +32,10 @@
                     <th style="text-align:center;vertical-align:middle;width: 150px;">项目名称</th>
                     <th style="text-align:center;vertical-align:middle;width: 150px;">向中心申请资金</th>
                     <th style="text-align:center;vertical-align:middle;width: 150px;">申请时间</th>
-                    <th style="text-align:center;vertical-align:middle;width: 150px;">向联保申请拨付金额</th>
-                    <th style="text-align:center;vertical-align:middle;width: 150px;">向联保申请拨付时间</th>
-                    <th style="text-align:center;vertical-align:middle;width: 150px;">联保拨付金额</th>
-                    <th style="text-align:center;vertical-align:middle;width: 150px;">联保拨付时间</th>
+                    <th style="text-align:center;vertical-align:middle;width: 150px;" v-show="deptId=='1'">向联保申请拨付金额</th>
+                    <th style="text-align:center;vertical-align:middle;width: 150px;" v-show="deptId=='1'">向联保申请拨付时间</th>
+                    <th style="text-align:center;vertical-align:middle;width: 150px;" v-show="deptId=='1'">联保拨付金额</th>
+                    <th style="text-align:center;vertical-align:middle;width: 150px;" v-show="deptId=='1'">联保拨付时间</th>
                     <th style="text-align:center;vertical-align:middle;width: 150px;">中心资金拨付金额</th>
                     <th style="text-align:center;vertical-align:middle;width: 150px;">中心拨付时间</th>
                     <th style="text-align:center;vertical-align:middle;width: 150px;">操作</th>
@@ -48,16 +48,16 @@
                         <td style="text-align:center;vertical-align:middle;" v-text="zijinitem.xiangmuname"></td>
                         <td style="text-align:center;vertical-align:middle;" v-text="zijinitem.xiangzhongxinshenqingzijin"></td>
                         <td style="text-align:center;vertical-align:middle;" v-text="zijinitem.shenqingshijian"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="zijinitem.xianglianbaoshenqingzijin"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="zijinitem.xianglianbaoshenqingbofushijian"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="zijinitem.lianbaobofujine"></td>
-                        <td style="text-align:center;vertical-align:middle;" v-text="zijinitem.lianbaobofushijian"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-show="deptId=='1'" v-text="zijinitem.xianglianbaoshenqingzijin"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-show="deptId=='1'" v-text="zijinitem.xianglianbaoshenqingbofushijian"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-show="deptId=='1'" v-text="zijinitem.lianbaobofujine"></td>
+                        <td style="text-align:center;vertical-align:middle;" v-show="deptId=='1'" v-text="zijinitem.lianbaobofushijian"></td>
                         <td style="text-align:center;vertical-align:middle;" v-text="zijinitem.zhongxinbofujine"></td>
                         <td style="text-align:center;vertical-align:middle;" v-text="zijinitem.zhongxinbofushijian"></td>
                         <td style="text-align:center;vertical-align:middle;">
 
 
-                            <button class="btn btn-primary" v-if="zijinitem.zijinbaozhangid==null" @click="toAdd(zijinitem.xiangmuname,zijinitem.xiangmuid)">新 增</button>
+                            <button class="btn btn-success" v-if="zijinitem.zijinbaozhangid==null" @click="toAdd(zijinitem.xiangmuname,zijinitem.xiangmuid)">新 增</button>
                             <button class="btn btn-primary" v-if="zijinitem.zijinbaozhangid!=null" @click="perpareToModifyZijin(zijinitem.xiangmuname,zijinitem.zijinbaozhangid)">编 辑</button>
                             <button class="btn btn-danger"  v-if="zijinitem.zijinbaozhangid!=null" @click="toDelete(zijinitem.zijinbaozhangid)">删 除</button>
                         </td>
