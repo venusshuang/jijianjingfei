@@ -55,7 +55,7 @@
                         <td style="text-align:center;vertical-align:middle;">
 
 
-                            <button class="btn btn-primary" v-if="jinzhanitem.gongchengjinzhanid==null" @click="toAdd(jinzhanitem.xiangmuname,jinzhanitem.xiangmuid)">新 增</button>
+                            <button class="btn btn-success" v-if="jinzhanitem.gongchengjinzhanid==null" @click="toAdd(jinzhanitem.xiangmuname,jinzhanitem.xiangmuid)">新 增</button>
                             <button class="btn btn-primary" v-if="jinzhanitem.gongchengjinzhanid!=null" @click="perpareToModifyJinzhan(jinzhanitem.xiangmuname,jinzhanitem.gongchengjinzhanid)">编 辑</button>
                             <button class="btn btn-danger" v-if="jinzhanitem.gongchengjinzhanid!=null" @click="toDelete(jinzhanitem.gongchengjinzhanid)">删 除</button>
                         </td>

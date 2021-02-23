@@ -259,7 +259,7 @@ var Zijinbaozhang = new Vue({
                 return false;
             }
 
-            var xianglianbaoshenqingzijin = !_this.zijin.xianglianbaoshenqingzijin ? "" : $.trim(_this.zijin.xianglianbaoshenqingzijin);
+           /* var xianglianbaoshenqingzijin = !_this.zijin.xianglianbaoshenqingzijin ? "" : $.trim(_this.zijin.xianglianbaoshenqingzijin);
             if("" == xianglianbaoshenqingzijin){
                 layer.alert("请填写向联保申请拨付金额！");
                 return false;
@@ -306,7 +306,7 @@ var Zijinbaozhang = new Vue({
                 layer.alert("请选择中心拨付时间！");
                 return false;
             }
-
+*/
 
             return true;
         },

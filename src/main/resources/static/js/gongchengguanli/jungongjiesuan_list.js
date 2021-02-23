@@ -280,7 +280,7 @@ var Jungongjiesuan = new Vue({
                 return false;
             }
 
-            var jiesuanpifuwenhao = !_this.jiesuan.jiesuanpifuwenhao ? "" : $.trim(_this.jiesuan.jiesuanpifuwenhao);
+           /* var jiesuanpifuwenhao = !_this.jiesuan.jiesuanpifuwenhao ? "" : $.trim(_this.jiesuan.jiesuanpifuwenhao);
             if("" == jiesuanpifuwenhao){
                 layer.alert("请填写两级决算批复文号！");
                 return false;
@@ -305,7 +305,7 @@ var Jungongjiesuan = new Vue({
                 layer.alert("结余上缴金额请填写数字格式！");
                 return false;
             }
-
+*/
 
 
             return true;
