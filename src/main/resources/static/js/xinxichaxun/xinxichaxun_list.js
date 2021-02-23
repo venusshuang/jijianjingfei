@@ -18,6 +18,9 @@ var Xinxichaxun = new Vue({
         jiesuanzhuangtailist:[],
         jiesuanqingkuanglist:[],
 
+        m1:1,
+        m2:1000,
+
         pageIndex : 1,
         pageSize : 10,
         pageCount : 0,
