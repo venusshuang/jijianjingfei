@@ -421,4 +421,22 @@ public class PageController {
 
 	}
 
+	//上传
+	@RequestMapping("gongchengguanli/upload_batch.html")
+	public String UploadBatch(ModelMap map, HttpServletRequest request) {
+
+		if(!isLoginPC(request)) {
+			return "redirect:/manage/login.html";
+		}
+
+		String mmFuJianPath = request.getParameter("fujianpath").toString();
+		String mmFileSize = request.getParameter("filesize").toString();
+		map.put("filetype", "batch");
+		map.put("fujianpath", mmFuJianPath);
+		map.put("filesize", mmFileSize);
+		return "gongchengguanli/UploadBatch";
+	}
+
+
+
 }

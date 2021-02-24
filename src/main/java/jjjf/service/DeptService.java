@@ -48,5 +48,11 @@ public class DeptService {
         return ddMapper.updateByPrimaryKey(ppDept)==1;
     }
 
+    public List<Dept> findAll(String ppDeptName){
+        DeptExample mmExample=new DeptExample();
+        mmExample.createCriteria().andDeptnameEqualTo(ppDeptName);
+        return  ddMapper.selectByExample(mmExample);
+    }
+
 
 }

@@ -24,7 +24,7 @@
     jg.jiesuanqingkuangid,jsqk.text as jsqktext,jg.shifoujizhang,jg.jiesuanpifuwenhao,
     jg.jiesuanpifujine,jg.jieyushangjiaojine
     from junjianxiangmu xm
-    left join jungongjiesuan jg on jg.xiangmuid=jg.xiangmuid
+    left join jungongjiesuan jg on jg.xiangmuid=xm.xiangmuid
     left join dict_jiesuanzhuangtai jszt on jszt.id=jg.jiesuanzhuangtaiid
     left join dict_jiesuanqingkuang jsqk on jsqk.id=jg.jiesuanqingkuangid
     where 1=1
@@ -44,7 +44,7 @@
   <select id="getCountBydeptId" resultType="Object">
 
     SELECT count(*) from junjianxiangmu xm
-    left join jungongjiesuan jg on jg.xiangmuid=jg.xiangmuid
+    left join jungongjiesuan jg on jg.xiangmuid=xm.xiangmuid
     left join dict_jiesuanzhuangtai jszt on jszt.id=jg.jiesuanzhuangtaiid
     left join dict_jiesuanqingkuang jsqk on jsqk.id=jg.jiesuanqingkuangid
     where 1=1

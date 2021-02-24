@@ -211,7 +211,7 @@ public class ExportExcelController {
             }
 
             SimpleDateFormat mmDateFormat = new SimpleDateFormat("yyyyMMdd");
-            String mmSavePath = userfilepath +  "/temp/zjcq/"+mmDateFormat.format(new Date()) + "/";
+            String mmSavePath = userfilepath +  "/temp/"+mmDateFormat.format(new Date()) + "/";
 
             CreateXLS.createExcel(mmResultList, mmSavePath,  "jijianxiangmu_"+ UUID.randomUUID().toString()+".xls",
                     "jijianxiangmu", request, response);

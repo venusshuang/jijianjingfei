@@ -21,6 +21,8 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 
 
@@ -33,16 +35,16 @@ public class UploadController {
 	@Value("${userfilepath}")
 	String USERFILEPATH;
 	
-	@RequestMapping("UploadImage")
+	@RequestMapping("UploadFile")
 	public ResponseEntity<?> UploadImage(HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			MultipartHttpServletRequest  mmRequest = (MultipartHttpServletRequest) request;
+			//MultipartHttpServletRequest  mmRequest = (MultipartHttpServletRequest) request;
 			//取出文件信息
 			//org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest mmRequest = (DefaultMultipartHttpServletRequest) request;
 			
-			//MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-			//MultipartHttpServletRequest mmRequest = resolver.resolveMultipart(request);
+			MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+			MultipartHttpServletRequest mmRequest = resolver.resolveMultipart(request);
 			
 			Iterator<String> mm = mmRequest.getFileNames();
 			String mmKeyString = mm.next();
@@ -50,8 +52,8 @@ public class UploadController {
 			MultipartFile mmFile = mmRequest.getFile(mmKeyString);
 
 			SimpleDateFormat mmDateFormat = new SimpleDateFormat("yyyyMMdd");
-			String SaveFolder = "/jjjf/image/" +mmDateFormat.format(new Date()) + "/";
-			String FullUrl = UPLOADIMAGE_URL + "/image/"+ mmDateFormat.format(new Date()) + "/";
+			String SaveFolder = "/importexecl/" +mmDateFormat.format(new Date()) + "/";
+			String FullUrl = USERFILEPATH + "/importexecl/"+ mmDateFormat.format(new Date()) + "/";
 			//String FullUrl = SaveFolder;
 			ServletContext mmContext = request.getServletContext();
 			String FileUrl = mmContext.getContextPath() + SaveFolder;

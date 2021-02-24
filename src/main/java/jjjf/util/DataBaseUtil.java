@@ -12,10 +12,11 @@ public class DataBaseUtil {
     public static void backup() {
         String hostIP = "127.0.0.1";
         String userName = "root";
-        String password = "123123";
-        String savePath = "D:/userfiles/";
-        String fileName = "jijianjingfei"+new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+".sql";
-        String databaseName = "jijianjingfei";
+        String password = "123456";
+        String hostPort = "3306";
+        String savePath = "D:/userfiles/jjjf/";
+        String fileName = "jjjf"+new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+".sql";
+        String databaseName = "jjjf";
         File saveFile = new File(savePath);
     // 如果目录不存在
         if (!saveFile.exists()) {
@@ -30,7 +31,11 @@ public class DataBaseUtil {
         BufferedReader bufferedReader = null;
         try {
             printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(savePath + fileName), "utf8"));
-            Process process = Runtime.getRuntime().exec("cmd /c c:\\mysqldump -h" + hostIP + " -u" + userName + " -p" + password + " --set-charset=UTF8 " + databaseName);
+
+            String cmd ="cmd /c c:\\mysqldump -h" + hostIP +" -u" + userName +" -P" + hostPort +" -p" + password +" " + databaseName;
+
+            Process process = Runtime.getRuntime().exec(cmd);
+           // Process process = Runtime.getRuntime().exec("cmd /c c:\\mysqldump -h" + hostIP + " -u" + userName + " -p" + password + " --set-charset=UTF8 " + databaseName);
             //Process process = Runtime.getRuntime().exec("cmd /c c:\\\\mysqldump -hlocalhost -u root -p123123 --opt jijianjingfei>"+savePath + fileName);
             InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(), "utf8");
             bufferedReader = new BufferedReader(inputStreamReader);

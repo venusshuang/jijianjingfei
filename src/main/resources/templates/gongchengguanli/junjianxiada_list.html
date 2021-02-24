@@ -12,9 +12,12 @@
         <!-- 内容 -->
         <div id="Junjianxiada" class="main">
 
+            <div th:replace="gongchengguanli/Upload"></div>
 
             <div class="primary-title">
                 军建计划下达情况<span class="btn btn-success" style="float: right; margin-right: 15px; margin-top: 10px;" @click="toAdd()">新增</span>
+                <span  class="btn btn-primary" style="float:right;margin-right:15px;margin-top:10px;"
+                       @click="showUploadXls()">批量导入</span>
             </div>
             <div class="primary-content" >
 
@@ -89,7 +92,9 @@
 
 
 </body>
-<script src="../js/gongchengguanli/junjianxiada_list.js?ver=1.1"></script>
+<script src="../js/gongchengguanli/junjianxiada_list.js?ver=1.5"></script>
+<script type="text/javascript" charset="utf-8" src="../js/plupload/plupload.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/plupload/plupload.full.js"></script>
 <link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>
 <link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
 <link rel="stylesheet" href="/css/xadmin.css?ver=0.6">

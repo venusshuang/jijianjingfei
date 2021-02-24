@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="../css/upload.css?ver=0.4" />
+</head>
+<body>
+	<div id="upload">
+		<div class="body_upload">
+			<div style="width:650px;margin:0px auto;">
+		    	<div id="filelist" style="display: none;"></div>
+		    	<div id="uploadfilelist"></div>
+		    	<div id="container" style="width:100%;text-align: center;"> 
+		       		<input type="button" id="pickfiles" class="btn btn-lg btn-success button_container" value="浏览文件" style="" />
+		   		</div>
+			</div>
+		</div>
+		<div class="bottom_upload">
+			<input id="ConfirmUploadButton" type="button" class="btn btn-x btn-primary Button_upload" value="确定" />
+			<input id="CancelButton" type="button" class="btn btn-x btn-default Button_upload" value="取消" />
+		</div>
+	</div>
+
+	<script type="text/javascript" charset="utf-8" src="../js/upload/upload_embed.js?ver=2.0"></script>
+	<script type="text/javascript" charset="utf-8" src="../js/upload/upload_plupload.js?ver=3.4"></script>
+	<!--<script type="text/javascript" charset="utf-8" src="../js/plupload/plupload.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../js/plupload/plupload.full.js"></script>-->
+
+	
+	<script th:inline="javascript">
+	var filetype = [[${filetype}]];
+	var fujianpath = [[${fujianpath}]];
+	var filesize = [[${filesize}]];
+		$(function(){
+			InitUpLoader();
+		})
+	</script>
+</body>
+</html>
