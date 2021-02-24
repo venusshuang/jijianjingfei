@@ -32,10 +32,10 @@ public class DataBaseUtil {
         try {
             printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(savePath + fileName), "utf8"));
 
-            String cmd ="cmd /c c:\\mysqldump -h" + hostIP +" -u" + userName +" -P" + hostPort +" -p" + password +" " + databaseName;
+            //String cmd ="cmd /c c:\\mysqldump -h" + hostIP +" -u" + userName +" -P" + hostPort +" -p" + password +" " + databaseName;
 
-            Process process = Runtime.getRuntime().exec(cmd);
-           // Process process = Runtime.getRuntime().exec("cmd /c c:\\mysqldump -h" + hostIP + " -u" + userName + " -p" + password + " --set-charset=UTF8 " + databaseName);
+           // Process process = Runtime.getRuntime().exec(cmd);
+            Process process = Runtime.getRuntime().exec("C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin\\mysqldump --opt -h" + hostIP + " -u" + userName + " -p" + password + " --set-charset=UTF8 " + databaseName);
             //Process process = Runtime.getRuntime().exec("cmd /c c:\\\\mysqldump -hlocalhost -u root -p123123 --opt jijianjingfei>"+savePath + fileName);
             InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(), "utf8");
             bufferedReader = new BufferedReader(inputStreamReader);
