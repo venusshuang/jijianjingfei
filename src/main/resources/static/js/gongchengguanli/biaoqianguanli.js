@@ -19,7 +19,7 @@ var Leibiebiaoqian = new Vue({
 
     methods : {
         bindBiaoqianList : function(){
-            let _this = this;
+            var _this = this;
             layer.open({type:3});
             $.post('/leibiebiaoqian/find_all',{
                 biaoqian:_this.biaoqiantext,
@@ -67,7 +67,7 @@ var Leibiebiaoqian = new Vue({
                 layer.closeAll("loading");
                 if(ppData != null){
                     if(ppData.result == "1"){
-                        let data = ppData.resultContent;
+                        var data = ppData.resultContent;
                         _this.biaoqian = data;
                     }else{
                         layer.alert(ppData.message);
@@ -103,7 +103,7 @@ var Leibiebiaoqian = new Vue({
             }
         },
         modifyBiaoqian : function(){
-            let _this = this;
+            var _this = this;
             if(_this.checkInputData()){
                 layer.open({type:3});
                 $.post('/leibiebiaoqian/modify',{
@@ -131,7 +131,7 @@ var Leibiebiaoqian = new Vue({
         },
         //检查输入信息
         checkInputData : function(){
-            let mmText = !this.biaoqian.text ? "" : $.trim(this.biaoqian.text);
+            var mmText = !this.biaoqian.text ? "" : $.trim(this.biaoqian.text);
             if("" == mmText){
                 layer.alert("请填写类别标签名称！");
                 return false;

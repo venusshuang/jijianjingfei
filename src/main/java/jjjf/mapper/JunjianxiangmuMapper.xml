@@ -82,7 +82,7 @@ from junjianxiangmu xm
 left join jingfeiyusuan ys on ys.xiangmuid=xm.xiangmuid
 left join gongchengjinzhan jz on jz.xiangmuid=xm.xiangmuid
 left join zijinbaozhang bz on bz.xiangmuid=xm.xiangmuid
-left join jungongjiesuan jg on jg.xiangmuid=jg.xiangmuid
+left join jungongjiesuan jg on jg.xiangmuid=xm.xiangmuid
 left join dept dw on dw.deptid=xm.jieshoudanweiid
 left join dict_leibiebiaoqian lb on lb.id=xm.xiangmuleibie
 left join dict_xiangmuzhuangtai xmzt on xmzt.id=jz.xiangmuzhuangtaiid
@@ -127,7 +127,7 @@ LIMIT #{startindex},#{pagesize}
     left join jingfeiyusuan ys on ys.xiangmuid=xm.xiangmuid
     left join gongchengjinzhan jz on jz.xiangmuid=xm.xiangmuid
     left join zijinbaozhang bz on bz.xiangmuid=xm.xiangmuid
-    left join jungongjiesuan jg on jg.xiangmuid=jg.xiangmuid
+    left join jungongjiesuan jg on jg.xiangmuid=xm.xiangmuid
     left join dept dw on dw.deptid=xm.jieshoudanweiid
     left join dict_leibiebiaoqian lb on lb.id=xm.xiangmuleibie
     left join dict_xiangmuzhuangtai xmzt on xmzt.id=jz.xiangmuzhuangtaiid
