@@ -124,7 +124,7 @@ var Jungongjiesuan = new Vue({
             this.jiesuan = {};
             this.xiangmuId=ppXiangmuId;
             $("#shifoujizhang_y").prop('checked',false);
-            $("#shifoujizhang_n").prop('checked',true);
+            $("#shifoujizhang_n").prop('checked',false);
             this.jiesuan.shifoujizhang='0';
 
         },
@@ -180,7 +180,6 @@ var Jungongjiesuan = new Vue({
             this.jiesuan = {};
             this.jungongjiesuanId=ppJungongjiesuanId;
             this.xiangmuId=ppxiangmuid;
-
             this.bindJungongjiesuan();
         },
 
@@ -288,6 +287,7 @@ var Jungongjiesuan = new Vue({
             }
 
             var shifoujizhang = !_this.jiesuan.shifoujizhang ? "" : $.trim(_this.jiesuan.shifoujizhang);
+            alert(shifoujizhang);
             if("" == shifoujizhang&&_this.deptId!="1"){
                 layer.alert("请选择决算是否记账和登记资产！");
                 return false;
@@ -301,21 +301,21 @@ var Jungongjiesuan = new Vue({
 
           var jiesuanpifujine = !_this.jiesuan.jiesuanpifujine ? "" : $.trim(_this.jiesuan.jiesuanpifujine);
 
-            if("" == jiesuanpifujine&&_this.deptId=="1"){
+            if("" == jiesuanpifujine&&_this.deptId=="1"&&jiesuanzhuangtaiid=="3"){
                 layer.alert("请填写决算批复金额！");
                 return false;
             }
-            if (!_this.checknum(jiesuanpifujine)&&_this.deptId=="1") {
+            if (!_this.checknum(jiesuanpifujine)&&_this.deptId=="1"&&jiesuanzhuangtaiid=="3") {
                 layer.alert("决算批复金额请填写数字格式！");
                 return false;
             }
 
             var jieyushangjiaojine = !_this.jiesuan.jieyushangjiaojine ? "" : $.trim(_this.jiesuan.jieyushangjiaojine);
-            if("" == jieyushangjiaojine&&_this.deptId=="1"){
+            if("" == jieyushangjiaojine&&_this.deptId=="1"&&jiesuanzhuangtaiid=="3"){
                 layer.alert("请填写结余上缴金额！");
                 return false;
             }
-            if (!_this.checknum(jieyushangjiaojine)&&_this.deptId=="1") {
+            if (!_this.checknum(jieyushangjiaojine)&&_this.deptId=="1"&&jiesuanzhuangtaiid=="3") {
                 layer.alert("结余上缴金额请填写数字格式！");
                 return false;
             }

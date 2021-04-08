@@ -77,9 +77,10 @@ public class ZijinbaozhangController {
             SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM");
 
             Date mmshenqingshijian=simdate.parse(ppshenqingshijian);
-            Date mmxianglianbaoshenqingbofushijian=simdate.parse(ppxianglianbaoshenqingbofushijian);
-            Date mmlianbaobofushijian=simdate.parse(pplianbaobofushijian);
-            Date mmzhongxinbofushijian=simdate.parse(ppzhongxinbofushijian);
+
+           // Date mmxianglianbaoshenqingbofushijian=simdate.parse(ppxianglianbaoshenqingbofushijian);
+           // Date mmlianbaobofushijian=simdate.parse(pplianbaobofushijian);
+          //  Date mmzhongxinbofushijian=simdate.parse(ppzhongxinbofushijian);
 
             Zijinbaozhang mmZijinbaozhang=new Zijinbaozhang();
             mmZijinbaozhang.setZijinbaozhangid(UUID.randomUUID().toString());
@@ -87,11 +88,26 @@ public class ZijinbaozhangController {
             mmZijinbaozhang.setXiangzhongxinshenqingzijin(ppxiangzhongxinshenqingzijin);
             mmZijinbaozhang.setShenqingshijian(mmshenqingshijian);
             mmZijinbaozhang.setXianglianbaoshenqingzijin(ppxianglianbaoshenqingzijin);
-            mmZijinbaozhang.setXianglianbaoshenqingbofushijian(mmxianglianbaoshenqingbofushijian);
+
+            if(!"".equals(ppxianglianbaoshenqingbofushijian)){
+                Date mmxianglianbaoshenqingbofushijian=simdate.parse(ppxianglianbaoshenqingbofushijian);
+                mmZijinbaozhang.setXianglianbaoshenqingbofushijian(mmxianglianbaoshenqingbofushijian);
+            }
+
             mmZijinbaozhang.setLianbaobofujine(pplianbaobofujine);
-            mmZijinbaozhang.setLianbaobofushijian(mmlianbaobofushijian);
+
+            if(!"".equals(pplianbaobofushijian)){
+                Date mmlianbaobofushijian=simdate.parse(pplianbaobofushijian);
+                mmZijinbaozhang.setLianbaobofushijian(mmlianbaobofushijian);
+            }
+
             mmZijinbaozhang.setZhongxinbofujine(ppzhongxinbofujine);
-            mmZijinbaozhang.setZhongxinbofushijian(mmzhongxinbofushijian);
+
+            if(!"".equals(ppzhongxinbofushijian)){
+                Date mmzhongxinbofushijian=simdate.parse(ppzhongxinbofushijian);
+                mmZijinbaozhang.setZhongxinbofushijian(mmzhongxinbofushijian);
+            }
+
             mmZijinbaozhang.setCreater(ppadminId);
             mmZijinbaozhang.setCreatetime(new Date());
             mmZijinbaozhang.setModifier(ppadminId);
