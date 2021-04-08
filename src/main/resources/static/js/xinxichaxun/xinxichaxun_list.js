@@ -12,11 +12,14 @@ var Xinxichaxun = new Vue({
         s_xiangmuzhuangtaiid:'',
         s_jungongzhuangtaiid:'',
         s_jiesuanqingkuangid:'',
+        s_leibieid:'',
+        s_beizhu:'',
         searchxiangmulist:[],
 
         xiangmuzhuangtailist:[],
         jiesuanzhuangtailist:[],
         jiesuanqingkuanglist:[],
+        leibielist:[],
 
         m1:1,
         m2:1000,
@@ -34,6 +37,7 @@ var Xinxichaxun = new Vue({
         _this.bindXiangmuzhuangtaiList();
         _this.bindJiesuanzhuangtaiList();
         _this.bindJiesuanqingkuangList();
+        _this.bindLeibieList();
     },
     methods : {
 
@@ -96,6 +100,26 @@ var Xinxichaxun = new Vue({
             },"json");
         },
 
+        bindLeibieList:function (){
+            var _this = this;
+            layer.open({type:3});
+            $.post('/leibiebiaoqian/find_all',{
+                biaoqian:"",
+                rdm:Math.random()
+            },function(ppData){
+
+                layer.closeAll("loading");
+                if(ppData!=null){
+                    if(ppData.result == '1'){
+                        _this.leibielist =ppData.resultContent;
+
+                    }else{
+                        layer.alert(ppData.message);
+                    }
+                }
+            },"json");
+        },
+
         bindXiangmuList:function (){
             var _this = this;
             layer.open({type:3});
@@ -108,6 +132,8 @@ var Xinxichaxun = new Vue({
                 xiangmuzhuangtaiid : _this.s_xiangmuzhuangtaiid,
                 jungongzhuangtaiid : _this.s_jungongzhuangtaiid,
                 jiesuanqingkuangid : _this.s_jiesuanqingkuangid,
+                leibieid : _this.s_leibieid,
+                beizhu : _this.s_beizhu,
                 pageindex : _this.pageIndex,
                 pagesize : _this.pageSize,
                 rdm : Math.random()

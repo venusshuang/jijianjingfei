@@ -49,6 +49,8 @@ public class ExportExcelController {
                                 @RequestParam("xiangmuzhuangtaiid") String ppxiangmuzhuangtaiid,
                                 @RequestParam("jungongzhuangtaiid") String ppjungongzhuangtaiid,
                                 @RequestParam("jiesuanqingkuangid") String ppjiesuanqingkuangid,
+                                @RequestParam("leibieid") String ppleibieid,
+                                @RequestParam("beizhu") String ppbeizhu,
                                 @RequestParam("pageindex") int ppPageIndex,
                                 @RequestParam("pagesize") int ppPageSize) {
         List<List<String>> mmResultList = new ArrayList<List<String>>();
@@ -99,9 +101,29 @@ public class ExportExcelController {
         mmTitleList.add("备注");
         mmResultList.add(mmTitleList);
 
+        if(!ppxiangmumingcheng.equals("")) {
+            ppxiangmumingcheng = "%" + ppxiangmumingcheng + "%";
+        }
+        if(!ppdanweimingcheng.equals("")) {
+            ppdanweimingcheng = "%" + ppdanweimingcheng + "%";
+        }
+        if(!ppjihuawenhao.equals("")) {
+            ppjihuawenhao = "%" + ppjihuawenhao + "%";
+        }
+        if(!ppyusuanwenhao.equals("")) {
+            ppyusuanwenhao = "%" + ppyusuanwenhao + "%";
+        }
+        if(!ppjingfeikemu.equals("")) {
+            ppjingfeikemu = "%" + ppjingfeikemu + "%";
+        }
+        if(!ppbeizhu.equals("")){
+            ppbeizhu="%" + ppbeizhu + "%";
+        }
+
+
         List<Map<String, Object>> mmXiangmuList = ddJunjianxiangmuService.searchXiangmu(ppxiangmumingcheng,ppdanweimingcheng,
-                ppjihuawenhao,ppyusuanwenhao,ppjingfeikemu,ppxiangmuzhuangtaiid,ppjungongzhuangtaiid,
-                ppjiesuanqingkuangid,ppPageIndex,ppPageSize);
+                ppjihuawenhao,ppyusuanwenhao,ppjingfeikemu,ppxiangmuzhuangtaiid,ppjungongzhuangtaiid,ppjiesuanqingkuangid,
+                ppleibieid,ppbeizhu,ppPageIndex,ppPageSize);
         int mmXiangmushu = mmXiangmuList.size();
         if(mmXiangmushu > 0) {
             for (int i = 0; i < mmXiangmushu; i++) {

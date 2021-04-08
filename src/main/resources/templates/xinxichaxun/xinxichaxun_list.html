@@ -33,7 +33,7 @@
                         <td class="center middle" >
                             <input class="form-control" type="text" v-model="s_xiangmumingcheng"/>
                         </td>
-                        <td class="center middle"  rowspan="4">
+                        <td class="center middle"  rowspan="5">
                             <button class="btn btn-primary btn-lg" @click="bindXiangmuList();">搜 索</button>
 
                         </td>
@@ -92,7 +92,24 @@
                                         :value="jiesuanqingkuangitem.id" v-text="jiesuanqingkuangitem.text"></option>
                             </select>
                         </td>
-
+                    </tr>
+                    <tr>
+                        <th class="right middle" >
+                            类别
+                        </th>
+                        <td class="center middle" >
+                            <select class="input form-control" v-model="s_leibieid"  >
+                                <option value=''>--请选择--</option>
+                                <option v-for="leibieitem in leibielist"
+                                        :value="leibieitem.id" v-text="leibieitem.text"></option>
+                            </select>
+                        </td>
+                        <th class="right middle" >
+                            备注
+                        </th>
+                        <td class="center middle" >
+                            <input class="form-control" type="text" v-model="s_beizhu" />
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -102,25 +119,34 @@
         <div id="searchresult" class="primary-content">
             <a target="_blank" class='btn btn-primary'
                style='float:right;margin-right:15px;width:120px;height:34px;color:#fff !important;'
-               :href="'/exportexcel/exportxiangmu?xiangmumingcheng='+s_xiangmumingcheng+'&danweimingcheng='+s_danweimingcheng+'&jihuawenhao='+s_jihuawenhao+'&yusuanwenhao='+s_yusuanwenhao+'&jingfeikemu='+s_jingfeikemu+'&xiangmuzhuangtaiid='+s_xiangmuzhuangtaiid+'&jungongzhuangtaiid='+s_jungongzhuangtaiid+'&jiesuanqingkuangid='+s_jiesuanqingkuangid+'&pageindex='+m1+'&pagesize='+m2">导出</a>
+               :href="'/exportexcel/exportxiangmu?xiangmumingcheng='+s_xiangmumingcheng+'&danweimingcheng='+s_danweimingcheng+'&jihuawenhao='+s_jihuawenhao+'&yusuanwenhao='+s_yusuanwenhao+'&jingfeikemu='+s_jingfeikemu+'&xiangmuzhuangtaiid='+s_xiangmuzhuangtaiid+'&jungongzhuangtaiid='+s_jungongzhuangtaiid+'&jiesuanqingkuangid='+s_jiesuanqingkuangid+'&leibieid='+s_leibieid+'&beizhu='+s_beizhu+'&pageindex='+m1+'&pagesize='+m2">导出</a>
 
             <table class="table table-hover table-striped" >
                 <thead>
                 <th style="text-align:center;vertical-align:middle;width: 150px;">序号</th>
                 <th style="text-align:center;vertical-align:middle;width: 150px;">单位名称</th>
                 <th style="text-align:center;vertical-align:middle;width: 150px;">项目名称</th>
+                <th style="text-align:center;vertical-align:middle;width: 150px;">联保建设计划批复金额</th>
                 <th style="text-align:center;vertical-align:middle;width: 150px;">建设计划文号</th>
                 <th style="text-align:center;vertical-align:middle;width: 150px;">经费预算文号</th>
                 <th style="text-align:center;vertical-align:middle;width: 150px;">经费科目</th>
+                <th style="text-align:center;vertical-align:middle;width: 150px;">项目状态</th>
+                <th style="text-align:center;vertical-align:middle;width: 150px;">竣工结算状态</th>
+                <th style="text-align:center;vertical-align:middle;width: 150px;">竣工决算情况</th>
                 </thead>
                 <tbody>
                 <tr v-for="(searchxiangmuitem,index) in searchxiangmulist">
                     <td style="text-align:center;vertical-align:middle;" v-text="index+1+(pageIndex-1)*pageSize"></td>
                     <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.deptname"></td>
                     <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.xiangmuname"></td>
+                    <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.lianbaopifujine"></td>
                     <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.xiangmupifu"></td>
                     <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.jingfeixiadaqingkuang"></td>
                     <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.jingfeikemu"></td>
+                    <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.xmzttext"></td>
+                    <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.jszttext"></td>
+                    <td style="text-align:center;vertical-align:middle;" v-text="searchxiangmuitem.jsqktext"></td>
+
 
                 </tr>
                 </tbody>
@@ -151,7 +177,7 @@
 
 
 </body>
-<script src="../js/xinxichaxun/xinxichaxun_list.js?ver=1.2"></script>
+<script src="../js/xinxichaxun/xinxichaxun_list.js?ver=1.0"></script>
 <link href="../css/main.css?ver=1.1" rel="stylesheet" type="text/css"></link>
 <link href="../css/dashboard.css?ver=1.1" rel="stylesheet" type="text/css"></link>
 <link rel="stylesheet" href="/css/xadmin.css?ver=0.6">

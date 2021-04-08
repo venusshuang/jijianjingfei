@@ -2,6 +2,7 @@ package jjjf.controller;
 
 
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import jjjf.model.Junjianxiangmu;
 import jjjf.service.JunjianxiangmuService;
 import jjjf.util.JsonResult;
@@ -176,15 +177,17 @@ public class JunjianxiangmuContorller {
 
     @RequestMapping("searchXiangmu")
     public JsonResult<?> searchXiangmu(@RequestParam("xiangmumingcheng") String ppxiangmumingcheng,
-                                            @RequestParam("danweimingcheng") String ppdanweimingcheng,
-                                            @RequestParam("jihuawenhao") String ppjihuawenhao,
-                                            @RequestParam("yusuanwenhao") String ppyusuanwenhao,
-                                            @RequestParam("jingfeikemu") String ppjingfeikemu,
-                                            @RequestParam("xiangmuzhuangtaiid") String ppxiangmuzhuangtaiid,
-                                            @RequestParam("jungongzhuangtaiid") String ppjungongzhuangtaiid,
-                                            @RequestParam("jiesuanqingkuangid") String ppjiesuanqingkuangid,
-                                            @RequestParam("pageindex") int ppPageIndex,
-                                            @RequestParam("pagesize") int ppPageSize) {
+                                       @RequestParam("danweimingcheng") String ppdanweimingcheng,
+                                       @RequestParam("jihuawenhao") String ppjihuawenhao,
+                                       @RequestParam("yusuanwenhao") String ppyusuanwenhao,
+                                       @RequestParam("jingfeikemu") String ppjingfeikemu,
+                                       @RequestParam("xiangmuzhuangtaiid") String ppxiangmuzhuangtaiid,
+                                       @RequestParam("jungongzhuangtaiid") String ppjungongzhuangtaiid,
+                                       @RequestParam("jiesuanqingkuangid") String ppjiesuanqingkuangid,
+                                       @RequestParam("leibieid") String ppleibieid,
+                                       @RequestParam("beizhu") String ppbeizhu,
+                                       @RequestParam("pageindex") int ppPageIndex,
+                                       @RequestParam("pagesize") int ppPageSize) {
         try {
             if(!ppxiangmumingcheng.equals("")) {
                 ppxiangmumingcheng = "%" + ppxiangmumingcheng + "%";
@@ -201,12 +204,16 @@ public class JunjianxiangmuContorller {
             if(!ppjingfeikemu.equals("")) {
                 ppjingfeikemu = "%" + ppjingfeikemu + "%";
             }
+            if(!ppbeizhu.equals("")){
+                ppbeizhu="%" + ppbeizhu + "%";
+            }
+
             List<Map<String, Object>> mmList=ddService.searchXiangmu(ppxiangmumingcheng,ppdanweimingcheng,
                     ppjihuawenhao,ppyusuanwenhao,ppjingfeikemu,ppxiangmuzhuangtaiid,ppjungongzhuangtaiid,
-                    ppjiesuanqingkuangid,ppPageIndex,ppPageSize);
+                    ppjiesuanqingkuangid,ppleibieid,ppbeizhu,ppPageIndex,ppPageSize);
             Integer mmCount = ddService.getSearchXiangmuCount(ppxiangmumingcheng,ppdanweimingcheng,
                     ppjihuawenhao,ppyusuanwenhao,ppjingfeikemu,ppxiangmuzhuangtaiid,ppjungongzhuangtaiid,
-                    ppjiesuanqingkuangid);
+                    ppjiesuanqingkuangid,ppleibieid,ppbeizhu);
             PageInfo mmPageInfo = new PageInfo(ppPageIndex, ppPageSize, mmCount);
 
             Map<String, Object> mmMap = new HashMap<String, Object>();

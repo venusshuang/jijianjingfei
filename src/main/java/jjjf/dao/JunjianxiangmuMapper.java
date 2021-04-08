@@ -20,11 +20,13 @@ public interface JunjianxiangmuMapper {
                                             @Param("xiangmupifu") String mmXiangmuPifu, @Param("jingfeixiadaqingkuang") String mmJingfeixiadaqingkuang,
                                             @Param("jingfeikemu") String mmJingfeikemu,@Param("xiangmuzhuangtaiid") String mmXiangmuzhuangtaiid,
                                             @Param("jiesuanzhuangtaiid") String mmJiesuanzhuangtaiid,@Param("jiesuanqingkuangid") String mmJiesuanqingkuangid,
+                                            @Param("xiangmuleibie") String mmxiangmuleibie,@Param("beizhu") String mmbeizhu,
                                             @Param("startindex") int mmStartIndex,@Param("pagesize") int mmPageSize);
     Object getSearchXiangmuCount(@Param("xiangmuname") String mmXiangmuName,@Param("deptname") String mmDeptName,
                                  @Param("xiangmupifu") String mmXiangmuPifu, @Param("jingfeixiadaqingkuang") String mmJingfeixiadaqingkuang,
                                  @Param("jingfeikemu") String mmJingfeikemu,@Param("xiangmuzhuangtaiid") String mmXiangmuzhuangtaiid,
-                                 @Param("jiesuanzhuangtaiid") String mmJiesuanzhuangtaiid,@Param("jiesuanqingkuangid") String mmJiesuanqingkuangid);
+                                 @Param("jiesuanzhuangtaiid") String mmJiesuanzhuangtaiid,@Param("jiesuanqingkuangid") String mmJiesuanqingkuangid,
+                                 @Param("xiangmuleibie") String mmxiangmuleibie,@Param("beizhu") String mmbeizhu);
 
 
     int countByExample(JunjianxiangmuExample example);

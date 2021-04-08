@@ -114,6 +114,13 @@ where 1=1
     <if test="jiesuanqingkuangid != ''">
       and jiesuanqingkuangid=#{jiesuanqingkuangid}
     </if>
+    <if test="beizhu != ''">
+      and xm.beizhu like #{beizhu}
+    </if>
+    <if test="xiangmuleibie != ''">
+    and xm.xiangmuleibie=#{xiangmuleibie}
+    </if>
+
 
 order by deptname,xiangmuname
 LIMIT #{startindex},#{pagesize}
@@ -159,7 +166,12 @@ LIMIT #{startindex},#{pagesize}
     <if test="jiesuanqingkuangid != ''">
       and jiesuanqingkuangid=#{jiesuanqingkuangid}
     </if>
-
+    <if test="beizhu != ''">
+      and xm.beizhu like #{beizhu}
+    </if>
+    <if test="xiangmuleibie != ''">
+      and xm.xiangmuleibie=#{xiangmuleibie}
+    </if>
 
 
 
