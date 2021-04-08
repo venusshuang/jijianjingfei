@@ -55,7 +55,7 @@ public class DeptController {
     }
     @RequestMapping("add")
     public JsonResult<?> add(@RequestParam("deptname") String ppdeptname,
-                             @RequestParam("depttype") String ppdepttype,
+                            /* @RequestParam("depttype") String ppdepttype,*/
                              @RequestParam("shangjideptid") String ppshangjideptid,
                              @RequestParam("creator") String ppcreator) {
 
@@ -71,7 +71,7 @@ public class DeptController {
 
 
 
-            BooleanMessage mmBooleanMessage = checkInputData(mmDept,ppdeptname,ppdepttype);
+            BooleanMessage mmBooleanMessage = checkInputData(mmDept,ppdeptname);
             if (!mmBooleanMessage.isOk()) {
                 log.error("dept/add:error",mmBooleanMessage.getMessage().toString());
                 return JsonResult.getErrorResult(mmBooleanMessage.getMessage().toString());
@@ -80,7 +80,7 @@ public class DeptController {
                 return JsonResult.getErrorResult("单位名称已存在，请重新输入！");
             }
             mmDept.setDeptname(ppdeptname);
-            mmDept.setDepttype(ppdepttype);
+           /* mmDept.setDepttype(ppdepttype);*/
 
             return ddService.add(mmDept) == true ? JsonResult.getSuccessResult("新增单位信息成功")
                     : JsonResult.getErrorResult("新增单位信息失败");
@@ -96,7 +96,7 @@ public class DeptController {
     public JsonResult<?> modify(
             @RequestParam("deptid") String ppdeptid,
             @RequestParam("deptname") String ppdeptname,
-            @RequestParam("depttype") String ppdepttype,
+           /* @RequestParam("depttype") String ppdepttype,*/
             @RequestParam("modifier") String ppmodifier){
 
         try {
@@ -111,7 +111,7 @@ public class DeptController {
             mmDept.setLastupdatetime(new Date());
 
 
-            BooleanMessage mmBooleanMessage = checkInputData(mmDept,ppdeptname,ppdepttype);
+            BooleanMessage mmBooleanMessage = checkInputData(mmDept,ppdeptname);
             if (!mmBooleanMessage.isOk()) {
                 log.error("dept/modify:error",mmBooleanMessage.getMessage().toString());
                 return JsonResult.getErrorResult(mmBooleanMessage.getMessage().toString());
@@ -120,7 +120,7 @@ public class DeptController {
                 return JsonResult.getErrorResult("单位名称已存在，请重新输入！");
             }
             mmDept.setDeptname(ppdeptname);
-            mmDept.setDepttype(ppdepttype);
+            /*mmDept.setDepttype(ppdepttype);*/
             return ddService.modify(mmDept) ? JsonResult.getSuccessResult("修改成功")
                     : JsonResult.getErrorResult("修改失败");
 
@@ -132,15 +132,15 @@ public class DeptController {
         }
     }
 
-    private BooleanMessage checkInputData(Dept ppDept,String ppdeptname,String ppdepttype) {
+    private BooleanMessage checkInputData(Dept ppDept,String ppdeptname) {
 
 
         if (StringHandle.getStringByteLength(ppdeptname) > 255) {
             return BooleanMessage.getErrorMessage("单位名称不能超过255字节");
         }
-        if (StringHandle.getStringByteLength(ppdepttype) > 255) {
+        /*if (StringHandle.getStringByteLength(ppdepttype) > 255) {
             return BooleanMessage.getErrorMessage("单位类型不能超过255字节");
-        }
+        }*/
 
         return BooleanMessage.getSuccessMessage("验证通过");
 

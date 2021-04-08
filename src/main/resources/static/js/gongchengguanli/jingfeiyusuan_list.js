@@ -7,6 +7,7 @@ var Jingfeiyusuan = new Vue({
         xiangmutext:'',
         jingfei : {},
         jingfeilist : [],
+        danweilist:[],
 
         xiangmuId:'',
         jingfeiyusuanId:'',
@@ -24,6 +25,7 @@ var Jingfeiyusuan = new Vue({
         var _this = this;
 
         _this.bindJingfeiyusuanList();
+        _this.bindDanweilist();
 
 
 
@@ -55,6 +57,31 @@ var Jingfeiyusuan = new Vue({
                             _this.recordCount = PageInfo.recordCount;
                             _this.pageCount = PageInfo.pageCount;
 
+                        }else {
+                            _this.show = false;
+                        }
+
+                    }else{
+                        layer.alert(ppData.message);
+                    }
+                }
+
+            },"json");
+        },
+        bindDanweilist:function (){
+            var _this = this;
+            layer.open({type:3});
+            $.post("/dept/findVaild",{
+                pageindex : 1,
+                pagesize : 1000,
+                rdm : Math.random()
+            },function(ppData){
+                layer.closeAll("loading");
+                if (ppData != null){
+                    if(ppData.result == "1"){
+                        var data=ppData.resultContent;
+                        if(data.DanweiList.length > 0){
+                            _this.danweilist=data.DanweiList;
                         }else {
                             _this.show = false;
                         }
@@ -278,11 +305,11 @@ var Jingfeiyusuan = new Vue({
                 return false;
             }
 
-            var zhongxinkuaijihao = !_this.jingfei.zhongxinkuaijihao ? "" : $.trim(_this.jingfei.zhongxinkuaijihao);
+            /*var zhongxinkuaijihao = !_this.jingfei.zhongxinkuaijihao ? "" : $.trim(_this.jingfei.zhongxinkuaijihao);
             if("" == zhongxinkuaijihao){
                 layer.alert("请填写中心会计账凭证号！");
                 return false;
-            }
+            }*/
 
             var chengshoujingfeidanwei = !_this.jingfei.chengshoujingfeidanwei ? "" : $.trim(_this.jingfei.chengshoujingfeidanwei);
             if("" == chengshoujingfeidanwei){

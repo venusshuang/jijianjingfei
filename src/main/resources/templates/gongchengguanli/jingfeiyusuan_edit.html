@@ -63,7 +63,7 @@
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
-                                    <span class="required">*</span>中心会计账凭证号
+                                   中心会计账凭证号
                                 </label>
                                 <div class="col-sm-8">
                                     <input type="text"  class="form-control" v-model="jingfei.zhongxinkuaijihao">
@@ -75,7 +75,11 @@
                                     <span class="required">*</span>承受经费指标单位名称
                                 </label>
                                 <div class="col-sm-8">
-                                    <input type="text"  class="form-control" v-model="jingfei.chengshoujingfeidanwei">
+                                    <select class="input form-control" v-model="jingfei.chengshoujingfeidanwei" >
+                                        <option value=''>--请选择--</option>
+                                        <option v-for="danweiitem in danweilist"
+                                                :value="danweiitem.deptid" v-text="danweiitem.deptname"></option>
+                                    </select>
                                 </div>
                             </div>
 

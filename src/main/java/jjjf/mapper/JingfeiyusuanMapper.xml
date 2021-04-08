@@ -22,9 +22,10 @@
   <select id="findJingfeiyusuanBydeptId" resultType="Map">
     SELECT xm.xiangmuid,xm.xiangmuname,ys.jingfeiyuansuanid,ys.jingfeixiadaqingkuang,ys.yusuanniandu,
     ys.lianbaojingfeizhibiao,ys.zhongxinjingfeizhibiao,ys.zhongxinyuliujine,ys.zhongxinkuaijihao,
-    ys.chengshoujingfeidanwei,ys.jingfeikemu
+    dp.deptname as chengshoujingfeidanwei,ys.jingfeikemu
     from junjianxiangmu xm
     left join jingfeiyusuan ys on ys.xiangmuid=xm.xiangmuid
+    left join dept dp  on dp.deptid=ys.chengshoujingfeidanwei
     where 1=1
 
     <if test="xiangmuname != ''">

@@ -200,15 +200,15 @@ var DanWei = new Vue({
                 return false;
             }
 
-            if (!$.trim(_this.danwei.depttype)) {
+            /*if (!$.trim(_this.danwei.depttype)) {
                 layer.alert("请填写单位类型！");
                 return false;
-            }
+            }*/
 
             layer.open({type:3});
             $.post('/dept/add',{
                 deptname:$.trim(_this.danwei.deptname),
-                depttype:$.trim(_this.danwei.depttype),
+              /*  depttype:$.trim(_this.danwei.depttype),*/
                 shangjideptid:$.trim(_this.deptID),
                 creator:$.trim(_this.adminID),
 
@@ -254,17 +254,17 @@ var DanWei = new Vue({
                 return false;
             }
 
-            if (!$.trim(_this.danwei.depttype)) {
+           /* if (!$.trim(_this.danwei.depttype)) {
                 layer.alert("请填写单位类型！");
                 return false;
-            }
+            }*/
 
 
             layer.open({type:3});
             $.post('/dept/modify',{
                 deptid:_this.deptId,
                 deptname:$.trim(_this.danwei.deptname),
-                depttype:$.trim(_this.danwei.depttype),
+                /*depttype:$.trim(_this.danwei.depttype),*/
                 modifier:$.trim(_this.adminID),
 
 

@@ -480,11 +480,11 @@ var Junjianxiada = new Vue({
                 return false;
             }
 
-            var xiangmuleibie = !_this.xiangmu.xiangmuleibie ? "" : $.trim(_this.xiangmu.xiangmuleibie);
+            /*var xiangmuleibie = !_this.xiangmu.xiangmuleibie ? "" : $.trim(_this.xiangmu.xiangmuleibie);
             if("" == xiangmuleibie){
                 layer.alert("请选择类别！");
                 return false;
-            }
+            }*/
 
 
             var jieshoudanweiid = !_this.xiangmu.jieshoudanweiid ? "" : $.trim(_this.xiangmu.jieshoudanweiid);
