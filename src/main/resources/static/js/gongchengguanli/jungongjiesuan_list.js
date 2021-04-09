@@ -287,7 +287,7 @@ var Jungongjiesuan = new Vue({
             }
 
             var shifoujizhang = !_this.jiesuan.shifoujizhang ? "" : $.trim(_this.jiesuan.shifoujizhang);
-            alert(shifoujizhang);
+
             if("" == shifoujizhang&&_this.deptId!="1"){
                 layer.alert("请选择决算是否记账和登记资产！");
                 return false;

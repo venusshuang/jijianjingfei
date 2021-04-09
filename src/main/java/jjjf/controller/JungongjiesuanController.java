@@ -66,13 +66,15 @@ public class JungongjiesuanController {
                              @RequestParam("jieyushangjiaojine") Double ppjieyushangjiaojine){
         try {
 
-            List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
-            if(mmList.size()!=1) {
-                return JsonResult.getErrorResult("获取中心下达经费指标失败");
-            }
+
             Admin mmAdmin = ddAdminService.findOne(ppadminId);
             //admin选择结算状态为【已结算】时计算
             if(mmAdmin.getDeptid().equals("1")&&ppjiesuanzhuangtaiid.equals("3")){
+
+                List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
+                if(mmList.size()!=1) {
+                    return JsonResult.getErrorResult("获取中心下达经费指标失败");
+                }
                 Double mmzhongxinzhibiao=mmList.get(0).getZhongxinjingfeizhibiao();
                 Double mmjiesuanpifujine=ppjiesuanpifujine;
                 Double mmjieyushangjiaojine=ppjieyushangjiaojine;
@@ -143,14 +145,15 @@ public class JungongjiesuanController {
                                 @RequestParam("jieyushangjiaojine") Double ppjieyushangjiaojine){
 
         try {
-            List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
-            if(mmList.size()!=1) {
-                return JsonResult.getErrorResult("获取错误");
-            }
+
             Admin mmAdmin = ddAdminService.findOne(ppadminId);
 
             //admin选择结算状态为【已结算】时计算
             if(mmAdmin.getDeptid().equals("1")&&ppjiesuanzhuangtaiid.equals("3")){
+                List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
+                if(mmList.size()!=1) {
+                    return JsonResult.getErrorResult("获取中心下达经费指标失败");
+                }
                 Double mmzhongxinzhibiao=mmList.get(0).getZhongxinjingfeizhibiao();
                 Double mmjiesuanpifujine=ppjiesuanpifujine;
                 Double mmjieyushangjiaojine=ppjieyushangjiaojine;

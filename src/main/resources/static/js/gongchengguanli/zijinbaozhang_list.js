@@ -263,54 +263,54 @@ var Zijinbaozhang = new Vue({
                 return false;
             }
 
-           /* var xianglianbaoshenqingzijin = !_this.zijin.xianglianbaoshenqingzijin ? "" : $.trim(_this.zijin.xianglianbaoshenqingzijin);
-            if("" == xianglianbaoshenqingzijin){
+            var xianglianbaoshenqingzijin = !_this.zijin.xianglianbaoshenqingzijin ? "" : $.trim(_this.zijin.xianglianbaoshenqingzijin);
+            /*if("" == xianglianbaoshenqingzijin){
                 layer.alert("请填写向联保申请拨付金额！");
                 return false;
-            }
-            if (!_this.checknum(xianglianbaoshenqingzijin)) {
+            }*/
+            if (!"" == xianglianbaoshenqingzijin&&!_this.checknum(xianglianbaoshenqingzijin)) {
                 layer.alert("向联保申请拨付金额请填写数字格式！");
                 return false;
             }
 
             var xianglianbaoshenqingbofushijian = !_this.zijin.xianglianbaoshenqingbofushijian ? "" : $.trim(_this.zijin.xianglianbaoshenqingbofushijian);
-            if("" == xianglianbaoshenqingbofushijian){
+            /*if("" == xianglianbaoshenqingbofushijian){
                 layer.alert("请选择向联保申请拨付时间！");
                 return false;
-            }
+            }*/
 
             var lianbaobofujine = !_this.zijin.lianbaobofujine ? "" : $.trim(_this.zijin.lianbaobofujine);
-            if("" == lianbaobofujine){
+           /* if("" == lianbaobofujine){
                 layer.alert("请填写联保拨付金额！");
                 return false;
-            }
-            if (!_this.checknum(lianbaobofujine)) {
+            }*/
+            if (!"" == lianbaobofujine&&!_this.checknum(lianbaobofujine)) {
                 layer.alert("联保拨付金额请填写数字格式！");
                 return false;
             }
 
             var lianbaobofushijian = !_this.zijin.lianbaobofushijian ? "" : $.trim(_this.zijin.lianbaobofushijian);
-            if("" == lianbaobofushijian){
+            /*if("" == lianbaobofushijian){
                 layer.alert("请选择联保拨付时间！");
                 return false;
-            }
+            }*/
 
             var zhongxinbofujine = !_this.zijin.zhongxinbofujine ? "" : $.trim(_this.zijin.zhongxinbofujine);
-            if("" == zhongxinbofujine){
+           /* if("" == zhongxinbofujine){
                 layer.alert("请填写中心资金拨付金额！");
                 return false;
-            }
-            if (!_this.checknum(zhongxinbofujine)) {
+            }*/
+            if (!"" == zhongxinbofujine&&!_this.checknum(zhongxinbofujine)) {
                 layer.alert("中心资金拨付金额请填写数字格式！");
                 return false;
             }
 
             var zhongxinbofushijian = !_this.zijin.zhongxinbofushijian ? "" : $.trim(_this.zijin.zhongxinbofushijian);
-            if("" == zhongxinbofushijian){
+            /*if("" == zhongxinbofushijian){
                 layer.alert("请选择中心拨付时间！");
                 return false;
-            }
-*/
+            }*/
+
 
             return true;
         },

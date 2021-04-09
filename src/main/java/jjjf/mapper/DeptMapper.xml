@@ -15,8 +15,9 @@
   </resultMap>
   <select id="findDanweiByzhuangtai" resultMap="BaseResultMap">
 
-  select * from Dept
+   select * from Dept
 where zhuangtai=100
+order by deptname desc
 
 LIMIT #{startindex},#{pagesize}
 

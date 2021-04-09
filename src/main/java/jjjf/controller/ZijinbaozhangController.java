@@ -54,25 +54,25 @@ public class ZijinbaozhangController {
     @RequestMapping("add")
     public JsonResult<?> add(@RequestParam("adminId") String ppadminId,
                              @RequestParam("xiangmuId") String ppxiangmuId,
-                             @RequestParam("xiangzhongxinshenqingzijin") Double ppxiangzhongxinshenqingzijin,
+                             @RequestParam("xiangzhongxinshenqingzijin") String ppxiangzhongxinshenqingzijin,
                              @RequestParam("shenqingshijian") String ppshenqingshijian,
-                             @RequestParam("xianglianbaoshenqingzijin") Double ppxianglianbaoshenqingzijin,
+                             @RequestParam("xianglianbaoshenqingzijin") String ppxianglianbaoshenqingzijin,
                              @RequestParam("xianglianbaoshenqingbofushijian") String ppxianglianbaoshenqingbofushijian,
-                             @RequestParam("lianbaobofujine") Double pplianbaobofujine,
+                             @RequestParam("lianbaobofujine") String pplianbaobofujine,
                              @RequestParam("lianbaobofushijian") String pplianbaobofushijian,
-                             @RequestParam("zhongxinbofujine") Double ppzhongxinbofujine,
+                             @RequestParam("zhongxinbofujine") String ppzhongxinbofujine,
                              @RequestParam("zhongxinbofushijian") String ppzhongxinbofushijian){
         try {
 
             List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
             if(mmList.size()!=1) {
-                return JsonResult.getErrorResult("获取错误");
+                return JsonResult.getErrorResult("请联系上级单位填写经费预算下达情况");
             }
             Double mmzhongxinzhibiao=mmList.get(0).getZhongxinjingfeizhibiao();
-            Double mmxiangzhongxinshenqingzijin=ppxiangzhongxinshenqingzijin;
+           /* Double mmxiangzhongxinshenqingzijin=ppxiangzhongxinshenqingzijin;
             if(Double.doubleToLongBits(mmzhongxinzhibiao) < Double.doubleToLongBits(mmxiangzhongxinshenqingzijin)){
                 return JsonResult.getErrorResult("向中心申请资金不能大于中心下达经费指标");
-            }
+            }*/
 
             SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM");
 
@@ -85,23 +85,45 @@ public class ZijinbaozhangController {
             Zijinbaozhang mmZijinbaozhang=new Zijinbaozhang();
             mmZijinbaozhang.setZijinbaozhangid(UUID.randomUUID().toString());
             mmZijinbaozhang.setXiangmuid(ppxiangmuId);
-            mmZijinbaozhang.setXiangzhongxinshenqingzijin(ppxiangzhongxinshenqingzijin);
+            if(!"".equals(ppxiangzhongxinshenqingzijin)){
+
+                Double mmxiangzhongxinshenqingzijin=Double.parseDouble(ppxiangzhongxinshenqingzijin);
+                if(Double.doubleToLongBits(mmzhongxinzhibiao) < Double.doubleToLongBits(mmxiangzhongxinshenqingzijin)){
+                    return JsonResult.getErrorResult("向中心申请资金不能大于中心下达经费指标");
+                }
+                mmZijinbaozhang.setXiangzhongxinshenqingzijin(Double.parseDouble(ppxiangzhongxinshenqingzijin));
+            }else{
+                mmZijinbaozhang.setXiangzhongxinshenqingzijin(null);
+            }
+
             mmZijinbaozhang.setShenqingshijian(mmshenqingshijian);
-            mmZijinbaozhang.setXianglianbaoshenqingzijin(ppxianglianbaoshenqingzijin);
+            if(!"".equals(ppxianglianbaoshenqingzijin)){
+                mmZijinbaozhang.setXianglianbaoshenqingzijin(Double.parseDouble(ppxianglianbaoshenqingzijin));
+            }else{
+                mmZijinbaozhang.setXianglianbaoshenqingzijin(null);
+            }
 
             if(!"".equals(ppxianglianbaoshenqingbofushijian)){
                 Date mmxianglianbaoshenqingbofushijian=simdate.parse(ppxianglianbaoshenqingbofushijian);
                 mmZijinbaozhang.setXianglianbaoshenqingbofushijian(mmxianglianbaoshenqingbofushijian);
             }
 
-            mmZijinbaozhang.setLianbaobofujine(pplianbaobofujine);
+            if(!"".equals(pplianbaobofujine)){
+                mmZijinbaozhang.setLianbaobofujine(Double.parseDouble(pplianbaobofujine));
+            }else{
+                mmZijinbaozhang.setLianbaobofujine(null);
+            }
 
             if(!"".equals(pplianbaobofushijian)){
                 Date mmlianbaobofushijian=simdate.parse(pplianbaobofushijian);
                 mmZijinbaozhang.setLianbaobofushijian(mmlianbaobofushijian);
             }
 
-            mmZijinbaozhang.setZhongxinbofujine(ppzhongxinbofujine);
+            if(!"".equals(ppzhongxinbofujine)){
+                mmZijinbaozhang.setZhongxinbofujine(Double.parseDouble(ppzhongxinbofujine));
+            }else{
+                mmZijinbaozhang.setZhongxinbofujine(null);
+            }
 
             if(!"".equals(ppzhongxinbofushijian)){
                 Date mmzhongxinbofushijian=simdate.parse(ppzhongxinbofushijian);
@@ -139,47 +161,71 @@ public class ZijinbaozhangController {
     public JsonResult<?> modify(@RequestParam("adminId") String ppadminId,
                                 @RequestParam("xiangmuId") String ppxiangmuId,
                                 @RequestParam("zijinbaozhangId") String ppzijinbaozhangId,
-                                @RequestParam("xiangzhongxinshenqingzijin") Double ppxiangzhongxinshenqingzijin,
+                                @RequestParam("xiangzhongxinshenqingzijin") String ppxiangzhongxinshenqingzijin,
                                 @RequestParam("shenqingshijian") String ppshenqingshijian,
-                                @RequestParam("xianglianbaoshenqingzijin") Double ppxianglianbaoshenqingzijin,
+                                @RequestParam("xianglianbaoshenqingzijin") String ppxianglianbaoshenqingzijin,
                                 @RequestParam("xianglianbaoshenqingbofushijian") String ppxianglianbaoshenqingbofushijian,
-                                @RequestParam("lianbaobofujine") Double pplianbaobofujine,
+                                @RequestParam("lianbaobofujine") String pplianbaobofujine,
                                 @RequestParam("lianbaobofushijian") String pplianbaobofushijian,
-                                @RequestParam("zhongxinbofujine") Double ppzhongxinbofujine,
+                                @RequestParam("zhongxinbofujine") String ppzhongxinbofujine,
                                 @RequestParam("zhongxinbofushijian") String ppzhongxinbofushijian){
 
         try {
 
             List<Jingfeiyusuan> mmList=ddJingfeiyusuanService.findJingfeiyusuanByXiangmuId(ppxiangmuId);
             if(mmList.size()!=1) {
-                return JsonResult.getErrorResult("获取错误");
+                return JsonResult.getErrorResult("请联系上级单位填写经费预算下达情况！");
             }
             Double mmzhongxinzhibiao=mmList.get(0).getZhongxinjingfeizhibiao();
-            Double mmxiangzhongxinshenqingzijin=ppxiangzhongxinshenqingzijin;
-            if(Double.doubleToLongBits(mmzhongxinzhibiao) < Double.doubleToLongBits(mmxiangzhongxinshenqingzijin)){
-                return JsonResult.getErrorResult("向中心申请资金不能大于中心下达经费指标");
-            }
+
 
             SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM");
             Date mmshenqingshijian=simdate.parse(ppshenqingshijian);
 
             Zijinbaozhang mmZijinbaozhang=new Zijinbaozhang();
             mmZijinbaozhang.setZijinbaozhangid(ppzijinbaozhangId);
-            mmZijinbaozhang.setXiangzhongxinshenqingzijin(ppxiangzhongxinshenqingzijin);
+
+            if(!"".equals(ppxiangzhongxinshenqingzijin)){
+
+                Double mmxiangzhongxinshenqingzijin=Double.parseDouble(ppxiangzhongxinshenqingzijin);
+                if(Double.doubleToLongBits(mmzhongxinzhibiao) < Double.doubleToLongBits(mmxiangzhongxinshenqingzijin)){
+                    return JsonResult.getErrorResult("向中心申请资金不能大于中心下达经费指标");
+                }
+                mmZijinbaozhang.setXiangzhongxinshenqingzijin(Double.parseDouble(ppxiangzhongxinshenqingzijin));
+            }else{
+                mmZijinbaozhang.setXiangzhongxinshenqingzijin(null);
+            }
+
             mmZijinbaozhang.setShenqingshijian(mmshenqingshijian);
-            mmZijinbaozhang.setXianglianbaoshenqingzijin(ppxianglianbaoshenqingzijin);
+
+            if(!"".equals(ppxianglianbaoshenqingzijin)){
+                mmZijinbaozhang.setXianglianbaoshenqingzijin(Double.parseDouble(ppxianglianbaoshenqingzijin));
+            }else{
+                mmZijinbaozhang.setXianglianbaoshenqingzijin(null);
+            }
+
             if(!"".equals(ppxianglianbaoshenqingbofushijian)){
                 Date mmxianglianbaoshenqingbofushijian=simdate.parse(ppxianglianbaoshenqingbofushijian);
                 mmZijinbaozhang.setXianglianbaoshenqingbofushijian(mmxianglianbaoshenqingbofushijian);
             }
 
-            mmZijinbaozhang.setLianbaobofujine(pplianbaobofujine);
+            if(!"".equals(pplianbaobofujine)){
+                mmZijinbaozhang.setLianbaobofujine(Double.parseDouble(pplianbaobofujine));
+            }else{
+                mmZijinbaozhang.setLianbaobofujine(null);
+            }
+
             if(!"".equals(pplianbaobofushijian)){
                 Date mmlianbaobofushijian=simdate.parse(pplianbaobofushijian);
                 mmZijinbaozhang.setLianbaobofushijian(mmlianbaobofushijian);
             }
 
-            mmZijinbaozhang.setZhongxinbofujine(ppzhongxinbofujine);
+            if(!"".equals(ppzhongxinbofujine)){
+                mmZijinbaozhang.setZhongxinbofujine(Double.parseDouble(ppzhongxinbofujine));
+            }else{
+                mmZijinbaozhang.setZhongxinbofujine(null);
+            }
+
             if(!"".equals(ppzhongxinbofushijian)){
                 Date mmzhongxinbofushijian=simdate.parse(ppzhongxinbofushijian);
                 mmZijinbaozhang.setZhongxinbofushijian(mmzhongxinbofushijian);
