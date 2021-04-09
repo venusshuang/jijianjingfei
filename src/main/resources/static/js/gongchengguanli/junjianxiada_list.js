@@ -408,7 +408,7 @@ var Junjianxiada = new Vue({
 
 
         backup : function(){
-            let _this = this;
+            var _this = this;
             //layer.open({type:3});
             $.post("/import_xiangmu/backup",{
                 random : Math.random()
