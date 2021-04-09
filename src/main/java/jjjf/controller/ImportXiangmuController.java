@@ -65,6 +65,10 @@ public class ImportXiangmuController {
 
 	@Value("${userfilepath}")
 	private String userfilepath;
+	@Value("${command}")
+    private String command;
+
+
 
 
 	// 解析上传的EXCEL文件
@@ -408,7 +412,22 @@ public class ImportXiangmuController {
 	// 备份数据库
 	@SuppressWarnings("resource")
 	@RequestMapping("backup")
-	public void backup(
+    public void backup(
+            HttpServletRequest request,
+			HttpServletResponse response
+    ){
+	    try{
+	    	System.out.println(command);
+			DataBaseUtil.backup(response);
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+    }
+
+
+
+	/*public void backup(
 			HttpServletRequest request
 	){
 		try {
@@ -417,7 +436,7 @@ public class ImportXiangmuController {
 			e.printStackTrace();
 			logger.error("ImportPaichuGaoxiaoController -> get_value: "+e.getMessage());
 		}
-	}
+	}*/
 
 
 }

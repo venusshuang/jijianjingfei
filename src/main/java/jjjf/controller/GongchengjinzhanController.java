@@ -57,7 +57,7 @@ public class GongchengjinzhanController {
                              @RequestParam("hetongzongjia") Double pphetongzongjia,
                              @RequestParam("wangchengtouzi") Double ppwangchengtouzi,
                              @RequestParam("jindukuaizhifu") Double ppjindukuaizhifu,
-                             @RequestParam("jindukuanbili") String ppjindukuanbili,
+                            // @RequestParam("jindukuanbili") String ppjindukuanbili,
                              @RequestParam("wangongshijian") String ppwangongshijian){
 
         try {
@@ -74,7 +74,10 @@ public class GongchengjinzhanController {
             mmGongchengjinzhan.setHetongzongjia(pphetongzongjia);
             mmGongchengjinzhan.setWangchengtouzi(ppwangchengtouzi);
             mmGongchengjinzhan.setJindukuaizhifu(ppjindukuaizhifu);
-            mmGongchengjinzhan.setJindukuanbili(ppjindukuanbili);
+            double ppjindukuanbili=(ppjindukuaizhifu/(pphetongzongjia+ppwangchengtouzi))*100;
+
+            mmGongchengjinzhan.setJindukuanbili(String.format("%.2f", ppjindukuanbili));
+
             mmGongchengjinzhan.setWangongshijian(mmwangongshijian);
             mmGongchengjinzhan.setCreater(ppadminId);
             mmGongchengjinzhan.setCreatetime(new Date());
@@ -114,7 +117,7 @@ public class GongchengjinzhanController {
                                 @RequestParam("hetongzongjia") Double pphetongzongjia,
                                 @RequestParam("wangchengtouzi") Double ppwangchengtouzi,
                                 @RequestParam("jindukuaizhifu") Double ppjindukuaizhifu,
-                                @RequestParam("jindukuanbili") String ppjindukuanbili,
+                              //  @RequestParam("jindukuanbili") String ppjindukuanbili,
                                 @RequestParam("wangongshijian") String ppwangongshijian){
         try {
             SimpleDateFormat simdate=new SimpleDateFormat("yyyy-MM");
@@ -129,7 +132,11 @@ public class GongchengjinzhanController {
             mmGongchengjinzhan.setHetongzongjia(pphetongzongjia);
             mmGongchengjinzhan.setWangchengtouzi(ppwangchengtouzi);
             mmGongchengjinzhan.setJindukuaizhifu(ppjindukuaizhifu);
-            mmGongchengjinzhan.setJindukuanbili(ppjindukuanbili);
+
+            double ppjindukuanbili=(ppjindukuaizhifu/(pphetongzongjia+ppwangchengtouzi))*100;
+
+            mmGongchengjinzhan.setJindukuanbili(String.format("%.2f", ppjindukuanbili));
+
             mmGongchengjinzhan.setWangongshijian(mmwangongshijian);
             mmGongchengjinzhan.setModifier(ppadminId);
             mmGongchengjinzhan.setLastupdatetime(new Date());

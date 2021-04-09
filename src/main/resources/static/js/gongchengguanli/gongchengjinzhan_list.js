@@ -117,7 +117,7 @@ var Gongchengjinzhan = new Vue({
                     hetongzongjia:$.trim(_this.jinzhan.hetongzongjia),
                     wangchengtouzi:$.trim(_this.jinzhan.wangchengtouzi),
                     jindukuaizhifu:$.trim(_this.jinzhan.jindukuaizhifu),
-                    jindukuanbili:$.trim(_this.jinzhan.jindukuanbili),
+               //     jindukuanbili:$.trim(_this.jinzhan.jindukuanbili),
                     wangongshijian:$.trim(_this.jinzhan.wangongshijian),
                     random : Math.random()
                 },function(ppData){
@@ -183,7 +183,7 @@ var Gongchengjinzhan = new Vue({
                     hetongzongjia:$.trim(_this.jinzhan.hetongzongjia),
                     wangchengtouzi:$.trim(_this.jinzhan.wangchengtouzi),
                     jindukuaizhifu:$.trim(_this.jinzhan.jindukuaizhifu),
-                    jindukuanbili:$.trim(_this.jinzhan.jindukuanbili),
+                 //   jindukuanbili:$.trim(_this.jinzhan.jindukuanbili),
                     wangongshijian:$.trim(_this.jinzhan.wangongshijian),
                     random : Math.random()
                 },function(ppData){
@@ -297,11 +297,11 @@ var Gongchengjinzhan = new Vue({
                 return false;
             }
 
-            var jindukuanbili = !_this.jinzhan.jindukuanbili ? "" : $.trim(_this.jinzhan.jindukuanbili);
+      /*      var jindukuanbili = !_this.jinzhan.jindukuanbili ? "" : $.trim(_this.jinzhan.jindukuanbili);
             if("" == jindukuanbili){
                 layer.alert("请填写进度款占总合同比例！");
                 return false;
-            }
+            }*/
 
             var wangongshijian = !_this.jinzhan.wangongshijian ? "" : $.trim(_this.jinzhan.wangongshijian);
             if("" == wangongshijian){

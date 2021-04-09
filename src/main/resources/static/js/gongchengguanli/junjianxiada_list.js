@@ -407,7 +407,22 @@ var Junjianxiada = new Vue({
 
 
 
-
+        backup : function(){
+            let _this = this;
+            //layer.open({type:3});
+            $.post("/import_xiangmu/backup",{
+                random : Math.random()
+            },function(ppData){
+                layer.closeAll("loading");
+                if(ppData != null){
+                    var mmData = ppData;
+                    var result = mmData.result;
+                    var message = mmData.message;
+                    var data = mmData.resultContent;
+                    window.location.href=data;
+                }
+            },"json");
+        },
 
 
 

@@ -18,12 +18,19 @@
                 军建计划下达情况<span class="btn btn-success" style="float: right; margin-right: 15px; margin-top: 10px;" @click="toAdd()">新增</span>
                 <span  class="btn btn-primary" style="float:right;margin-right:15px;margin-top:10px;"
                        @click="showUploadXls()">批量导入</span>
+                <a target="_self" class='btn btn-info'
+                   style='float:right;margin-right:15px;margin-top:10px;'
+                   :href="'/exportexcel/muban'">模板下载</a>
             </div>
             <div class="primary-content" >
 
                 <div style="margin-top:15px;text-align: center;">
                     <label  style="margin-left: 20px;">项目名称：</label><input type="text" class="form-control" style="width: 150px;display:inline-block;"  v-model="xiangmutext"  >
                     <button class="btn btn-info" @click="bindXiadaList()" style="margin-left:15px;">查询</button>
+
+                   <!-- <a target="_self" class='btn btn-info'
+                       style='float:right;margin-right:15px;margin-top:10px;'
+                       :href="'/import_xiangmu/backup'">备份</a>-->
                 </div>
 
             <div class="table-responsive" style="overflow:inherit;margin-top:40px;">
@@ -92,7 +99,7 @@
 
 
 </body>
-<script src="../js/gongchengguanli/junjianxiada_list.js?ver=1.5"></script>
+<script src="../js/gongchengguanli/junjianxiada_list.js?ver=1.2"></script>
 <script type="text/javascript" charset="utf-8" src="../js/plupload/plupload.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/plupload/plupload.full.js"></script>
 <link href="../css/main.css?ver=1.0" rel="stylesheet" type="text/css"></link>

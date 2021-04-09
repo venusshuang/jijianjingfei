@@ -74,8 +74,8 @@ public class ExportExcelController {
 
         mmTitleList.add("项目状态");
         mmTitleList.add("开工时间");
-        mmTitleList.add("各类合同总价");
-        mmTitleList.add("完成投资");
+        mmTitleList.add("设计、施工、监理等合同总价");
+        mmTitleList.add("前期工作费、建设单位管理费等零星支出");
         mmTitleList.add("进度款支付");
         mmTitleList.add("进度款占总合同比例％");
         mmTitleList.add("完工时间（预计）");
@@ -238,6 +238,77 @@ public class ExportExcelController {
             CreateXLS.createExcel(mmResultList, mmSavePath,  "jijianxiangmu_"+ UUID.randomUUID().toString()+".xls",
                     "jijianxiangmu", request, response);
             return "/jjjf/jijianxiangmu.xls";
+
+        }
+        catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
+
+
+    @RequestMapping("muban")
+    public String muban(HttpServletRequest request, HttpServletResponse response){
+        List<List<String>> mmResultList = new ArrayList<List<String>>();
+        List<String> mmTitleList = new ArrayList<String>();
+
+        mmTitleList.add("序号");
+        mmTitleList.add("项目名称");
+        mmTitleList.add("两级建设计划或设计任务书批复情况");
+        mmTitleList.add("联保建设计划批复金额");
+        mmTitleList.add("中心建设计划批复金额");
+        mmTitleList.add("联保预留预备费");
+
+        mmTitleList.add("两级经费下达情况");
+        mmTitleList.add("预算年度");
+        mmTitleList.add("联保下达经费指标");
+        mmTitleList.add("中心下达经费指标");
+        mmTitleList.add("中心预留预备费");
+        mmTitleList.add("中心会计账凭证号");
+        mmTitleList.add("承受经费指标单位名称");
+        mmTitleList.add("经费科目");
+
+        mmTitleList.add("项目状态");
+        mmTitleList.add("开工时间");
+        mmTitleList.add("设计、施工、监理等合同总价");
+        mmTitleList.add("前期工作费、建设单位管理费等零星支出");
+        mmTitleList.add("进度款支付");
+        mmTitleList.add("进度款占总合同比例％");
+        mmTitleList.add("完工时间（预计）");
+
+        mmTitleList.add("向中心申请资金");
+        mmTitleList.add("申请时间");
+        mmTitleList.add("向联保申请拨付金额");
+        mmTitleList.add("向联保申请拨付时间");
+        mmTitleList.add("联保拨付金额");
+        mmTitleList.add("联保拨付时间");
+        mmTitleList.add("中心资金拨付金额");
+        mmTitleList.add("中心拨付时间");
+
+        mmTitleList.add("竣工结算状态");
+        mmTitleList.add("竣工结算完成时间（未完成不填）");
+        mmTitleList.add("竣工决算情况");
+        mmTitleList.add("决算是否记账和登记资产");
+        mmTitleList.add("两级决算批复文号");
+        mmTitleList.add("决算批复金额");
+        mmTitleList.add("结余上缴金额");
+
+        mmTitleList.add("类别");
+        mmTitleList.add("备注");
+        mmResultList.add(mmTitleList);
+        try {
+            //取出文档存放的根目录，并去除文件最后的斜杠
+            if (userfilepath.endsWith("/")) {
+                userfilepath = userfilepath.substring(0, userfilepath.length()-1);
+            }
+
+            SimpleDateFormat mmDateFormat = new SimpleDateFormat("yyyyMMdd");
+            String mmSavePath = userfilepath +  "/temp/"+mmDateFormat.format(new Date()) + "/";
+
+            CreateXLS.createExcel(mmResultList, mmSavePath,  "muban_"+ UUID.randomUUID().toString()+".xls",
+                    "jijianxiangmu", request, response);
+            return "/jjjf/jijianmuban.xls";
 
         }
         catch (Exception e) {
